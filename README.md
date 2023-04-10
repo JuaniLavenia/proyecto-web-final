@@ -16,4 +16,4 @@ Proyecto final del curso FullStack de RollingCode-School.
 ## Uso
 
 Para iniciar el proyecto, en la terminal, dentro del directorio del proyecto, correr:
-
+*npm run dev
