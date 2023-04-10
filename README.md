@@ -1,4 +1,4 @@
-# PROYECTO WEB - ROLLING-DETAILING
+# PROYECTO WEB - ROLLING-DETAILING (Front)
 
 Proyecto final del curso FullStack de RollingCode-School.
 
