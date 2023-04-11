@@ -18,7 +18,7 @@ function Footer() {
             <div className="d-flex justify-content-center mt-2">
               <p className="text-white fw-bold me-1">Dirección:</p>
               <i className="text-white ms-2">
-                Juan Manuel de Rosas 345, Lastenia, Tucumán
+                Juan Manuel de Rosas 345, Tucumán
               </i>
             </div>
             <div className="d-flex justify-content-center">
