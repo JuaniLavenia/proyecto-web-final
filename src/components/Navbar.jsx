@@ -91,7 +91,7 @@ function Navbar() {
               </ul>
             </div>
             <div className="search d-flex">
-              <div className="searching me-2">
+              <div className="searching me-4">
                 <input type="text" placeholder="Buscar" />
                 <Link to="">
                   <div className="lupa">
@@ -100,10 +100,18 @@ function Navbar() {
                 </Link>
               </div>
               <div>
-                <button className="car me-4">
+                <button className="car me-2">
                   <span className="material-icons-outlined md-48">
                     shopping_cart
                   </span>
+                </button>
+              </div>
+              <div>
+                <button
+                  className="fav"
+                  onClick={() => (window.location.href = "/favorites")}
+                >
+                  <span className="material-icons-outlined">favorite</span>
                 </button>
               </div>
             </div>
