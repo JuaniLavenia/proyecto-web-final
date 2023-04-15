@@ -2,17 +2,8 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logonav from "../assets/img/logo3.png";
 import "material-icons/iconfont/material-icons.css";
-import { useEffect } from "react";
 
-function Navbar({ path }) {
-  useEffect(() => {
-    window.history.pushState(null, "", path);
-  }, [path]);
-
-  const handleClick = (e) => {
-    e.preventDefault;
-    window.location.href = path;
-  };
+function Navbar() {
   return (
     <>
       <header className="fixed-top position-sticky">
@@ -109,11 +100,13 @@ function Navbar({ path }) {
                 </Link>
               </div>
               <div>
-                <button className="car me-4" onClick={handleClick}>
-                  <span className="material-icons-outlined md-48">
-                    shopping_cart
-                  </span>
-                </button>
+                <Link to="/cart">
+                  <button className="car me-4">
+                    <span className="material-icons-outlined md-48">
+                      shopping_cart
+                    </span>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
