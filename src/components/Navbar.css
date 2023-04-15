@@ -81,6 +81,22 @@
   color: black;
 }
 
+.favorite-count {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /*______________Footer______________*/
 .foot {
   background: var(--color-bg);

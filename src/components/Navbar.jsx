@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logonav from "../assets/img/logo3.png";
 import "material-icons/iconfont/material-icons.css";
+import { useState } from "react";
 
 function Navbar() {
+  const [numFavorites, setNumFavorites] = useState(0);
+
+  // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
+
   return (
     <>
       <header className="fixed-top position-sticky">
@@ -107,12 +112,14 @@ function Navbar() {
                 </button>
               </div>
               <div>
-                <button
-                  className="fav"
-                  onClick={() => (window.location.href = "/favorites")}
-                >
-                  <span className="material-icons-outlined">favorite</span>
-                </button>
+                <Link to="/favorites">
+                  <button className="fav">
+                    <span className="material-icons-outlined">favorite</span>
+                    {numFavorites > 0 && (
+                      <span className="favorite-count">{numFavorites}</span>
+                    )}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
