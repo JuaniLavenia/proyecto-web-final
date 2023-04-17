@@ -5,10 +5,23 @@ function Create() {
 
       <form>
         <div className="mb-3">
+          <label htmlFor="producto" className="form-label">
+            Producto:
+          </label>
+          <input
+            placeholder="Producto"
+            type="text"
+            name="producto"
+            id="prodcuto"
+            className="form-control"
+          />
+        </div>
+        <div className="mb-3">
           <label htmlFor="nombre" className="form-label">
             Nombre:
           </label>
           <input
+            placeholder="Nombre"
             type="text"
             name="nombre"
             id="nombre"
@@ -20,6 +33,7 @@ function Create() {
             Stock:
           </label>
           <input
+            placeholder="Cantidad"
             type="number"
             name="stock"
             id="stock"
@@ -31,6 +45,7 @@ function Create() {
             Descripción:
           </label>
           <textarea
+            placeholder="Descripcion del producto..."
             name="descripcion"
             id="descripcion"
             cols="30"
