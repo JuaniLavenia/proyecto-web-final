@@ -1,38 +1,43 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate} from "react-router";
 
 function Create() {
- //hook para el estado inicial
+  //hook de navegacion a pagina de productos
+  const navegate = useNavigate()
+
+  //hook para el estado inicial
   const [values, setValues] = useState({
     producto: "",
-    nombre:"",
-    stock:"",
-    descripcion:"",
+    nombre: "",
+    stock: "",
+    descripcion: "",
   })
 
   //funcion que cambia los parametros del value
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     setValues({
       ...values,
       [e.target.name]: e.target.value,
     })
   }
 
-   //hook para cambiar los valores y guardarlos
-   const handleSubmit = (e) =>{
+  //hook para cambiar los valores y guardarlos
+  const handleSubmit = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3000/productos`,{
-      method:"POST",
-      headers:{"Content-Type": "application/json"},
+    fetch(`http://localhost:3000/productos`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     })
 
-    //aqui voy a redireccionar al edit hasta el producto
-    .then(response => console.log(response))
+      //aqui voy a redireccionar al edit hasta el producto
+      .then((response) => {
+        if (response.status == 201) {
+          navegate("/producto")
+        }
+      })
   }
 
-
-  
   return (
     <div className="container">
       <h1>Crear Producto</h1>

@@ -32,13 +32,14 @@ function Admin() {
   const destroy = (id) => {
     //primero pregunto si lo deseo borrra
     if (confirm(`¿Esta seguro que quiere borrar el producto ${id}?`)) {
-    //hook para cambiar los valores y guardarlos
+      //hook para cambiar los valores y guardarlos
       fetch(`http://localhost:3000/productos/${id}`, {
-        method: "DELETE"})
+        method: "DELETE"
+      })
 
         //aqui voy a redireccionar al edit hasta el producto
         .then(response => {
-          if(response.status == 200){
+          if (response.status == 200) {
             const filterProductos = productos.filter(
               (productos) => productos.id != id
             )
@@ -48,7 +49,8 @@ function Admin() {
 
           }
         })
-      }}
+    }
+  }
 
   //se muestran todos los detalles de pagina web
   return (
@@ -70,22 +72,30 @@ function Admin() {
             <th></th>
           </tr>
         </thead>
+
         <tbody>
-          {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td scope="row">{producto.id}</td>
-              <td scope="row">
-                <Link to={`/producto/${producto.id}`}>{producto.nombre}</Link>
-              </td>
-              <td scope="row">{producto.nombre}</td>
-              <td scope="row">{producto.stock}</td>
-              <td scope="row">{producto.descripcion}</td>
-              <td className="text-end">
-                <Link className="btn btn-info float-end" to={`/producto/${producto.id}/edit`}>Editar</Link>
-                <Link className="btn btn-danger" onClick={() => destroy(producto.id)}>Borrar</Link>
+          {productos.length == 0 ?
+          //si es cero pasa eso
+            <tr>
+              <td colSpan={12} className="text-center">
+                No hay registro de productos cargados
               </td>
             </tr>
-          ))}
+            : productos.map((producto) => (
+              <tr key={producto.id}>
+                <td scope="row">{producto.id}</td>
+                <td scope="row">
+                  <Link to={`/producto/${producto.id}`}>{producto.nombre}</Link>
+                </td>
+                <td scope="row">{producto.nombre}</td>
+                <td scope="row">{producto.stock}</td>
+                <td scope="row">{producto.descripcion}</td>
+                <td className="text-end">
+                  <Link className="btn btn-info float-end" to={`/producto/${producto.id}/edit`}>Editar</Link>
+                  <Link className="btn btn-danger" onClick={() => destroy(producto.id)}>Borrar</Link>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
@@ -95,7 +105,7 @@ function Admin() {
         <button className="btn btn-light" onClick={() => paginacion(page + 1)}>Siguiente</button>
       </div>
 
-    </div>
+    </div >
   );
 }
 
