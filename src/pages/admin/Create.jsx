@@ -1,9 +1,43 @@
+import { useState } from "react";
+import { useParams } from "react-router";
+
 function Create() {
+ //hook para el estado inicial
+  const [values, setValues] = useState({
+    producto: "",
+    nombre:"",
+    stock:"",
+    descripcion:"",
+  })
+
+  //funcion que cambia los parametros del value
+  const handleChange = (e) =>{
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+   //hook para cambiar los valores y guardarlos
+   const handleSubmit = (e) =>{
+    e.preventDefault()
+    fetch(`http://localhost:3000/productos`,{
+      method:"POST",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify(values),
+    })
+
+    //aqui voy a redireccionar al edit hasta el producto
+    .then(response => console.log(response))
+  }
+
+
+  
   return (
     <div className="container">
       <h1>Crear Producto</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="producto" className="form-label">
             Producto:
@@ -13,6 +47,8 @@ function Create() {
             type="text"
             name="producto"
             id="prodcuto"
+            value={values.producto}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -25,6 +61,8 @@ function Create() {
             type="text"
             name="nombre"
             id="nombre"
+            value={values.nombre}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -37,6 +75,8 @@ function Create() {
             type="number"
             name="stock"
             id="stock"
+            value={values.stock}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -50,6 +90,8 @@ function Create() {
             id="descripcion"
             cols="30"
             rows="10"
+            value={values.descripcion}
+            onChange={handleChange}
             className="form-control"
           ></textarea>
         </div>

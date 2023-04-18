@@ -1,23 +1,31 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { useState } from "react"
+import { useParams } from "react-router"
 
 function Detalle() {
-    //traigo el valor id del producto
+    //hook para tomar el string del url
     const { id } = useParams()
 
-    //genero el hook de para el estado inicial
-    const[producto, setProducto] = useState({})
+    //hook para el estado inicial
+    const [producto, setProducto] = useState({})
 
-    useEffect(()=>{
+    //vamos a cargar todo los datos prederminados anteriormente
+    useEffect(() => {
         fetch(`http://localhost:3000/productos/${id}`)
-        .then(response => response.json())
-        .then(json => console.log(json))
-    })
+            .then(response => response.json())
+            .then((json) => setProducto(json))
+    }, [])
 
     return (
-        <div className="conteiner">
-            <h1>Producto {producto.id}</h1>
+        <div class="card mb-3">
+            <div class="card-body text-center">
+                <h3 class="card-title">{producto.producto}</h3>
+                <h3 class="card-title">{producto.nombre}</h3>
+                <p class="card-text">Stok: {producto.stock}</p>
+                <p class="card-text">{producto.descripcion}</p>
+            </div>
         </div>
+
     )
 }
 

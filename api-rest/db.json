@@ -1,114 +1,11 @@
 {
   "productos": [
     {
-      "id": 1,
-      "producto": "Cera liquida111",
-      "nombre": "Cherry Quick111",
-      "stock": 4,
-      "descripcion": "Cera Liquita con aroma a cereza.1"
-    },
-    {
-      "nombre": "Enjuegue 2",
-      "stock": 6,
-      "descripcion": "Enjueague para auto",
-      "id": 2
-    },
-    {
-      "id": 3,
       "producto": "Cera liquida",
-      "nombre": "Waterlees",
+      "nombre": "La cera de la casa",
       "stock": "4",
-      "descripcion": "Limpiador en seco para suspender suciedad."
-    },
-    {
-      "id": 4,
-      "producto": "Cera liquida",
-      "nombre": "Ilussion wax",
-      "stock": 4,
-      "descripcion": "Mantenimiento de acrilicos."
-    },
-    {
-      "id": 5,
-      "producto": "Cera liquida",
-      "nombre": "The boss",
-      "stock": 3,
-      "descripcion": "Sellador de pintura."
-    },
-    {
-      "id": 6,
-      "producto": "Lava Autos",
-      "nombre": "Atomic",
-      "stock": 6,
-      "descripcion": "Shampoo de PH acido con aroma a citrico."
-    },
-    {
-      "id": 7,
-      "producto": "Lava Autos",
-      "nombre": "Banana",
-      "stock": 6,
-      "descripcion": "Shampoo de PH neutro con aroma a banana."
-    },
-    {
-      "id": 8,
-      "producto": "Lava Autos",
-      "nombre": "Supreme",
-      "stock": 6,
-      "descripcion": "Shampoo generador de espuma aroma a frutilla."
-    },
-    {
-      "id": 9,
-      "producto": "Lava Autos",
-      "nombre": "PureFoam",
-      "stock": 4,
-      "descripcion": "Shampoo iseñado para Foam Lance."
-    },
-    {
-      "id": 10,
-      "producto": "Lava Autos",
-      "nombre": "Elite",
-      "stock": 7,
-      "descripcion": "Shampoo de mix de ceras con aroma a coco y banana."
-    },
-    {
-      "id": 11,
-      "producto": "Limpiadores",
-      "nombre": "Infierno gel",
-      "stock": 11,
-      "descripcion": "APC Premium con suspension de suciedad y frganacia a rosas."
-    },
-    {
-      "id": 12,
-      "producto": "Limpiadores",
-      "nombre": "All Clean",
-      "stock": 3,
-      "descripcion": "Limpiador multiproposito con suspendion de suciedad."
-    },
-    {
-      "id": 13,
-      "producto": "Alcaline Wheels",
-      "nombre": "Supreme",
-      "stock": 8,
-      "descripcion": "Limpiador alcalino para multiples superficies."
-    },
-    {
-      "id": 14,
-      "producto": "Limpiadores",
-      "nombre": "Formule Conquest",
-      "stock": 9,
-      "descripcion": "Desengrasante con grean porder de limpieza."
-    },
-    {
-      "id": 15,
-      "producto": "Limpiadores",
-      "nombre": "Bug Remover",
-      "stock": 7,
-      "descripcion": "Limpiador exclusivo para remover insectos con precision."
-    },
-    {
-      "nombre": "Enjuegue 7",
-      "stock": 7,
-      "descripcion": "Enjueague para auto",
-      "id": 16
+      "descripcion": "Es la cera de la gente",
+      "id": 2
     }
   ]
 }

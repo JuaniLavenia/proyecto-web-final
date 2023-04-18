@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function Admin() {
+  //hook de id proveniente de url
   const { id } = useParams()
+  //hook de navegacion
+  const navegate = useNavigate
   //hook para iniciar la lista
   const [productos, setProductos] = useState([]);
   //hook para inicio de paginacion
@@ -18,13 +21,34 @@ function Admin() {
   //paginacion de productos en crud
   const paginacion = (page) => {
     if (page <= 0) return
-    if (page >= 4) return
+    if (page >= 5) return
     fetch(`http://localhost:3000/productos?_page=${page}&_limit=5`)
       .then((response) => response.json())
       .then((json) => setProductos(json))
     setPage(page)
   }
 
+  //funcion para borrar un producto
+  const destroy = (id) => {
+    //primero pregunto si lo deseo borrra
+    if (confirm(`¿Esta seguro que quiere borrar el producto ${id}?`)) {
+    //hook para cambiar los valores y guardarlos
+      fetch(`http://localhost:3000/productos/${id}`, {
+        method: "DELETE"})
+
+        //aqui voy a redireccionar al edit hasta el producto
+        .then(response => {
+          if(response.status == 200){
+            const filterProductos = productos.filter(
+              (productos) => productos.id != id
+            )
+
+            setProductos(filterProductos)
+            alert(`Se borro el producto ${id}`)
+
+          }
+        })
+      }}
 
   //se muestran todos los detalles de pagina web
   return (
@@ -51,15 +75,14 @@ function Admin() {
             <tr key={producto.id}>
               <td scope="row">{producto.id}</td>
               <td scope="row">
-                <Link to={`/productos/${producto.id}`}>
-                  {producto.nombre}
-                </Link></td>
+                <Link to={`/producto/${producto.id}`}>{producto.nombre}</Link>
+              </td>
               <td scope="row">{producto.nombre}</td>
               <td scope="row">{producto.stock}</td>
               <td scope="row">{producto.descripcion}</td>
               <td className="text-end">
                 <Link className="btn btn-info float-end" to={`/producto/${producto.id}/edit`}>Editar</Link>
-                <Link className="btn btn-danger">Borrar</Link>
+                <Link className="btn btn-danger" onClick={() => destroy(producto.id)}>Borrar</Link>
               </td>
             </tr>
           ))}
