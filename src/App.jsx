@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import Admin from "./pages/admin/Admin";
 import Edit from "./pages/admin/Edit";
 import Create from "./pages/admin/Create";
+import Detalle from "./pages/admin/Detalle";
+
 
 function App() {
   return (
@@ -15,9 +17,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/edit" element={<Edit />} />
-        <Route path="/create" element={<Create />} />
+        <Route path="/producto" element={<Admin />} />
+        <Route path="/producto/:id" element={<Detalle/>}/>
+        <Route path="producto/:id/edit" element={<Edit/>} />
+        <Route path="/producto/create" element={<Create />} />
       </Routes>
 
       <Footer />

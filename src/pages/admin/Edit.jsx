@@ -1,9 +1,58 @@
+import { useEffect } from "react"
+import { useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+
 function Edit() {
+  //hook de navegacion
+  const navegate = useNavigate()
+
+  //hook para traer el dato variable de la url
+  const { id } = useParams()
+
+  const [values, setValues] = useState({
+    producto: "",
+    nombre: "",
+    stock: "",
+    descripcion: "",
+  })
+
+  //vamos a cargar todo los datos prederminados anteriormente
+  useEffect(() => {
+    fetch(`http://localhost:3000/productos/${id}`)
+      .then(response => response.json())
+      .then((json) => setValues(json))
+  }, [])
+
+  //captura y modifica los valores de values
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  //hook para cambiar los valores y guardarlos
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    fetch(`http://localhost:3000/productos/${id}`,{
+      method:"PUT",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify(values),
+    })
+
+    //aqui voy a redireccionar al edit hasta el producto
+    .then(response => {
+      if(response.status == 200){
+        navegate("/producto")
+      }
+    })
+  }
+
   return (
     <div className="container">
-      <h1>Editar Producto</h1>
+      <h1>Editar productos</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="producto" className="form-label">
             Producto:
@@ -13,6 +62,8 @@ function Edit() {
             type="text"
             name="producto"
             id="prodcuto"
+            value={values.producto}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -25,6 +76,8 @@ function Edit() {
             type="text"
             name="nombre"
             id="nombre"
+            value={values.nombre}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -37,6 +90,8 @@ function Edit() {
             type="number"
             name="stock"
             id="stock"
+            value={values.stock}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -50,6 +105,8 @@ function Edit() {
             id="descripcion"
             cols="30"
             rows="10"
+            value={values.descripcion}
+            onChange={handleChange}
             className="form-control"
           ></textarea>
         </div>
@@ -58,7 +115,7 @@ function Edit() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default Edit;
+export default Edit

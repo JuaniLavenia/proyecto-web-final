@@ -1,24 +1,23 @@
 {
-  "crud": [
+  "productos": [
     {
       "id": 1,
-      "producto": "Cera liquida",
-      "nombre": "Cherry Quick",
+      "producto": "Cera liquida111",
+      "nombre": "Cherry Quick111",
       "stock": 4,
-      "descripcion": "Cera Liquita con aroma a cereza."
+      "descripcion": "Cera Liquita con aroma a cereza.1"
     },
     {
-      "id": 2,
-      "producto": "Cera liquida",
-      "nombre": "Extreme detail",
-      "stock": 2,
-      "descripcion":"Cera Liquita con aroma a durazno."
+      "nombre": "Enjuegue 2",
+      "stock": 6,
+      "descripcion": "Enjueague para auto",
+      "id": 2
     },
     {
       "id": 3,
       "producto": "Cera liquida",
       "nombre": "Waterlees",
-      "stock": 3,
+      "stock": "4",
       "descripcion": "Limpiador en seco para suspender suciedad."
     },
     {
@@ -74,7 +73,7 @@
       "id": 11,
       "producto": "Limpiadores",
       "nombre": "Infierno gel",
-      "stock":11,
+      "stock": 11,
       "descripcion": "APC Premium con suspension de suciedad y frganacia a rosas."
     },
     {
@@ -89,7 +88,7 @@
       "producto": "Alcaline Wheels",
       "nombre": "Supreme",
       "stock": 8,
-      "descripcion":"Limpiador alcalino para multiples superficies."
+      "descripcion": "Limpiador alcalino para multiples superficies."
     },
     {
       "id": 14,
@@ -104,6 +103,12 @@
       "nombre": "Bug Remover",
       "stock": 7,
       "descripcion": "Limpiador exclusivo para remover insectos con precision."
+    },
+    {
+      "nombre": "Enjuegue 7",
+      "stock": 7,
+      "descripcion": "Enjueague para auto",
+      "id": 16
     }
   ]
 }
