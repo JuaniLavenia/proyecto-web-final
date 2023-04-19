@@ -6,7 +6,7 @@ import Login from "./Login";
 
 function Navbar() {
 	function handleSubmit(e) {
-		return Login, console.log("You clicked me");
+		return Login;
 	}
 
 	return (
