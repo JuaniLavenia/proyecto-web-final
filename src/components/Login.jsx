@@ -5,8 +5,11 @@ import OlvideContrasena from "./OlvideContrasena";
 
 function Login() {
 	function handleSubmit(e, id) {
-		console.log(`Click en ${id}`);
-		return handleSubmit;
+		if (id === "registrarse") {
+			return <Registro />;
+		} else {
+		}
+		return <OlvideContrasena />;
 	}
 
 	return (
