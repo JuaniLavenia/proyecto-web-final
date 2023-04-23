@@ -79,17 +79,17 @@ function Navbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">
+                  <Link className="nav-link" to="/">
                     Productos
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">
+                  <Link className="nav-link" to="/">
                     Iniciar Sesion
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/producto">
+                  <Link className="nav-link" to="/">
                     Administrador
                   </Link>
                 </li>
