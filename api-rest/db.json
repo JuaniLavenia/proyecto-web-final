@@ -1,25 +1,11 @@
 {
   "productos": [
     {
-      "producto": "Cera liquida",
-      "nombre": "La cera del demonio",
-      "stock": "3",
-      "descripcion": "Esta es la cera del demonio\n",
-      "id": 1
-    },
-    {
-      "producto": "aa",
-      "nombre": "darioasdAA",
-      "stock": "1",
-      "descripcion": "aaa",
+      "producto": "Cera liquidaasdsadasdas",
+      "nombre": "Extreme Detailasdasdasdas",
+      "stock": "-2",
+      "descripcion": "Cera líquida con aroma a durazno, otorga un brillo único.asdasdasdas",
       "id": 2
-    },
-    {
-      "producto": "aa",
-      "nombre": "darioasdAA",
-      "stock": "1",
-      "descripcion": "aaa",
-      "id": 3
     },
     {
       "producto": "111",
@@ -29,25 +15,11 @@
       "id": 4
     },
     {
-      "producto": "aaa",
-      "nombre": "aa",
-      "stock": "2",
-      "descripcion": "asdsa",
-      "id": 5
-    },
-    {
-      "producto": "aaa",
-      "nombre": "aa",
-      "stock": "2",
-      "descripcion": "asdsa",
+      "producto": "aaaaaaa",
+      "nombre": "aaaaa",
+      "stock": "24",
+      "descripcion": "asdsaaaaaa",
       "id": 6
-    },
-    {
-      "producto": "aaa",
-      "nombre": "aa",
-      "stock": "2",
-      "descripcion": "asdsa",
-      "id": 7
     },
     {
       "producto": "aaa",
@@ -62,6 +34,20 @@
       "stock": "1",
       "descripcion": "asdf",
       "id": 9
+    },
+    {
+      "producto": "asdas",
+      "nombre": "asdasd",
+      "stock": "4",
+      "descripcion": "asdasd",
+      "id": 10
+    },
+    {
+      "producto": "asdas",
+      "nombre": "asdasd",
+      "stock": "3",
+      "descripcion": "sadasd",
+      "id": 11
     }
   ]
 }
