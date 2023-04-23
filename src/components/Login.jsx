@@ -9,19 +9,19 @@ function Login() {
 
 	function handleSubmit(e, id) {
 		if (id === "registrarse") {
-			setShowComponent("Registro");
+			setShowComponent(<Registro />);
 			console.log("click registro");
 		} else if (id === "olvideContrasena") {
-			setShowComponent("OlvideContrasena");
+			setShowComponent(<OlvideContrasena />);
 			console.log("click contra");
 		}
 	}
 
 	const renderComponent = () => {
 		switch (showComponent) {
-			case "Registro":
+			case (<Registro />):
 				return <Registro />;
-			case "OlvideContrasena":
+			case (<OlvideContrasena />):
 				return <OlvideContrasena />;
 			default:
 				return null;
