@@ -6,6 +6,7 @@ function Formcarrito(props) {
   const [cardExpirationYear, setCardExpYear] = useState("");
   const [cardCvv, setCardCvv] = useState("");
   const [shippingName, setShippingName] = useState("");
+  const [DniNumber, setDniNumber] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [formValid, setFormValid] = useState(false);
 
@@ -55,11 +56,10 @@ function Formcarrito(props) {
         </div>
 
         <div>
-          <label htmlFor="cardNumber" className="form-label">
-            Número de la tarjeta
-          </label>
+          <label htmlFor="cardNumber" className="form-label"></label>
           <input
             className="form-control"
+            placeholder="Número de la tarjeta"
             min={0}
             minLength={13}
             maxLength={18}
@@ -81,12 +81,14 @@ function Formcarrito(props) {
         </div>
 
         <div className="row">
-          <label htmlFor="cardExpiration" className="form-label">
-            Fecha de vencimiento (MM/AA)
+          <label htmlFor="cardExpiration" className="form-label mt-3">
+            Fecha de caducidad
           </label>
+
           <div className="form-group d-flex">
             <input
               className="form-control w-50"
+              placeholder="MM"
               type="number"
               min={1}
               max={12}
@@ -104,6 +106,7 @@ function Formcarrito(props) {
             <strong className="align-self-center mx-2">/</strong>
             <input
               className="form-control w-50"
+              placeholder="AA"
               type="number"
               min={23}
               max={99}
@@ -125,11 +128,10 @@ function Formcarrito(props) {
         </div>
 
         <div>
-          <label htmlFor="cardCvv" className="form-label">
-            Código de seguridad (CVV)
-          </label>
+          <label htmlFor="cardCvv" className="form-label"></label>
           <input
             className="form-control"
+            placeholder="Código de seguridad (CVV)"
             min={0}
             max={999}
             maxLength={3}
@@ -152,14 +154,13 @@ function Formcarrito(props) {
           </div>
         </div>
       </div>
-      <div className="form-group">
+      <div className="form-group mt-3">
         <h2 className="form-label">Información de envío</h2>
         <div>
-          <label htmlFor="shippingName" className="form-label">
-            Nombre completo
-          </label>
+          <label htmlFor="shippingName" className="form-label"></label>
           <input
             className="form-control"
+            placeholder="Nombre completo (de la persona que va a recibir el pedido)"
             maxLength={40}
             type="text"
             id="shippingName"
@@ -176,11 +177,35 @@ function Formcarrito(props) {
         </div>
 
         <div>
-          <label htmlFor="shippingAddress" className="form-label">
-            Dirección de envío
-          </label>
+          <label htmlFor="shippingDNI" className="form-label"></label>
+          <input
+            className="form-control dni"
+            placeholder="DNI (de la persona que va a recibir el pedido)"
+            min={0}
+            minLength={7}
+            maxLength={8}
+            type="number"
+            id="DniNumber"
+            value={DniNumber}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value.length <= 8) {
+                setDniNumber(value);
+                validateForm();
+              }
+            }}
+            required
+          />
+          <div className="invalid-feedback">
+            Por favor, completa este campo.
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="shippingAddress" className="form-label"></label>
           <input
             className="form-control"
+            placeholder="Dirección de envío"
             type="text"
             maxLength={140}
             id="shippingAddress"

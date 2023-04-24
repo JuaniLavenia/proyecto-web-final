@@ -7,7 +7,103 @@
   min-height: 50vh;
 }
 
-th {
+.dni {
+  -webkit-outer-spin-button: none;
+  -webkit-inner-spin-button: none;
+  -webkit-appearance: none;
+  appearance: textfield;
+  margin: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 650px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+  flex: 1;
+}
+
+.card-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 10px;
+}
+
+.card-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.card-buttons button {
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.card-buttons button.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.card-buttons button.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.card-price {
+  flex: 1;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+/* th {
   font-family: var(--font-family);
   font-weight: 700;
   color: var(--color-greyish-blue);
@@ -18,7 +114,7 @@ td {
   font-family: var(--font-family);
   font-weight: 400;
   color: var(--color-dark-blue);
-}
+} */
 
 .itemCardTotal {
   font-family: var(--font-family);

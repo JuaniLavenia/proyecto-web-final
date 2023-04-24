@@ -1,12 +1,12 @@
 import "./Carrito.css";
 import { useState, useEffect } from "react";
 import Formcarrito from "../components/Formcarrito";
-import { useNavigate } from "react-router";
+import { Button, Modal } from "react-bootstrap";
 
 function Carrito() {
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [formValid, setFormValid] = useState(false);
+
   const valKey = localStorage.getItem("validation");
 
   useEffect(() => {
@@ -46,57 +46,59 @@ function Carrito() {
     }
   };
 
+  const handlePayment = () => {
+    if (valKey) {
+      alert(
+        "¡Compra realizada con exito, se enviara su factura al correo electronico!"
+      );
+      handleCloseModal();
+      setCartItems([]);
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("validation");
+    }
+  };
+
   return (
     <div className="main bg-dark text-light">
       <div className="table-responsive ">
         {cartItems.length > 0 ? (
           <>
-            <table
-              className="table table-sm text-center align-middle bg-dark text-light"
-              id="table"
-            >
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Productos</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Eliminar</th>
-                </tr>
-              </thead>
-              <tbody className="tbody " id="cartTable">
-                {cartItems.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>{item.price}</td>
-                    <td>1</td>
-                    <td>
+            {cartItems.map((item, index) => (
+              <div className="card-container" key={index}>
+                <div className="card bg-dark text-light" key={index}>
+                  <div className="card-image">
+                    <img src={item.image} alt={item.name} />
+                  </div>
+                  <div className="card-details">
+                    <div className="card-name">{item.name}</div>
+                    <div className="card-buttons">
                       <button
                         className="btn btn-danger"
                         onClick={() => handleRemoveFromCart(item)}
                       >
                         Eliminar
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      <button className="btn btn-primary">
+                        Ver más productos
+                      </button>
+                      <Button variant="warning" onClick={handleShowModal}>
+                        Comprar Ahora
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="card-price">$ {item.price}</div>
+                </div>
+              </div>
+            ))}
 
             <div className="col total-comprar">
               <h3 className="itemCardTotal" id="itemTotal">
                 Total ${calculateTotal()}
               </h3>
 
-              <button
-                className="btn btn-success"
-                onClick={handleShowModal}
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                COMPRAR ({cartItems.length})
-              </button>
+              <Button variant="success" onClick={handleShowModal}>
+                Comprar Todo ({cartItems.length})
+              </Button>
             </div>
           </>
         ) : (
@@ -105,51 +107,24 @@ function Carrito() {
       </div>
 
       {showModal && (
-        <div className="modal" tabIndex="-1" role="dialog" id="exampleModal">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content bg-dark">
-              <div className="modal-header">
-                <h5 className="modal-title">Información de la compra</h5>
-                <button
-                  type="button"
-                  className="close"
-                  onClick={handleCloseModal}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <Formcarrito />
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                  onClick={handleCloseModal}
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  onClick={() => {
-                    if (valKey) {
-                      alert("¡Compra realizada correctamente!");
-                      handleCloseModal();
-                      setCartItems([]);
-                      localStorage.removeItem("cartItems");
-                      localStorage.removeItem("validation");
-                    }
-                  }}
-                >
-                  Pagar y enviar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <>
+          <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Información de la compra</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Formcarrito />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="danger" onClick={handleCloseModal}>
+                Cancelar
+              </Button>
+              <Button variant="primary" onClick={handlePayment}>
+                Pagar y enviar
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       )}
     </div>
   );
