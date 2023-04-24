@@ -1,19 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Favoritos.css";
-import axios from "axios";
+import { Button } from "react-bootstrap";
 
 function Favoritos() {
   const [favorites, setFavorites] = useState([]);
 
-  const getProducts = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/products");
-      const products = response.data;
-      // Aquí puedes hacer lo que quieras con los datos de los productos
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("favItems"));
+    if (items) {
+      setFavorites(items);
     }
-  };
+  }, []);
 
   // Función para agregar un favorito a la lista
   function addFavorite(favorite) {
@@ -21,27 +18,55 @@ function Favoritos() {
   }
 
   // Función para eliminar un favorito de la lista
-  function removeFavorite(favorite) {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((fav) => fav !== favorite)
-    );
-  }
+  const removeFavorite = (producto) => {
+    const newFavItems = favorites.filter((item) => item.id !== producto.id);
+    if (newFavItems.length !== favorites.length) {
+      setFavorites(newFavItems);
+      localStorage.setItem("favItems", JSON.stringify(newFavItems));
+    }
+  };
 
   return (
-    <div className="favorites">
-      <h1>Mis Favoritos</h1>
-      {favorites.length === 0 ? (
-        <p>No tienes favoritos guardados</p>
-      ) : (
-        <ul>
-          {favorites.map((favorite) => (
-            <li key={favorite}>
-              {favorite}
-              <button onClick={() => removeFavorite(favorite)}>Eliminar</button>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="favorites bg-dark text-light">
+      <div className="table-responsive ">
+        {favorites.length > 0 ? (
+          <>
+            <div className="col total-comprar mt-3">
+              <Button variant="success">
+                Agregar todo al carrito ({favorites.length})
+              </Button>
+            </div>
+            {favorites.map((item, index) => (
+              <div className="card-container" key={index}>
+                <div className="card bg-dark text-light" key={index}>
+                  <div className="card-image">
+                    <img src={item.image} alt={item.name} />
+                  </div>
+                  <div className="card-details">
+                    <div className="card-name">{item.name}</div>
+                    <div className="card-text mb-3">{item.description}</div>
+                    <div className="card-buttons">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeFavorite(item)}
+                      >
+                        Eliminar
+                      </button>
+                      <button className="btn btn-primary">
+                        Ver más productos
+                      </button>
+                      <Button variant="warning">Comprar Ahora</Button>
+                    </div>
+                  </div>
+                  <div className="card-price">$ {item.price}</div>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p>No tienes favoritos guardados.</p>
+        )}
+      </div>
     </div>
   );
 }
