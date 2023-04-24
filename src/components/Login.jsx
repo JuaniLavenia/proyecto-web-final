@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import Registro from "./Registro";
+import ModalRegistro from "./ModalRegistro";
 import OlvideContrasena from "./OlvideContrasena";
 
 function Login() {
-	const [showComponent, setShowComponent] = useState(null);
+	const [showRegister, setShowRegister] = useState(false);
+	const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-	function handleSubmit(e, id) {
-		if (id === "registrarse") {
-			setShowComponent(<Registro />);
-			console.log("click registro");
-		} else if (id === "olvideContrasena") {
-			setShowComponent(<OlvideContrasena />);
-			console.log("click contra");
-		}
-	}
+	const handleRegisterClick = () => {
+		setShowRegister(true);
+	};
 
-	const renderComponent = () => {
-		switch (showComponent) {
-			case (<Registro />):
-				return <Registro />;
-			case (<OlvideContrasena />):
-				return <OlvideContrasena />;
-			default:
-				return null;
-		}
+	const handleForgotPasswordClick = () => {
+		setShowForgotPassword(true);
+	};
+
+	const handleLoginClick = () => {
+		// Lógica para iniciar sesión
 	};
 
 	return (
@@ -77,8 +69,9 @@ function Login() {
 							<button
 								type="button"
 								className="btn btn-secondary btn-registrarse"
-								data-bs-dismiss="modal"
-								onClick={(e) => handleSubmit(e, "registrarse")}
+								onClick={handleRegisterClick}
+								data-bs-toggle="modal"
+								data-bs-target="#modalRegistro"
 							>
 								Quiero registrarme
 							</button>
@@ -86,7 +79,7 @@ function Login() {
 								id="iniciarSesion"
 								type="button"
 								className=" btn btn-primary btn-inicio-sesion"
-								data-bs-dismiss="modal"
+								onClick={handleLoginClick}
 							>
 								Iniciar Sesión
 							</button>
@@ -94,8 +87,7 @@ function Login() {
 							<button
 								type="button"
 								className="btn btn-div btn-contrasena"
-								data-bs-dismiss="modal"
-								onClick={(e) => handleSubmit(e, "olvideContrasena")}
+								onClick={handleForgotPasswordClick}
 							>
 								Olvidé mi contraseña
 							</button>
@@ -103,7 +95,9 @@ function Login() {
 					</div>
 				</div>
 			</div>
-			{renderComponent()}
+
+			{showRegister && <ModalRegistro setShowRegister={setShowRegister} />}
+			{showForgotPassword && <OlvideContrasena />}
 		</>
 	);
 }
