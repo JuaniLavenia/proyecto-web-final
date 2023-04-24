@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Login.css";
 import ModalRegistro from "./ModalRegistro";
 import OlvideContrasena from "./OlvideContrasena";
@@ -88,6 +87,8 @@ function Login() {
 								type="button"
 								className="btn btn-div btn-contrasena"
 								onClick={handleForgotPasswordClick}
+								data-bs-toggle="modal"
+								data-bs-target="#olvideContrasena"
 							>
 								Olvidé mi contraseña
 							</button>
@@ -97,7 +98,9 @@ function Login() {
 			</div>
 
 			{showRegister && <ModalRegistro setShowRegister={setShowRegister} />}
-			{showForgotPassword && <OlvideContrasena />}
+			{showForgotPassword && (
+				<OlvideContrasena setShowForgotPassword={setShowForgotPassword} />
+			)}
 		</>
 	);
 }
