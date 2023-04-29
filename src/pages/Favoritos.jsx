@@ -55,7 +55,7 @@ function Favoritos() {
                       <button className="btn btn-primary">
                         Ver más productos
                       </button>
-                      <Button variant="warning">Comprar Ahora</Button>
+                      <Button variant="warning">Comprar</Button>
                     </div>
                   </div>
                   <div className="card-price">$ {item.price}</div>
