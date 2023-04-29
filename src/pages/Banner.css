@@ -1,0 +1,21 @@
+.conteinerBanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner {
+  width: 100%;
+  margin: 10px; /* margen inferior de 20px */
+  height: auto;
+}
+
+.card-banner {
+  width: 40%;
+}
+
+.card-banner img {
+  width: 100%;
+  height: 100%;
+}

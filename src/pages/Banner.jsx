@@ -1,99 +1,42 @@
 import React from "react";
+import "./Banner.css";
+import banner1 from "../assets/img/banner1.png";
+import banner2 from "../assets/img/banner2.jpg";
+import banner3 from "../assets/img/banner3.jpg";
+import banner4 from "../assets/img/banner5.png";
 
-function ProductCard({ image, title, description }) {
+const Banner = ({ image, title, category }) => {
   return (
-    <div className="card m-3">
-      <img src={image} className="card-img-top" alt={title} />
-      <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <button className="btn btn-primary me-2">Comprar</button>
-        <button className="btn btn-outline-secondary">
-          Agregar a favoritos
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function ProductList() {
-  const products = [
-    {
-      id: 1,
-      title: "Producto 1",
-      description: "Descripción del Producto 1",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      title: "Producto 2",
-      description: "Descripción del Producto 2",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      title: "Producto 3",
-      description: "Descripción del Producto 3",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 4,
-      title: "Producto 4",
-      description: "Descripción del Producto 4",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 5,
-      title: "Producto 5",
-      description: "Descripción del Producto 5",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 6,
-      title: "Producto 6",
-      description: "Descripción del Producto 5",
-      image: "https://via.placeholder.com/150",
-    },
-  ];
-
-  return (
-    <section>
-      <div className="container py-5">
-        <h1>Productos</h1>
-        <div className="row">
-          {products.map((product) => (
-            <div className="col-md-4" key={product.id}>
-              <ProductCard {...product} />
-            </div>
-          ))}
+    <section className="conteinerBanner">
+      <a href={`/${category}`} className="banner">
+        <div className="card-banner bg-dark text-dark">
+          <img src={image} className="card-img" alt="..." />
+          <div className="card-img-overlay">
+            <h5 className="card-title">{title}</h5>
+          </div>
         </div>
-      </div>
+      </a>
     </section>
   );
-}
+};
 
-export default ProductList;
+const Banners = () => {
+  return (
+    <div>
+      <Banner
+        image={banner1}
+        title="Productos Lavado de Autos"
+        category="categoria1"
+      />
+      <Banner image={banner2} title="Perfumes" category="categoria2" />
+      <Banner
+        image={banner3}
+        title="Productos Interior/Tapizados"
+        category="categoria3"
+      />
+      <Banner image={banner4} title="Ceras Liquidas" category="categoria4" />
+    </div>
+  );
+};
 
-// import React from "react";
-// import "./Banner.css";
-
-// function Banner() {
-//   return (
-//     <>
-//       <section className="cards">
-//         <div className="card m-3">
-//           <img src={image} className="card-img-top" alt={title} />
-//           <div className="card-body">
-//             <h5 className="card-title">{title}</h5>
-//             <p className="card-text">{description}</p>
-//             <button className="btn btn-primary me-2">Comprar</button>
-//             <button className="btn btn-outline-secondary">
-//               Agregar a favoritos
-//             </button>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// }
-// export default Banner;
+export default Banners;
