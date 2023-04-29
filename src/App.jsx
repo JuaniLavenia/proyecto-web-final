@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import Footer from "./components/Footer";
+import SearchResult from "./pages/SearchResult";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/busqueda" element={<SearchResult />} />
       </Routes>
 
       <Footer />
