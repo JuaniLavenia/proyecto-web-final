@@ -1,4 +1,5 @@
 import React from "react";
+import "./OlvideContrasena.css";
 
 function OlvideContrasena() {
 	return (
@@ -18,7 +19,7 @@ function OlvideContrasena() {
 							</h5>
 							<button
 								type="button"
-								className="btn-close"
+								className="btn-close btn-close-white"
 								data-bs-dismiss="modal"
 								aria-label="Close"
 							></button>
@@ -35,7 +36,7 @@ function OlvideContrasena() {
 									</label>
 									<input
 										type="email"
-										className="form-control"
+										className="form-control emailFPasswordForm"
 										id="emailFPasswordForm"
 										placeholder="Correo electrónico"
 									/>
@@ -43,7 +44,7 @@ function OlvideContrasena() {
 							</form>
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-primary">
+							<button type="button" className="btn btn-primary botonRecuperar">
 								Recuperar contraseña
 							</button>
 						</div>
