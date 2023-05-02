@@ -48,7 +48,7 @@ function Login() {
 										className="input-email"
 										type="email"
 										name="email"
-										id="email"
+										id="emailLoginForm"
 										placeholder="Correo electrónico"
 										autoFocus
 									/>
@@ -58,7 +58,7 @@ function Login() {
 										className="input-password"
 										type="password"
 										name="password"
-										id="password"
+										id="passwordLoginForm"
 										placeholder="Contraseña"
 									/>
 								</div>
@@ -85,10 +85,11 @@ function Login() {
 							<br />
 							<button
 								type="button"
+								id="olvideContrasena"
 								className="btn btn-div btn-contrasena"
 								onClick={handleForgotPasswordClick}
 								data-bs-toggle="modal"
-								data-bs-target="#olvideContrasena"
+								data-bs-target="#olvideContrasenaForm"
 							>
 								Olvidé mi contraseña
 							</button>

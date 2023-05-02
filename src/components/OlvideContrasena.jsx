@@ -5,7 +5,7 @@ function OlvideContrasena() {
 		<>
 			<div
 				className="modal fade"
-				id="olvideContrasena"
+				id="olvideContrasenaForm"
 				tabIndex="-1"
 				aria-labelledby="exampleModalLabel"
 				aria-hidden="true"
@@ -36,20 +36,13 @@ function OlvideContrasena() {
 									<input
 										type="email"
 										className="form-control"
-										id="email"
+										id="emailFPasswordForm"
 										placeholder="Correo electrónico"
 									/>
 								</div>
 							</form>
 						</div>
 						<div className="modal-footer">
-							<button
-								type="button"
-								className="btn btn-secondary"
-								data-bs-dismiss="modal"
-							>
-								Cancelar
-							</button>
 							<button type="button" className="btn btn-primary">
 								Recuperar
 							</button>
