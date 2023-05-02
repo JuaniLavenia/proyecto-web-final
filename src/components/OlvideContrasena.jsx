@@ -44,7 +44,7 @@ function OlvideContrasena() {
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-primary">
-								Recuperar
+								Recuperar contraseña
 							</button>
 						</div>
 					</div>
