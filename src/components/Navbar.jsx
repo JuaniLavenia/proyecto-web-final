@@ -1,13 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Navbar.css";
-import logonav from "../assets/img/logo3.png";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
+import logonav from "../assets/img/logo3.png";
 
 function Navbar() {
   function handleSubmit(e) {
     return Login;
   }
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChangeSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const buscar = () => {
+    if (searchTerm === "") {
+      navigate("/busqueda");
+    }
+  };
 
   return (
     <>
@@ -28,6 +43,7 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
+
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
                 <li className="nav-item">
@@ -101,22 +117,32 @@ function Navbar() {
                 </li>
               </ul>
             </div>
+
             <div className="search d-flex">
               <div className="searching me-2">
-                <input type="text" placeholder="Buscar" />
-                <Link to="">
-                  <div className="lupa">
-                    <span className="material-icons-outlined">search</span>
-                  </div>
+                <input
+                  type="search"
+                  placeholder="Buscar"
+                  value={searchTerm}
+                  onChange={handleChangeSearch}
+                />
+
+                <Link
+                  className="lupa"
+                  onClick={buscar}
+                  to={`/busqueda/${searchTerm}`}
+                >
+                  <span className="material-icons-outlined">search</span>
                 </Link>
               </div>
-              <div>
-                <button className="car me-4">
-                  <span className="material-icons-outlined md-48">
-                    shopping_cart
-                  </span>
-                </button>
-              </div>
+            </div>
+
+            <div>
+              <button className="car me-4">
+                <span className="material-icons-outlined md-48">
+                  shopping_cart
+                </span>
+              </button>
             </div>
           </div>
         </nav>
