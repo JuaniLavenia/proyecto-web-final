@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logonav from "../assets/img/logo3.png";
 import "material-icons/iconfont/material-icons.css";
+import Login from "./Login";
 
 function Navbar() {
+  function handleSubmit(e) {
+    return Login;
+  }
+
   return (
     <>
       <header className="fixed-top position-sticky">
@@ -79,20 +84,21 @@ function Navbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link className="nav-link" to="#">
                     Productos
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link
+                    onClick={handleSubmit}
+                    className="nav-link"
+                    to="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
                     Iniciar Sesion
                   </Link>
                 </li>
-                {/* <li className="nav-item">
-                  <Link className="nav-link" to="/">
-                    Administrador
-                  </Link>
-                </li> */}
               </ul>
             </div>
             <div className="search d-flex">
