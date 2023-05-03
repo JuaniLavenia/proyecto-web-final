@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import Footer from "./components/Footer";
 import SearchResult from "./pages/SearchResult";
+import SearchClean from "./pages/SearchClean";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/busqueda" element={<SearchResult />} />
+        <Route path="/busqueda/:filter" element={<SearchResult />} />
+        <Route path="/busqueda/" element={<SearchClean />} />
       </Routes>
 
       <Footer />

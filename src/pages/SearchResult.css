@@ -1,0 +1,8 @@
+.noresult {
+  min-height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-align: center;
+  margin-top: 10rem;
+}

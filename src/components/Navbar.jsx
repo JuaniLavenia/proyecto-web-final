@@ -1,37 +1,24 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import logonav from "../assets/img/logo3.png";
-import "material-icons/iconfont/material-icons.css";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import "./Navbar.css";
+import "material-icons/iconfont/material-icons.css";
+import logonav from "../assets/img/logo3.png";
 
 function Navbar() {
-  const [search, setSearch] = useState("");
-  const [productos, setProductos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const getProductos = () => {
-    axios
-      .get("http://localhost:3000/api/productos")
-      .then((res) => setProductos(res.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const navigate = useNavigate();
 
   const handleChangeSearch = (event) => {
-    setSearch(event.target.value);
+    setSearchTerm(event.target.value);
   };
 
   const buscar = () => {
-    if (search == "") {
-      getProductos();
-    } else {
-      axios
-        .get(`http://localhost:3000/api/productos/search/${search}`)
-        .then((res) => setProductos(res.data))
-        .catch((err) => console.log(err));
+    if (searchTerm === "") {
+      navigate("/busqueda");
     }
   };
+
   return (
     <>
       <header className="fixed-top position-sticky">
@@ -128,24 +115,28 @@ function Navbar() {
             <div className="search d-flex">
               <div className="searching me-2">
                 <input
-                  type="text"
+                  type="search"
                   placeholder="Buscar"
-                  value={search}
+                  value={searchTerm}
                   onChange={handleChangeSearch}
                 />
 
-                <Link className="lupa" onClick={buscar} to="/busqueda">
+                <Link
+                  className="lupa"
+                  onClick={buscar}
+                  to={`/busqueda/${searchTerm}`}
+                >
                   <span className="material-icons-outlined">search</span>
                 </Link>
               </div>
+            </div>
 
-              <div>
-                <button className="car me-4">
-                  <span className="material-icons-outlined md-48">
-                    shopping_cart
-                  </span>
-                </button>
-              </div>
+            <div>
+              <button className="car me-4">
+                <span className="material-icons-outlined md-48">
+                  shopping_cart
+                </span>
+              </button>
             </div>
           </div>
         </nav>
