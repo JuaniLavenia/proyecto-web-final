@@ -2,9 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
+import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
 
 function Navbar() {
+  function handleSubmit(e) {
+    return Login;
+  }
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
@@ -95,20 +100,21 @@ function Navbar() {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link className="nav-link" to="#">
                     Productos
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">
+                  <Link
+                    onClick={handleSubmit}
+                    className="nav-link"
+                    to="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
                     Iniciar Sesion
                   </Link>
                 </li>
-                {/* <li className="nav-item">
-                  <Link className="nav-link" to="/">
-                    Administrador
-                  </Link>
-                </li> */}
               </ul>
             </div>
 
