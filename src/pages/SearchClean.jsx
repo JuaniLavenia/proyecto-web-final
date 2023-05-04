@@ -4,6 +4,7 @@ import axios from "axios";
 
 function SearchClean() {
   const [products, setProducts] = useState([]);
+  const [categoria, setCategoria] = useState("");
 
   const getProductos = () => {
     axios
@@ -24,6 +25,7 @@ function SearchClean() {
     );
     const data = await response.json();
     setProducts(data);
+    setCategoria(category);
   };
   return (
     <>
@@ -35,7 +37,11 @@ function SearchClean() {
         >
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className={
+              categoria == "Interiores"
+                ? "active btn btn-outline-warning"
+                : "btn btn-outline-warning"
+            }
             data-category="Interiores"
             onClick={() => handleCategoryClick("Interiores")}
           >
@@ -43,7 +49,11 @@ function SearchClean() {
           </button>
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className={
+              categoria == "Exteriores"
+                ? "active btn btn-outline-warning"
+                : "btn btn-outline-warning"
+            }
             data-category="Exteriores"
             onClick={() => handleCategoryClick("Exteriores")}
           >
@@ -51,7 +61,11 @@ function SearchClean() {
           </button>
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className={
+              categoria == "Linea Profesional"
+                ? "active btn btn-outline-warning"
+                : "btn btn-outline-warning"
+            }
             data-category="Linea Profesional"
             onClick={() => handleCategoryClick("Linea Profesional")}
           >
@@ -59,7 +73,11 @@ function SearchClean() {
           </button>
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className={
+              categoria == "Linea Industrial"
+                ? "active btn btn-outline-warning"
+                : "btn btn-outline-warning"
+            }
             data-category="Linea Industrial"
             onClick={() => handleCategoryClick("Linea Industrial")}
           >
@@ -67,7 +85,11 @@ function SearchClean() {
           </button>
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className={
+              categoria == "Perfumes"
+                ? "active btn btn-outline-warning"
+                : "btn btn-outline-warning"
+            }
             data-category="Perfumes"
             onClick={() => handleCategoryClick("Perfumes")}
           >
