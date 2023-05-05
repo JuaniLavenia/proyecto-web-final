@@ -27,7 +27,7 @@
   padding: 20px;
 }
 
-.card {
+.cardCart {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -39,7 +39,7 @@
   width: 650px;
 }
 
-.card:hover {
+.cardCart:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -102,19 +102,6 @@
   text-align: center;
   padding: 10px;
 }
-
-/* th {
-  font-family: var(--font-family);
-  font-weight: 700;
-  color: var(--color-greyish-blue);
-}
-
-td {
-  text-align: center;
-  font-family: var(--font-family);
-  font-weight: 400;
-  color: var(--color-dark-blue);
-} */
 
 .itemCardTotal {
   font-family: var(--font-family);

@@ -19,7 +19,7 @@ function Carrito() {
   const calculateTotal = () => {
     let total = 0;
     cartItems.forEach((item) => {
-      total += item.price;
+      total += item.price * item.quantity;
     });
     return total;
   };
@@ -65,12 +65,14 @@ function Carrito() {
           <>
             {cartItems.map((item, index) => (
               <div className="card-container" key={index}>
-                <div className="card bg-dark text-light" key={index}>
+                <div className="card cardCart bg-dark text-light" key={index}>
                   <div className="card-image">
                     <img src={item.image} alt={item.name} />
                   </div>
                   <div className="card-details">
-                    <div className="card-name">{item.name}</div>
+                    <div className="card-name">
+                      {item.name} x({item.quantity})
+                    </div>
                     <div className="card-buttons">
                       <button
                         className="btn btn-danger"

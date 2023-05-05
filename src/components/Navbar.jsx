@@ -82,11 +82,13 @@ function Navbar() {
               </Link>
             </form>
             <div className="d-flex  carrito p-1">
-              <button className="car me-4">
-                <span className="material-icons-outlined md-48">
-                  shopping_cart
-                </span>
-              </button>
+              <Link to="/cart">
+                <button className="car me-4">
+                  <span className="material-icons-outlined md-48">
+                    shopping_cart
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>

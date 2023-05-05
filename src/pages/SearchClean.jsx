@@ -33,6 +33,8 @@ function SearchClean() {
   return (
     <>
       <div className="p-5 bg-dark text-light cleanSearch">
+        <h1 className="text-center ">Filtrar por categoria</h1>
+        <br />
         <div
           className="btn-group d-flex text-center mb-4 categorias"
           role="group"
