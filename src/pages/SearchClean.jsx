@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
+import "./SearchResult.css";
+import { useNavigate } from "react-router";
 
 function SearchClean() {
   const [products, setProducts] = useState([]);
   const [categoria, setCategoria] = useState("");
+  const navigate = useNavigate();
 
   const getProductos = () => {
     axios
@@ -29,9 +32,9 @@ function SearchClean() {
   };
   return (
     <>
-      <div className="p-5 bg-dark text-light">
+      <div className="p-5 bg-dark text-light cleanSearch">
         <div
-          className="btn-group d-flex text-center mb-4"
+          className="btn-group d-flex text-center mb-4 categorias"
           role="group"
           aria-label="Basic example"
         >
@@ -94,6 +97,21 @@ function SearchClean() {
             onClick={() => handleCategoryClick("Perfumes")}
           >
             Perfumes
+          </button>
+          <button
+            type="button"
+            className={
+              categoria == "Productos"
+                ? "active btn btn-outline-primary"
+                : "btn btn-outline-primary "
+            }
+            data-category="Productos"
+            onClick={() => {
+              getProductos();
+              handleCategoryClick("Productos");
+            }}
+          >
+            Todos los productos
           </button>
         </div>
 

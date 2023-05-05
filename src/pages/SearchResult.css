@@ -6,3 +6,15 @@
   text-align: center;
   margin-top: 10rem;
 }
+.cleanSearch {
+  min-width: 380px;
+  height: 100%;
+}
+
+/*______________Media Queries______________*/
+@media (max-width: 991px) {
+  .categorias {
+    display: flex;
+    flex-direction: column;
+  }
+}
