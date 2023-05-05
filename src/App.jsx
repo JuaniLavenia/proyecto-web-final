@@ -9,11 +9,12 @@ import ModalRegistro from "./components/ModalRegistro";
 import OlvideContrasena from "./components/OlvideContrasena";
 import SearchResult from "./pages/SearchResult";
 import SearchClean from "./pages/SearchClean";
+import Carrito from "./pages/Carrito";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Navbar path="/cart" />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -22,6 +23,7 @@ function App() {
         <Route path="/OlvideMiContraseña" element={<OlvideContrasena />} />
         <Route path="/busqueda/:filter" element={<SearchResult />} />
         <Route path="/busqueda/" element={<SearchClean />} />
+        <Route path="/cart" element={<Carrito />} />
       </Routes>
       <Login />
       <ModalRegistro />
