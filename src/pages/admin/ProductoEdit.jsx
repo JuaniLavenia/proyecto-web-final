@@ -1,4 +1,4 @@
-function Edit() {
+function ProductoEdit() {
   return (
     <div className="container">
       <h1>Editar Producto</h1>
@@ -46,4 +46,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default ProductoEdit;

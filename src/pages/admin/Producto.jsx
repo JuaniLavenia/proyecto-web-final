@@ -6,43 +6,52 @@ function Producto() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch(` http://localhost:3000/crud`)
+    fetch(`http://localhost:3000/api/productos`)
       .then((response) => response.json())
       .then((json) => setProductos(json));
   }, []);
 
   return (
     <div className="container">
-      <h1 className="text-center">Lista de productos</h1>
-      <Link to="/create" className="btn btn-primary float-end">
-        Crear
-      </Link>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="text-center">Lista de productos</h1>
+        <Link to="/create" className="btn btn-primary float-end">
+          Crear
+        </Link>
+      </div>
+
 
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
             <th scope="col">Stock</th>
-            <th scope="col">Descripcion</th>
+
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td scope="row">{producto.id}</td>
-              <td scope="row">{producto.nombre}</td>
-              <td scope="row">{producto.stock}</td>
-              <td scope="row">{producto.descripcion}</td>
-              <td className="text-end">
-                <Link className="btn btn-warning" to="/edit">
-                  Editar
-                </Link>
-                <Link className="btn btn-danger">Borrar</Link>
-              </td>
-            </tr>
-          ))}
+          {productos &&
+            productos.map((producto) => (
+              <tr key={producto._id}>
+                <td scope="row">{producto.name}</td>
+                <td scope="row">{producto.price}</td>
+                <td scope="row">{producto.stock}</td>
+                <td>
+                  <img
+                    //ruta para buscar imagen
+                    src={`http://localhost:3000/img/productos/${producto.imagen}`}
+                    width={100}
+                    alt={producto.nombre}
+                  />
+                </td>
+                <td className="text-end">       
+                    <Link to={`/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
+                    <button onClick={() => destroy(producto._id)} type="button" class="btn btn-danger m-3">Borrar</button>      
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
