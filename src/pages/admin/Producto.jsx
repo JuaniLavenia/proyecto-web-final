@@ -25,9 +25,10 @@ function Producto() {
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Precio</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Precio</th>   
             <th scope="col">Stock</th>
-
+            <th scope="col">Descripcion</th>
             <th></th>
           </tr>
         </thead>
@@ -36,8 +37,10 @@ function Producto() {
             productos.map((producto) => (
               <tr key={producto._id}>
                 <td scope="row">{producto.name}</td>
-                <td scope="row">{producto.price}</td>
+                <td scope="row">{producto.category}</td>
+                <td scope="row">{producto.price}</td>              
                 <td scope="row">{producto.stock}</td>
+                <td scope="row">{producto.description}</td>
                 <td>
                   <img
                     //ruta para buscar imagen
