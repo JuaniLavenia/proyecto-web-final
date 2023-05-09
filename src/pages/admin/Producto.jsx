@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Producto() {
-  //hook para iniciar la lista
+  //hook para iniciar la lista y guardar lo que nos llega
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -12,10 +12,11 @@ function Producto() {
   }, []);
 
   return (
+    //aqui vamos a colocar los productos
     <div className="container">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
-        <Link to="/create" className="btn btn-primary float-end">
+        <Link to="/productos/create" className="btn btn-primary float-end">
           Crear
         </Link>
       </div>
@@ -28,7 +29,7 @@ function Producto() {
             <th scope="col">Categoria</th>
             <th scope="col">Precio</th>   
             <th scope="col">Stock</th>
-            <th scope="col">Descripcion</th>
+            <th scope="col">Imagen</th>
             <th></th>
           </tr>
         </thead>
@@ -40,11 +41,10 @@ function Producto() {
                 <td scope="row">{producto.category}</td>
                 <td scope="row">{producto.price}</td>              
                 <td scope="row">{producto.stock}</td>
-                <td scope="row">{producto.description}</td>
                 <td>
                   <img
                     //ruta para buscar imagen
-                    src={`http://localhost:3000/img/productos/${producto.imagen}`}
+                    src={`http://localhost:3000/productos/${producto.image}`}
                     width={100}
                     alt={producto.nombre}
                   />
