@@ -6,6 +6,9 @@ function Producto() {
   //hook para iniciar la lista y guardar lo que nos llega
   const [productos, setProductos] = useState([]);
 
+  //hokk de busqueda
+  const [search, setSearch] = useState("")
+
   //funcion para resetear despues de borrar
   const getProductos = () => {
     axios
@@ -35,7 +38,29 @@ function Producto() {
     }
   };
 
+  //Buscador
+  const handleChangeSearch = (event) => {
+    setSearch(event.target.value)
+  }
 
+  const buscar = () => {
+    if(search == ""){
+      getProductos()
+    }else{
+      axios
+      .get(`http://localhost:3000/api/productos/search/${search}`)
+      .then((res) => {
+        console.log(res)
+        setProductos(res.data)
+      }
+      )
+      .catch((err) =>
+        console.log(err)
+      )
+    }
+  }
+
+  //Estado de buscador
 
   return (
     //aqui vamos a colocar los productos
@@ -47,6 +72,22 @@ function Producto() {
         </Link>
       </div>
 
+      <div class="input-group m-2">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Nombre de producto"
+          name="search"
+          value={search}
+          onChange={handleChangeSearch}
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          onClick={buscar}>
+          Buscar
+        </button>
+      </div>
 
       <table class="table">
         <thead>
@@ -83,8 +124,8 @@ function Producto() {
             ))}
         </tbody>
       </table>
-      
-    </div>
+
+    </div >
   );
 }
 
