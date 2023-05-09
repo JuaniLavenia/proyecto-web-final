@@ -7,8 +7,9 @@ function ProductoCreate() {
   const [values, setValues] = useState({
     name: "",
     description: "",
-    category: "",
     price: "",
+    stock:"",
+    category: "", 
   })
   //Estado para la imagen
   const [image, setImage] = useState();
@@ -21,9 +22,11 @@ function ProductoCreate() {
     formData.append("image", image)
     formData.append("name", values.name)
     formData.append("description", values.description)
-    formData.append("category", values.category)
     formData.append("price", values.price)
+    formData.append("stock", values.stock)
+    formData.append("category", values.category)
     
+
     axios
       .post("http://localhost:3000/api/productos", formData, {
         headers: {

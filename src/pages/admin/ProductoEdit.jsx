@@ -9,6 +9,7 @@ function ProductoEdit() {
     description: "",
     category: "",
     price: "",
+    stock: "",
   })
   const [image, setImage] = useState();
 
@@ -41,6 +42,7 @@ function ProductoEdit() {
     formData.append("description", values.description)
     formData.append("category", values.category)
     formData.append("price", values.price)
+    formData.append("stock", values.stock)
 
     axios
       .put(`http://localhost:3000/api/productos/${id}`, formData, {
