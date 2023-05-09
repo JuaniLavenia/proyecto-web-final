@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -5,11 +6,36 @@ function Producto() {
   //hook para iniciar la lista y guardar lo que nos llega
   const [productos, setProductos] = useState([]);
 
+  //funcion para resetear despues de borrar
+  const getProductos = () => {
+    axios
+      .get(`http://localhost:3000/api/productos`)
+      .then((res) => setProductos(res.data))
+      .catch((err) => console.log(err))
+  }
+
+  //hook para recorrer los productos
   useEffect(() => {
-    fetch(`http://localhost:3000/api/productos`)
-      .then((response) => response.json())
-      .then((json) => setProductos(json));
+    getProductos()
   }, []);
+
+  //destruyo el registro
+  const destroy = (id) => {
+    if (confirm("¿Esta seguro ?")) {
+      axios
+        .delete(`http://localhost:3000/api/productos/${id}`)
+        .then((res) => {
+          console.log(res)
+          getProductos() //llamo la funcion de productos
+        }
+        )
+        .catch((err) =>
+          console.log(err)
+        )
+    }
+  };
+
+
 
   return (
     //aqui vamos a colocar los productos
@@ -27,7 +53,7 @@ function Producto() {
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Categoria</th>
-            <th scope="col">Precio</th>   
+            <th scope="col">Precio</th>
             <th scope="col">Stock</th>
             <th scope="col">Imagen</th>
             <th></th>
@@ -39,7 +65,7 @@ function Producto() {
               <tr key={producto._id}>
                 <td scope="row">{producto.name}</td>
                 <td scope="row">{producto.category}</td>
-                <td scope="row">{producto.price}</td>              
+                <td scope="row">{producto.price}</td>
                 <td scope="row">{producto.stock}</td>
                 <td>
                   <img
@@ -49,14 +75,15 @@ function Producto() {
                     alt={producto.nombre}
                   />
                 </td>
-                <td className="text-end">       
-                    <Link to={`/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
-                    <button onClick={() => destroy(producto._id)} type="button" class="btn btn-danger m-3">Borrar</button>      
+                <td className="text-end">
+                  <Link to={`/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
+                  <button onClick={() => destroy(producto._id)} type="button" class="btn btn-danger m-3">Borrar</button>
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
+      
     </div>
   );
 }
