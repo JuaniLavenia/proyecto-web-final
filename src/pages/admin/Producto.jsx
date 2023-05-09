@@ -106,12 +106,12 @@ function Producto() {
               <tr key={producto._id}>
                 <td scope="row">{producto.name}</td>
                 <td scope="row">{producto.category}</td>
-                <td scope="row">{producto.price}</td>
+                <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
                 <td>
                   <img
                     //ruta para buscar imagen
-                    src={`http://localhost:3000/productos/${producto.image}`}
+                    src={`http://localhost:3000/img/productos/${producto.image}`}
                     width={100}
                     alt={producto.nombre}
                   />

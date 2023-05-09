@@ -10,6 +10,7 @@ function ProductoCreate() {
     category: "",
     price: "",
   })
+  //Estado para la imagen
   const [image, setImage] = useState();
 
   //escuchador del formulario
@@ -22,7 +23,7 @@ function ProductoCreate() {
     formData.append("description", values.description)
     formData.append("category", values.category)
     formData.append("price", values.price)
-
+    
     axios
       .post("http://localhost:3000/api/productos", formData, {
         headers: {
@@ -33,7 +34,7 @@ function ProductoCreate() {
         console.log(res.data)
         navigate("/productos");
       })
-      
+
       .catch((err) => {
         console.log(err);
       });
@@ -53,10 +54,11 @@ function ProductoCreate() {
     })
   }
 
+  //escuchador de evento de imagen
   const handleChangeFile = (event) => {
-    if (event.target.files[0]) {
+    if(event.target.files[0]){
       setImage(event.target.files[0])
-    }
+    }  
   }
 
   return (
@@ -94,6 +96,7 @@ function ProductoCreate() {
             onChange={handleChange}
           ></textarea>
         </div>
+
 
         <div className="mb-3">
           <label htmlFor="image" className="form-label">
