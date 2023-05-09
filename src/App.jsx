@@ -10,6 +10,7 @@ import OlvideContrasena from "./components/OlvideContrasena";
 import SearchResult from "./pages/SearchResult";
 import SearchClean from "./pages/SearchClean";
 import Carrito from "./pages/Carrito";
+import Favoritos from "./pages/Favoritos";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/busqueda/:filter" element={<SearchResult />} />
         <Route path="/busqueda/" element={<SearchClean />} />
         <Route path="/cart" element={<Carrito />} />
+        <Route path="/favorites" element={<Favoritos />} />
       </Routes>
       <Login />
       <ModalRegistro />

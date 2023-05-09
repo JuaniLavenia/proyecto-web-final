@@ -24,6 +24,10 @@ function Navbar() {
     }
   };
 
+  const [numFavorites, setNumFavorites] = useState(0);
+
+  // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
+
   return (
     <>
       <nav className="navbar navbar-expand-lg px-2 fixed-top position-sticky">
@@ -81,12 +85,22 @@ function Navbar() {
                 <span className="material-icons-outlined">search</span>
               </Link>
             </form>
-            <div className="d-flex  carrito p-1">
+            <div className="d-flex carrito p-1">
               <Link to="/cart">
                 <button className="car me-4">
                   <span className="material-icons-outlined md-48">
                     shopping_cart
                   </span>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/favorites">
+                <button className="fav">
+                  <span className="material-icons-outlined">favorite</span>
+                  {numFavorites > 0 && (
+                    <span className="favorite-count">{numFavorites}</span>
+                  )}
                 </button>
               </Link>
             </div>

@@ -1,0 +1,117 @@
+:root {
+  --color-l1: #fff004;
+  --color-l2: #00b3f5;
+  --color-bg: rgb(36, 35, 35);
+  --font-family: "Rubik", sans-serif;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+.favorites {
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  min-height: 50vh;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 650px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+  flex: 1;
+}
+
+.card-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin: 10px;
+}
+
+.card-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.card-buttons button {
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.card-buttons button.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.card-buttons button.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.card-price {
+  flex: 1;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.total-comprar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
