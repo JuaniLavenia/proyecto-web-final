@@ -64,7 +64,7 @@ function Favoritos() {
             ))}
           </>
         ) : (
-          <p>No tienes favoritos guardados.</p>
+          <p className="text-center">No tienes favoritos guardados.</p>
         )}
       </div>
     </div>

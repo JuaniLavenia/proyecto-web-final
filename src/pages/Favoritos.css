@@ -9,7 +9,11 @@
   font-family: var(--font-family);
 }
 
-.main {
+.favorites {
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
