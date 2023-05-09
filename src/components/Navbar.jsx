@@ -1,117 +1,100 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import logonav from "../assets/img/logo3.png";
-import "material-icons/iconfont/material-icons.css";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./Navbar.css";
+import "material-icons/iconfont/material-icons.css";
+import Login from "./Login";
+import logonav from "../assets/img/logo3.png";
 
 function Navbar() {
+  function handleSubmit(e) {
+    return Login;
+  }
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChangeSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const buscar = () => {
+    if (searchTerm === "") {
+      navigate("/busqueda");
+    }
+  };
+
   const [numFavorites, setNumFavorites] = useState(0);
 
   // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
 
   return (
     <>
-      <header className="fixed-top position-sticky">
-        <nav className="navbar navbar-dark navbar-expand-lg px-2">
-          <div className="container-fluid">
+      <nav className="navbar navbar-expand-lg px-2 fixed-top position-sticky">
+        <div className="container-fluid">
+          <div className="imgNav">
             <Link className="navbar-brand" to="/">
               <img className="img-nav" src={logonav} alt="" />
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" to="#"></Link>
-                </li>
+          </div>
 
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Catalogo
-                  </Link>
-                  <ul className="dropdown-menu bg-dark text-light">
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Toxic-Shine
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Full-Car
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Ternnova
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Drop
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Dreams
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Meguiars
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item bg-dark text-light" to="#">
-                        Menzerna
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link" to="/productos">
-                    Productos
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="#">
-                    Iniciar Sesion
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="search d-flex">
-              <div className="searching me-4">
-                <input type="text" placeholder="Buscar" />
-                <Link to="">
-                  <div className="lupa">
-                    <span className="material-icons-outlined">search</span>
-                  </div>
+          <button
+            className="navbar-toggler buttonHamb"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="#">
+                  Productos
                 </Link>
-              </div>
-              <div>
-                <button className="car me-2">
+              </li>
+              <li className="nav-item">
+                <Link
+                  onClick={handleSubmit}
+                  className="nav-link text-light"
+                  to="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Iniciar Sesion
+                </Link>
+              </li>
+            </ul>
+            <form className="d-flex search" role="search">
+              <input
+                className="searchbar"
+                type="search"
+                placeholder="Buscar"
+                value={searchTerm}
+                onChange={handleChangeSearch}
+              />
+
+              <Link
+                className="lupa"
+                onClick={buscar}
+                to={`/busqueda/${searchTerm}`}
+              >
+                <span className="material-icons-outlined">search</span>
+              </Link>
+            </form>
+            <div className="d-flex carrito p-1">
+              <Link to="/cart">
+                <button className="car me-4">
                   <span className="material-icons-outlined md-48">
                     shopping_cart
                   </span>
                 </button>
-              </div>
-              <div>
+              </Link>
+            </div>
+            <div>
                 <Link to="/favorites">
                   <button className="fav">
                     <span className="material-icons-outlined">favorite</span>
@@ -121,10 +104,9 @@ function Navbar() {
                   </button>
                 </Link>
               </div>
-            </div>
           </div>
-        </nav>
-      </header>
+        </div>
+      </nav>
     </>
   );
 }

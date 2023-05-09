@@ -11,7 +11,7 @@ import logofot from "../assets/img/logo4.png";
 function Footer() {
   return (
     <>
-      <footer className="foot">
+      <footer className="foot w-100">
         <div className="d-flex justify-content-around row text-center me-0">
           <div className="col-lg-4 col-sm-12">
             <h5 className="text-white mt-4">Contacto</h5>
