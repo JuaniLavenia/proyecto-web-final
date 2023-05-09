@@ -10,6 +10,7 @@ function ProductoCreate() {
     price: "",
     stock:"",
     category: "", 
+    ability: "",
   })
   //Estado para la imagen
   const [image, setImage] = useState();
@@ -25,6 +26,7 @@ function ProductoCreate() {
     formData.append("price", values.price)
     formData.append("stock", values.stock)
     formData.append("category", values.category)
+    formData.append("ability", values.ability)
     
 
     axios
@@ -158,6 +160,20 @@ function ProductoCreate() {
             id="stock"
             name="stock"
             value={values.stock}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="ability" className="form-label">
+            Capacidad
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="ability"
+            name="ability"
+            value={values.ability}
             onChange={handleChange}
           />
         </div>

@@ -7,9 +7,10 @@ function ProductoEdit() {
   const [values, setValues] = useState({
     name: "",
     description: "",
-    category: "",
     price: "",
-    stock: "",
+    stock:"",
+    category: "", 
+    ability: "",
   })
   const [image, setImage] = useState();
 
@@ -40,9 +41,10 @@ function ProductoEdit() {
     formData.append("image", image)
     formData.append("name", values.name)
     formData.append("description", values.description)
-    formData.append("category", values.category)
     formData.append("price", values.price)
     formData.append("stock", values.stock)
+    formData.append("category", values.category)
+    formData.append("ability", values.ability)
 
     axios
       .put(`http://localhost:3000/api/productos/${id}`, formData, {
@@ -170,6 +172,20 @@ function ProductoEdit() {
             id="stock"
             name="stock"
             value={values.stock}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="ability" className="form-label">
+            Capacidad
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="ability"
+            name="ability"
+            value={values.ability}
             onChange={handleChange}
           />
         </div>

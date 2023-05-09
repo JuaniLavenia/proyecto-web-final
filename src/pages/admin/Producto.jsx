@@ -96,6 +96,7 @@ function Producto() {
             <th scope="col">Categoria</th>
             <th scope="col">Precio</th>
             <th scope="col">Stock</th>
+            <th scope="col">Capacidad</th>
             <th scope="col">Imagen</th>
             <th></th>
           </tr>
@@ -108,6 +109,7 @@ function Producto() {
                 <td scope="row">{producto.category}</td>
                 <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
+                <td scope="row">{producto.ability} ml</td>
                 <td>
                   <img
                     //ruta para buscar imagen
