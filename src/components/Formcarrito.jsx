@@ -1,13 +1,8 @@
 import { useState } from "react";
+import chip from "../assets/img/chip.png";
+import "./Form.css";
 
 function Formcarrito(props) {
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpirationMonth, setCardExpMonth] = useState("");
-  const [cardExpirationYear, setCardExpYear] = useState("");
-  const [cardCvv, setCardCvv] = useState("");
-  const [shippingName, setShippingName] = useState("");
-  const [DniNumber, setDniNumber] = useState("");
-  const [shippingAddress, setShippingAddress] = useState("");
   const [formValid, setFormValid] = useState(false);
 
   const handleSubmit = (event) => {
@@ -33,195 +28,206 @@ function Formcarrito(props) {
     localStorage.setItem("validation", isValid);
   };
 
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardHolder, setCardHolder] = useState("");
+  const [expMonth, setExpMonth] = useState("");
+  const [expYear, setExpYear] = useState("");
+  const [cvv, setCvv] = useState("");
+
+  const handleCardNumberInput = (e) => {
+    document.querySelector(".card-number-box").innerText = cardNumber;
+  };
+
+  const handleCardHolderInput = (e) => {
+    setCardHolder(e.target.value.toUpperCase());
+    document.querySelector(".card-holder-name").innerText = cardHolder;
+  };
+
+  const handleMonthInput = (e) => {
+    document.querySelector(".exp-month").innerText = expMonth;
+  };
+
+  const handleYearInput = (e) => {
+    document.querySelector(".exp-year").innerText = expYear;
+  };
+
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleCardFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  const handleCvvChange = (event) => {
+    document.querySelector(".cvv-box").innerText = cvv;
+  };
+
+  const handleCVVFocus = () => {
+    setIsFlipped(true);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="form-container formcarrito">
-      <div className="form-group">
-        <h2 className="form-label">Información de pago</h2>
-        <div>
-          <label htmlFor="cardNumber" className="form-label">
-            Tipo de tarjeta
-          </label>
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            required
-          >
-            <option>Seleccione la entidad</option>
-            <option value="1">Visa</option>
-            <option value="2">MasterCard</option>
-          </select>
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
+    <>
+      <div
+        className={`creditcard-container ${isFlipped ? "flipped" : ""}`}
+        onClick={handleCardFlip}
+      >
+        <div className="front">
+          <div className="image">
+            <img src={chip} alt="" />
           </div>
-        </div>
-
-        <div>
-          <label htmlFor="cardNumber" className="form-label"></label>
-          <input
-            className="form-control"
-            placeholder="Número de la tarjeta"
-            min={0}
-            minLength={13}
-            maxLength={18}
-            type="number"
-            id="cardNumber"
-            value={cardNumber}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value.length <= 18) {
-                setCardNumber(value);
-                validateForm();
-              }
-            }}
-            required
-          />
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
-          </div>
-        </div>
-
-        <div className="row">
-          <label htmlFor="cardExpiration" className="form-label mt-3">
-            Fecha de caducidad
-          </label>
-
-          <div className="form-group d-flex">
-            <input
-              className="form-control w-50"
-              placeholder="MM"
-              type="number"
-              min={1}
-              max={12}
-              id="cardExpiration"
-              value={cardExpirationMonth}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value.length <= 2) {
-                  setCardExpMonth(value);
-                  validateForm();
-                }
-              }}
-              required
-            />
-            <strong className="align-self-center mx-2">/</strong>
-            <input
-              className="form-control w-50"
-              placeholder="AA"
-              type="number"
-              min={23}
-              max={99}
-              id="cardExpirationYear"
-              value={cardExpirationYear}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (value.length <= 2) {
-                  setCardExpYear(value);
-                  validateForm();
-                }
-              }}
-              required
-            />
-            <div className="invalid-feedback">
-              Por favor, completa este campo.
+          <div className="card-number-box">################</div>
+          <div className="flexbox">
+            <div className="box">
+              <span>TITULAR</span>
+              <div className="card-holder-name">################</div>
+            </div>
+            <div className="box">
+              <span>VENCIMIENTO</span>
+              <div className="expiration form-group d-flex">
+                <div className="exp-month w-50">MM</div>
+                <strong className="align-self-center mx-2">/</strong>
+                <div className="exp-year w-50">AA</div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div>
-          <label htmlFor="cardCvv" className="form-label"></label>
-          <input
-            className="form-control"
-            placeholder="Código de seguridad (CVV)"
-            min={0}
-            max={999}
-            maxLength={3}
-            minLength={3}
-            type="number"
-            id="cardCvv"
-            value={cardCvv}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value.length <= 3) {
-                setCardCvv(value);
-                validateForm();
-              }
-            }}
-            required
-          />
-
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
+        <div className="back">
+          <div className="stripe"></div>
+          <div className="box">
+            <span>cvv</span>
+            <div className="cvv-box">###</div>
           </div>
         </div>
       </div>
-      <div className="form-group mt-3">
-        <h2 className="form-label">Información de envío</h2>
-        <div>
-          <label htmlFor="shippingName" className="form-label"></label>
-          <input
-            className="form-control"
-            placeholder="Nombre completo (de la persona que va a recibir el pedido)"
-            maxLength={40}
-            type="text"
-            id="shippingName"
-            value={shippingName}
-            onChange={(e) => {
-              setShippingName(e.target.value);
-              validateForm();
-            }}
-            required
-          />
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
-          </div>
-        </div>
 
-        <div>
-          <label htmlFor="shippingDNI" className="form-label"></label>
-          <input
-            className="form-control dni"
-            placeholder="DNI (de la persona que va a recibir el pedido)"
-            min={0}
-            minLength={7}
-            maxLength={8}
-            type="number"
-            id="DniNumber"
-            value={DniNumber}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value.length <= 8) {
-                setDniNumber(value);
-                validateForm();
-              }
-            }}
-            required
-          />
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
+      <div className="container formcarrito bg-dark text-light">
+        <form onSubmit={handleSubmit} className="formCard bg-dark text-light">
+          <div className="inputBox">
+            <label htmlFor="card-number-input">Numero de la Tarjeta</label>
+            <input
+              id="card-number-input"
+              className="card-number-input"
+              placeholder="################"
+              min={0}
+              minLength={8}
+              maxLength={30}
+              type="number"
+              value={cardNumber}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length <= 18) {
+                  setCardNumber(value);
+                  handleCardNumberInput();
+                  validateForm();
+                }
+              }}
+            />
           </div>
-        </div>
-
-        <div>
-          <label htmlFor="shippingAddress" className="form-label"></label>
-          <input
-            className="form-control"
-            placeholder="Dirección de envío"
-            type="text"
-            maxLength={140}
-            id="shippingAddress"
-            value={shippingAddress}
-            onChange={(e) => {
-              setShippingAddress(e.target.value);
-              validateForm();
-            }}
-            required
-          />
-          <div className="invalid-feedback">
-            Por favor, completa este campo.
+          <div className="inputBox">
+            <label htmlFor="card-holder-input">Titular de la Tarjeta</label>
+            <input
+              id="card-holder-input"
+              className="card-holder-input"
+              type="text"
+              maxLength={36}
+              placeholder="################"
+              onChange={handleCardHolderInput}
+              value={cardHolder}
+              required
+            />
           </div>
-        </div>
+          <div className="flexbox">
+            <div className="inputBox">
+              <label htmlFor="month-input">Mes de expiracion</label>
+              <select
+                id="month-input"
+                className="month-input"
+                placeholder="MM"
+                type="number"
+                value={expMonth}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 2) {
+                    setExpMonth(value);
+                    handleMonthInput();
+                  }
+                }}
+                required
+              >
+                <option value="" disabled>
+                  MM
+                </option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <div className="inputBox">
+              <label htmlFor="year-input">Año de expiracion</label>
+              <select
+                id="year-input"
+                placeholder="AA"
+                type="number"
+                value={expYear}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 2) {
+                    setExpYear(value);
+                    handleYearInput();
+                  }
+                }}
+                required
+              >
+                <option value="" disabled>
+                  AA
+                </option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          <div className="inputBox ">
+            <label htmlFor="cvv-input">CVV</label>
+            <input
+              className="cvv-input"
+              onFocus={handleCVVFocus}
+              onBlur={handleCardFlip}
+              placeholder="###"
+              min={0}
+              max={999}
+              maxLength={3}
+              minLength={3}
+              type="number"
+              id="cardCvv"
+              value={cvv}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length <= 3) {
+                  setCvv(value);
+                  handleCvvChange();
+                  validateForm();
+                }
+              }}
+            />
+          </div>
+        </form>
       </div>
-    </form>
+    </>
   );
 }
 

@@ -2,12 +2,11 @@ import "./Carrito.css";
 import { useState, useEffect } from "react";
 import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
+import Envio from "../components/EnvioForm";
 
 function Carrito() {
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-
-  const valKey = localStorage.getItem("validation");
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartItems"));
@@ -33,10 +32,10 @@ function Carrito() {
     setShowModal(false);
   };
 
-  const handleAddToCart = (producto) => {
-    setCartItems([...cartItems, producto]);
-    localStorage.setItem("cartItems", JSON.stringify([...cartItems, producto]));
-  };
+  // const handleAddToCart = (producto) => {
+  //   setCartItems([...cartItems, producto]);
+  //   localStorage.setItem("cartItems", JSON.stringify([...cartItems, producto]));
+  // };
 
   const handleRemoveFromCart = (producto) => {
     const newCartItems = cartItems.filter((item) => item.id !== producto.id);
@@ -47,7 +46,9 @@ function Carrito() {
   };
 
   const handlePayment = () => {
-    if (valKey) {
+    const valKey = localStorage.getItem("validation");
+    const valKeyTwo = localStorage.getItem("validation2");
+    if (valKey && valKeyTwo) {
       alert(
         "¡Compra realizada con exito, se enviara su factura al correo electronico!"
       );
@@ -60,12 +61,15 @@ function Carrito() {
 
   return (
     <div className="main bg-dark text-light">
-      <div className="table-responsive ">
+      <div className="table-responsive">
         {cartItems.length > 0 ? (
           <>
             {cartItems.map((item, index) => (
               <div className="card-container" key={index}>
-                <div className="card cardCart bg-dark text-light" key={index}>
+                <div
+                  className="card cardCart bg-dark text-light carritoItems w-100"
+                  key={index}
+                >
                   <div className="card-image">
                     <img src={item.image} alt={item.name} />
                   </div>
@@ -73,7 +77,7 @@ function Carrito() {
                     <div className="card-name">
                       {item.name} x({item.quantity})
                     </div>
-                    <div className="card-buttons">
+                    <div className="card-buttons buttonsCart d-flex">
                       <button
                         className="btn btn-danger"
                         onClick={() => handleRemoveFromCart(item)}
@@ -104,7 +108,7 @@ function Carrito() {
             </div>
           </>
         ) : (
-          <p>No hay productos en el carrito.</p>
+          <p className="text-center">No hay productos en el carrito.</p>
         )}
       </div>
 
@@ -112,10 +116,11 @@ function Carrito() {
         <>
           <Modal show={showModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>
-              <Modal.Title>Información de la compra</Modal.Title>
+              <Modal.Title>Información del pago</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Formcarrito />
+              <Envio />
             </Modal.Body>
             <Modal.Footer>
               <Button variant="danger" onClick={handleCloseModal}>
