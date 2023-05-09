@@ -111,19 +111,20 @@ function ProductoCreate() {
 
 
         <div className="mb-3">
-          <label htmlFor="category" className="form-label">
-            Categoria
-          </label>
-          <textarea
-            className="form-control"
-            name="category"
-            id="category"
-            cols="30"
-            rows="5"
-            required
-            value={values.category}
-            onChange={handleChange}
-          ></textarea>
+          <div className="mb-3">
+            <label htmlFor="category" className="form-label">
+              Categoria
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="category"
+              required
+              name="category"
+              value={values.category}
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
         <div className="mb-3">

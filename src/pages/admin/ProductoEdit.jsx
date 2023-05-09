@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
 function ProductoEdit() {
   //creamos un hook con estados vacios
@@ -11,6 +11,25 @@ function ProductoEdit() {
     price: "",
   })
   const [image, setImage] = useState();
+
+  //obtenemos el id para identificar al producto
+  const { id } = useParams()
+
+  //navegacion a lista de productos
+  const navigate = useNavigate()
+
+  //setiamos los valores anteriores del formulario
+  useEffect(() =>{
+    axios
+    .get(`http://localhost:3000/api/productos/${id}`)
+    .then((res) =>{
+      console.log(res)
+      setValues(res.data)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [])
 
   //escuchador del formulario
   const handleSubmit = (e) => {
@@ -24,7 +43,7 @@ function ProductoEdit() {
     formData.append("price", values.price)
 
     axios
-      .post("http://localhost:3000/api/productos", formData, {
+      .put(`http://localhost:3000/api/productos/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -33,14 +52,11 @@ function ProductoEdit() {
         console.log(res.data)
         navigate("/productos");
       })
-      
+
       .catch((err) => {
         console.log(err);
       });
   }
-
-  //navegacion a lista de productos
-  const navigate = useNavigate()
 
 
   //escuchador de enventos
@@ -111,19 +127,20 @@ function ProductoEdit() {
 
 
         <div className="mb-3">
-          <label htmlFor="category" className="form-label">
-            Categoria
-          </label>
-          <textarea
-            className="form-control"
-            name="category"
-            id="category"
-            cols="30"
-            rows="5"
-            required
-            value={values.category}
-            onChange={handleChange}
-          ></textarea>
+          <div className="mb-3">
+            <label htmlFor="category" className="form-label">
+              Categoria
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="category"
+              required
+              name="category"
+              value={values.category}
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
         <div className="mb-3">
