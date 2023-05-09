@@ -95,15 +95,15 @@ function Navbar() {
               </Link>
             </div>
             <div>
-                <Link to="/favorites">
-                  <button className="fav">
-                    <span className="material-icons-outlined">favorite</span>
-                    {numFavorites > 0 && (
-                      <span className="favorite-count">{numFavorites}</span>
-                    )}
-                  </button>
-                </Link>
-              </div>
+              <Link to="/favorites">
+                <button className="fav">
+                  <span className="material-icons-outlined">favorite</span>
+                  {numFavorites > 0 && (
+                    <span className="favorite-count">{numFavorites}</span>
+                  )}
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
