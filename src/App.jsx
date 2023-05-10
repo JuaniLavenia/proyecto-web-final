@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Producto from "./pages/admin/Producto";
 import Edit from "./pages/admin/ProductoEdit";
 import Create from "./pages/admin/ProductoCreate";
+import Main from "./components/Main";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Route path="/productos" element={<Producto />} />
         <Route path="/productos/edit/:id" element={<Edit />} />
         <Route path="/productos/create" element={<Create />} />
-
       </Routes>
+
+      <Main />
 
       <Footer />
     </>

@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+:root {
+  --color-l1: #fff004;
+  --color-l2: #00b3f5;
+  --color-bg: rgb(36, 35, 35);
+  --font-family: "Rubik", sans-serif;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+section{
+    height: 100%;
+    background: var(--color-bg);
+}
+
+.card{
+    height: 17rem;
+    background: var(--color-bg);   
+}
+
+.card img{
+    height: 100%;
+}
+
+.card-img-overlay .card-title{
+    text-decoration: none;
+    font-size: 2.7rem;
+    font-weight: bold;
+    color: var( --color-l1);
+}
