@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
@@ -24,7 +24,16 @@ function Navbar() {
     }
   };
 
-  const [numFavorites, setNumFavorites] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const [favoritesCount, setFavoritesCount] = useState(0);
+
+  useEffect(() => {
+    const cartCountFromLocalStorage = localStorage.getItem("cartCount");
+    const favoritesCountFromLocalStorage =
+      localStorage.getItem("favoritesCount");
+    setCartCount(cartCountFromLocalStorage || 0);
+    setFavoritesCount(favoritesCountFromLocalStorage || 0);
+  }, []);
 
   // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
 
@@ -87,10 +96,13 @@ function Navbar() {
             </form>
             <div className="d-flex carrito p-1">
               <Link to="/cart">
-                <button className="car me-4">
+                <button className="car">
                   <span className="material-icons-outlined md-48">
                     shopping_cart
                   </span>
+                  {cartCount > 0 && (
+                    <span className="badgeCart">{cartCount}</span>
+                  )}
                 </button>
               </Link>
             </div>
@@ -98,8 +110,8 @@ function Navbar() {
               <Link to="/favorites">
                 <button className="fav">
                   <span className="material-icons-outlined">favorite</span>
-                  {numFavorites > 0 && (
-                    <span className="favorite-count">{numFavorites}</span>
+                  {favoritesCount > 0 && (
+                    <span className="badgeFav">{favoritesCount}</span>
                   )}
                 </button>
               </Link>

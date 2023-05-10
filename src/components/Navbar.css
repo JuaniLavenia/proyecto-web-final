@@ -67,7 +67,23 @@
   color: black;
 }
 
-.favorite-count {
+.badgeCart {
+  position: absolute;
+  top: 50px;
+  right: 70px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badgeFav {
   position: absolute;
   top: 50px;
   right: 20px;
@@ -122,10 +138,20 @@
   .carrito {
     display: flex;
     justify-content: center;
-    margin-left: 1.5rem;
   }
   .imgNav {
     display: flex;
     justify-content: center;
+  }
+  .badgeCart {
+    position: relative;
+    left: 25px;
+    top: -25px;
+  }
+
+  .badgeFav {
+    position: relative;
+    left: 25px;
+    top: -25px;
   }
 }

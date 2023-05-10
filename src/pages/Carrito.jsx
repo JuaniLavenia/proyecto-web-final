@@ -7,6 +7,14 @@ import Envio from "../components/EnvioForm";
 function Carrito() {
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
+
+  const updateLocalStorageCount = (key, count) => {
+    localStorage.setItem(key, count);
+    if (key === "cartCount") {
+      setCartCount(count);
+    }
+  };
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartItems"));
@@ -32,16 +40,13 @@ function Carrito() {
     setShowModal(false);
   };
 
-  // const handleAddToCart = (producto) => {
-  //   setCartItems([...cartItems, producto]);
-  //   localStorage.setItem("cartItems", JSON.stringify([...cartItems, producto]));
-  // };
-
   const handleRemoveFromCart = (producto) => {
-    const newCartItems = cartItems.filter((item) => item.id !== producto.id);
+    const newCartItems = cartItems.filter((item) => item._id !== producto._id);
     if (newCartItems.length !== cartItems.length) {
       setCartItems(newCartItems);
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+      const count = newCartItems.length; // calcular el recuento de elementos actualizado
+      updateLocalStorageCount("cartCount", count);
     }
   };
 
@@ -88,7 +93,7 @@ function Carrito() {
                         Ver más productos
                       </button>
                       <Button variant="warning" onClick={handleShowModal}>
-                        Comprar Ahora
+                        Comprar Ahora ({item.quantity})
                       </Button>
                     </div>
                   </div>
@@ -103,7 +108,7 @@ function Carrito() {
               </h3>
 
               <Button variant="success" onClick={handleShowModal}>
-                Comprar Todo ({cartItems.length})
+                Comprar Todo
               </Button>
             </div>
           </>

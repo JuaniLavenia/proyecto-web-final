@@ -11,6 +11,7 @@
 
 .favorites {
   min-height: 100vh;
+  min-width: 380px;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -19,10 +20,9 @@
   justify-content: center;
   align-items: center;
   padding: 4rem;
-  min-height: 50vh;
 }
 
-.card-container {
+.cardFav {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -32,7 +32,7 @@
   padding: 20px;
 }
 
-.card {
+.cardFavorites {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -44,44 +44,18 @@
   width: 650px;
 }
 
-.card:hover {
+.cardFavorites:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-image {
-  flex: 1;
-}
-
-.card-image img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  margin: 10px;
-}
-
-.card-details {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px;
-}
-
-.card-name {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.card-buttons {
+.cardBtnFav {
   display: flex;
   flex-direction: row;
   gap: 10px;
   margin-bottom: 10px;
 }
 
-.card-buttons button {
+.cardBtnFav button {
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -90,22 +64,12 @@
   cursor: pointer;
 }
 
-.card-buttons button.btn-danger {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.card-buttons button.btn-primary {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.card-price {
-  flex: 1;
+.cardPriceFav {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  padding: 10px;
+  padding-top: 5rem;
+  padding-left: 1rem;
 }
 
 .total-comprar {
@@ -114,4 +78,29 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+@media (max-width: 991px) {
+  .cardFavorites {
+    display: flex;
+    flex-direction: column;
+  }
+  .cardFav {
+    display: flex;
+    flex-direction: row;
+  }
+  .cardPriceFav {
+    padding-top: 0;
+  }
+  .imgFav {
+    width: 200px;
+    align-self: center;
+  }
+  .favContainer {
+    width: 100%;
+  }
+  .cardBtnFav {
+    display: flex;
+    flex-direction: column;
+  }
 }
