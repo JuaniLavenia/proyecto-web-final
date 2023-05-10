@@ -7,7 +7,7 @@ import lineaindustrial from "../assets/img/linea-industrial.jpg"
 import perfumes from "../assets/img/perfumes.png"
 
 
-function Main() {
+function Section() {
     return (
         <>
             <section className="d-flex align-items-center flex-column">
@@ -15,35 +15,35 @@ function Main() {
                 <div className="card  text-white col-6 m-2">
                     <img src={exteriores} className="card-img" />
                     <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                        <Link className="card-title">EXTERIORES</Link>
+                        <Link className="card-title" to="/productos/exteriores">EXTERIORES</Link>
                     </div>
                 </div>
 
                 <div className="card text-white col-6  m-2">
                     <img src={interiores} className="card-img" />
                     <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                        <Link className="card-title">INTERIORES</Link>
+                        <Link className="card-title" to="/productos/interiores">INTERIORES</Link>
                     </div>
                 </div>
 
                 <div className="card text-white col-6  m-2">
                     <img src={lineaprofesional} className="card-img" />
                     <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                        <Link className="card-title">LÍNEA PROFESIONAL</Link>
+                        <Link className="card-title" to="/productos/lineaprofesional">LÍNEA PROFESIONAL</Link>
                     </div>
                 </div>
 
                 <div className="card text-white col-6  m-2">
                     <img src={lineaindustrial} className="card-img" />
                     <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                        <Link className="card-title">LINEA INDUSTRIAL</Link>
+                        <Link className="card-title"  to="/productos/lineaindustrial">LINEA INDUSTRIAL</Link>
                     </div>
                 </div>
 
                 <div className="card text-white col-6  m-2">
                     <img src={perfumes} className="card-img " />
                     <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                        <Link className="card-title">PERFUMES</Link>
+                        <Link className="card-title" to="/productos/perfumes">PERFUMES</Link>
                     </div>
                 </div>
             </section>
@@ -51,4 +51,4 @@ function Main() {
     );
 }
 
-export default Main;
+export default Section;
