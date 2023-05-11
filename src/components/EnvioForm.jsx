@@ -10,10 +10,9 @@ function Envio() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes enviar la información de pago y envío a un servidor para procesar el pago y envío
+    // Aquí puedo enviar la información de pago y envío a un servidor para procesarlo
     // ...
-    // Luego redirige al usuario a una página de confirmación de pedido
-    props.history.push("/confirmacion-pedido");
+    // Luego redirijo al usuario a una página de confirmación de pedido
   };
 
   const validateForm = () => {

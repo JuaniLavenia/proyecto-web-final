@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import "./SearchResult.css";
+import CategoryButton from "../components/CategoryBtn";
 
 function SearchClean() {
   const [products, setProducts] = useState([]);
@@ -31,88 +32,56 @@ function SearchClean() {
   return (
     <>
       <div className="p-5 bg-dark text-light cleanSearch">
-        <h1 className="text-center ">Filtrar por categoria</h1>
+        <h1 className="text-center ">Filtrar por categoría</h1>
         <br />
         <div
           className="btn-group d-flex text-center mb-4 categorias"
           role="group"
           aria-label="Basic example"
         >
-          <button
-            type="button"
-            className={
-              categoria == "Interiores"
-                ? "active btn btn-outline-warning"
-                : "btn btn-outline-warning"
-            }
-            data-category="Interiores"
-            onClick={() => handleCategoryClick("Interiores")}
+          <CategoryButton
+            categoria="Interiores"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
           >
             Interiores
-          </button>
-          <button
-            type="button"
-            className={
-              categoria == "Exteriores"
-                ? "active btn btn-outline-warning"
-                : "btn btn-outline-warning"
-            }
-            data-category="Exteriores"
-            onClick={() => handleCategoryClick("Exteriores")}
+          </CategoryButton>
+          <CategoryButton
+            categoria="Exteriores"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
           >
             Exteriores
-          </button>
-          <button
-            type="button"
-            className={
-              categoria == "Línea Profesional"
-                ? "active btn btn-outline-warning"
-                : "btn btn-outline-warning"
-            }
-            data-category="Línea Profesional"
-            onClick={() => handleCategoryClick("Línea Profesional")}
+          </CategoryButton>
+          <CategoryButton
+            categoria="Línea Profesional"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
           >
-            Linea Profesional
-          </button>
-          <button
-            type="button"
-            className={
-              categoria == "Línea Industrial"
-                ? "active btn btn-outline-warning"
-                : "btn btn-outline-warning"
-            }
-            data-category="Línea Industrial"
-            onClick={() => handleCategoryClick("Línea Industrial")}
+            Línea Profesional
+          </CategoryButton>
+          <CategoryButton
+            categoria="Línea Industrial"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
           >
-            Linea Industrial
-          </button>
-          <button
-            type="button"
-            className={
-              categoria == "Perfumes"
-                ? "active btn btn-outline-warning"
-                : "btn btn-outline-warning"
-            }
-            data-category="Perfumes"
-            onClick={() => handleCategoryClick("Perfumes")}
+            Línea Industrial
+          </CategoryButton>
+          <CategoryButton
+            categoria="Perfumes"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
           >
             Perfumes
-          </button>
-          <button
-            type="button"
-            className={
-              categoria == "Productos"
-                ? "active btn btn-outline-primary"
-                : "btn btn-outline-primary "
-            }
-            data-category="Productos"
-            onClick={() => {
-              getProductos();
-              handleCategoryClick("Productos");
-            }}
+          </CategoryButton>
+          <CategoryButton
+            categoria="Productos"
+            handleCategoryClick={handleCategoryClick}
+            activeCategory={categoria}
+            onClick={getProductos}
           >
             Todos los productos
-          </button>
+          </CategoryButton>
         </div>
 
         <div className="row">
