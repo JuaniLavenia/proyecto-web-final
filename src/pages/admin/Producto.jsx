@@ -3,13 +3,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Producto() {
-  //hook para iniciar la lista y guardar lo que nos llega
   const [productos, setProductos] = useState([]);
 
-  //hokk de busqueda
   const [search, setSearch] = useState("");
 
-  //funcion para resetear despues de borrar
   const getProductos = () => {
     axios
       .get(`http://localhost:3000/api/productos`)
@@ -17,12 +14,11 @@ function Producto() {
       .catch((err) => console.log(err));
   };
 
-  //hook para recorrer los productos
   useEffect(() => {
     getProductos();
   }, []);
 
-  //destruyo el registro
+
   const destroy = (id) => {
     if (confirm("¿Esta seguro ?")) {
       axios
@@ -35,7 +31,6 @@ function Producto() {
     }
   };
 
-  //Buscador
   const handleChangeSearch = (event) => {
     setSearch(event.target.value);
   };
@@ -57,7 +52,6 @@ function Producto() {
   //Estado de buscador
 
   return (
-    //aqui vamos a colocar los productos
     <div className="p-5 bg-dark text-light">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
