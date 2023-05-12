@@ -79,8 +79,8 @@ function ProductoEdit() {
   };
 
   return (
-    <div className="container">
-      <h1>Editar producto</h1>
+    <div className="p-5 bg-dark text-light">
+      <h1 className="text-center">Editar producto</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -178,7 +178,7 @@ function ProductoEdit() {
             Capacidad
           </label>
           <input
-            type="number"
+            type="text"
             className="form-control"
             id="capacity"
             name="capacity"

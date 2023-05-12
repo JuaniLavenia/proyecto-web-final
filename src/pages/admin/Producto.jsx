@@ -58,7 +58,7 @@ function Producto() {
 
   return (
     //aqui vamos a colocar los productos
-    <div className="container">
+    <div className="p-5 bg-dark text-light">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
         <Link to="/adm/productos/create" className="btn btn-primary float-end">
@@ -66,17 +66,17 @@ function Producto() {
         </Link>
       </div>
 
-      <div class="input-group m-2">
+      <div className="input-group mb-5">
         <input
           type="search"
-          class="form-control"
+          className="form-control"
           placeholder="Nombre de producto"
           name="search"
           value={search}
           onChange={handleChangeSearch}
         />
         <button
-          class="btn btn-outline-secondary"
+          className="btn btn-outline-secondary"
           type="button"
           onClick={buscar}
         >
@@ -84,7 +84,7 @@ function Producto() {
         </button>
       </div>
 
-      <table class="table">
+      <table className="table text-light">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -117,14 +117,14 @@ function Producto() {
                   <Link
                     to={`/adm/productos/edit/${producto._id}`}
                     type="button"
-                    class="btn btn-warning m-3"
+                    className="btn btn-warning m-3"
                   >
                     Editar
                   </Link>
                   <button
                     onClick={() => destroy(producto._id)}
                     type="button"
-                    class="btn btn-danger m-3"
+                    className="btn btn-danger m-3"
                   >
                     Borrar
                   </button>
