@@ -1,7 +1,7 @@
 import React from "react";
-import "./ModalRegistro.css";
+import "./Register.css";
 
-function ModalRegistro() {
+function Register() {
 	return (
 		<>
 			<div
@@ -80,4 +80,4 @@ function ModalRegistro() {
 	);
 }
 
-export default ModalRegistro;
+export default Register;

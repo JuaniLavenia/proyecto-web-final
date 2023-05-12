@@ -1,7 +1,7 @@
 import React from "react";
-import "./OlvideContrasena.css";
+import "./OlvideMiContrasena.css";
 
-function OlvideContrasena() {
+function OlvideMiContrasena() {
 	return (
 		<>
 			<div
@@ -55,4 +55,4 @@ function OlvideContrasena() {
 	);
 }
 
-export default OlvideContrasena;
+export default OlvideMiContrasena;

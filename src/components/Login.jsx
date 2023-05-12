@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
-import ModalRegistro from "./ModalRegistro";
-import OlvideContrasena from "./OlvideContrasena";
+import Register from "./Register";
+import OlvideMiContrasena from "./OlvideMiContrasena";
 
 function Login() {
 	const [showRegister, setShowRegister] = useState(false);
@@ -98,9 +98,9 @@ function Login() {
 				</div>
 			</div>
 
-			{showRegister && <ModalRegistro setShowRegister={setShowRegister} />}
+			{showRegister && <Register setShowRegister={setShowRegister} />}
 			{showForgotPassword && (
-				<OlvideContrasena setShowForgotPassword={setShowForgotPassword} />
+				<OlvideMiContrasena setShowForgotPassword={setShowForgotPassword} />
 			)}
 		</>
 	);
