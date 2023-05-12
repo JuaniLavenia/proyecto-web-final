@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+:root {
+  --color-l1: #fff004;
+  --color-l2: #00b3f5;
+  --color-bg: rgb(36, 35, 35);
+  --font-family: "Rubik", sans-serif;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+section{
+    height: 100%;
+    background: var(--color-bg);
+}
+
+.imgBan {
+  height: auto;
+  width: 40%;
+  margin-left: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.imgBan:hover img {
+  transform: scale(1.2);
+}
+
+.imgBan img {
+  transition: transform 0.3s;
+}
+
+.imgBan::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.imgBan:hover::before {
+  opacity: 1;
+}
+
+.imgBanTexto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff !important; 
+  font-size: 2rem;
+  font-family: "Rubik", sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+.imgBan:hover .imgBanTexto {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+/* .card-img{
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover img {
+  transform: scale(1.2);
+}
+
+.card img {
+  transition: transform 0.3s;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.imgBanTexto
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-img-overlay .card-title{
+    text-decoration: none;
+    font-size: 2.7rem;
+    font-weight: bold;
+    color: var( --color-l1);
+} */

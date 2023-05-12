@@ -67,7 +67,7 @@ function Producto() {
     <div className="container">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
-        <Link to="/productos/create" className="btn btn-primary float-end">
+        <Link to="/adm/productos/create" className="btn btn-primary float-end">
           Crear
         </Link>
       </div>
@@ -119,7 +119,7 @@ function Producto() {
                   />
                 </td>
                 <td className="text-end">
-                  <Link to={`/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
+                  <Link to={`/adm/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
                   <button onClick={() => destroy(producto._id)} type="button" class="btn btn-danger m-3">Borrar</button>
                 </td>
               </tr>
