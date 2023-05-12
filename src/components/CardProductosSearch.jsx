@@ -72,7 +72,7 @@ function CardProductos({
     <Card className="cardP m-3 bg-dark text-light d-flex">
       <Card.Img
         variant="top"
-        src={image}
+        src={`http://localhost:3000/img/productos/${image}`}
         className="imgCard d-flex"
         alt={name}
       />
