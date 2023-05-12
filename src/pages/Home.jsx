@@ -7,14 +7,11 @@ import Dream from "../assets/img/dream-carr.png";
 import Megui from "../assets/img/meguiars-carr.png";
 import Menzerna from "../assets/img/menzerna-carr.png";
 
+
 function HomePage() {
   return (
     <div className="home-page text-light">
-      <div
-        id="carouselExampleIndicators"
-        className="carousel slide"
-        data-bs-ride="true"
-      >
+      <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="true">
         <div className="carousel-indicators">
           <button
             type="button"
@@ -109,6 +106,7 @@ function HomePage() {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
+
       </div>
     </div>
   );

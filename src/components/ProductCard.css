@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+:root {
+    --color-l1: #fff004;
+    --color-l2: #00b3f5;
+    --color-bg: rgb(36, 35, 35);
+    --font-family: "Rubik", sans-serif;
+}
+
+* {
+    font-family: var(--font-family);
+}
+
+.card {
+    border-color: var(--color-bg);
+    border: 0px;
+    margin: 2rem;
+    width: 70%;
+
+}
+
+.card-product {
+    height: 100%;
+    background: var(--color-bg);
+}
+
+/*______________Media Queries______________*/
+@media (max-width: 790px) {
+    .card img {
+        width: 10rem;
+    }
+
+    .car .product-car .product-text{
+        font-size: 1rem;
+    }
+
+}
+
+
