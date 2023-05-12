@@ -8,43 +8,43 @@ function ProductoEdit() {
     name: "",
     description: "",
     price: "",
-    stock:"",
-    category: "", 
-    ability: "",
-  })
+    stock: "",
+    category: "",
+    capacity: "",
+  });
   const [image, setImage] = useState();
 
   //obtenemos el id para identificar al producto
-  const { id } = useParams()
+  const { id } = useParams();
 
   //navegacion a lista de productos
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //setiamos los valores anteriores del formulario
-  useEffect(() =>{
+  useEffect(() => {
     axios
-    .get(`http://localhost:3000/api/productos/${id}`)
-    .then((res) =>{
-      console.log(res)
-      setValues(res.data)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }, [])
+      .get(`http://localhost:3000/api/productos/${id}`)
+      .then((res) => {
+        console.log(res);
+        setValues(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   //escuchador del formulario
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append("image", image)
-    formData.append("name", values.name)
-    formData.append("description", values.description)
-    formData.append("price", values.price)
-    formData.append("stock", values.stock)
-    formData.append("category", values.category)
-    formData.append("ability", values.ability)
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("price", values.price);
+    formData.append("stock", values.stock);
+    formData.append("category", values.category);
+    formData.append("capacity", values.capacity);
 
     axios
       .put(`http://localhost:3000/api/productos/${id}`, formData, {
@@ -53,31 +53,30 @@ function ProductoEdit() {
         },
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         navigate("/productos");
       })
 
       .catch((err) => {
         console.log(err);
       });
-  }
-
+  };
 
   //escuchador de enventos
   const handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setValues({
       ...values,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
-      setImage(event.target.files[0])
+      setImage(event.target.files[0]);
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -129,7 +128,6 @@ function ProductoEdit() {
           />
         </div>
 
-
         <div className="mb-3">
           <div className="mb-3">
             <label htmlFor="category" className="form-label">
@@ -161,7 +159,6 @@ function ProductoEdit() {
           />
         </div>
 
-
         <div className="mb-3">
           <label htmlFor="stock" className="form-label">
             Stock
@@ -177,15 +174,15 @@ function ProductoEdit() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="ability" className="form-label">
+          <label htmlFor="capacity" className="form-label">
             Capacidad
           </label>
           <input
             type="number"
             className="form-control"
-            id="ability"
-            name="ability"
-            value={values.ability}
+            id="capacity"
+            name="capacity"
+            value={values.capacity}
             onChange={handleChange}
           />
         </div>

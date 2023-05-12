@@ -7,19 +7,19 @@ function Producto() {
   const [productos, setProductos] = useState([]);
 
   //hokk de busqueda
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   //funcion para resetear despues de borrar
   const getProductos = () => {
     axios
       .get(`http://localhost:3000/api/productos`)
       .then((res) => setProductos(res.data))
-      .catch((err) => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   //hook para recorrer los productos
   useEffect(() => {
-    getProductos()
+    getProductos();
   }, []);
 
   //destruyo el registro
@@ -28,37 +28,31 @@ function Producto() {
       axios
         .delete(`http://localhost:3000/api/productos/${id}`)
         .then((res) => {
-          console.log(res)
-          getProductos() //llamo la funcion de productos
-        }
-        )
-        .catch((err) =>
-          console.log(err)
-        )
+          console.log(res);
+          getProductos(); //llamo la funcion de productos
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   //Buscador
   const handleChangeSearch = (event) => {
-    setSearch(event.target.value)
-  }
+    setSearch(event.target.value);
+  };
 
   const buscar = () => {
-    if(search == ""){
-      getProductos()
-    }else{
+    if (search == "") {
+      getProductos();
+    } else {
       axios
-      .get(`http://localhost:3000/api/productos/search/${search}`)
-      .then((res) => {
-        console.log(res)
-        setProductos(res.data)
-      }
-      )
-      .catch((err) =>
-        console.log(err)
-      )
+        .get(`http://localhost:3000/api/productos/search/${search}`)
+        .then((res) => {
+          console.log(res);
+          setProductos(res.data);
+        })
+        .catch((err) => console.log(err));
     }
-  }
+  };
 
   //Estado de buscador
 
@@ -84,7 +78,8 @@ function Producto() {
         <button
           class="btn btn-outline-secondary"
           type="button"
-          onClick={buscar}>
+          onClick={buscar}
+        >
           Buscar
         </button>
       </div>
@@ -109,7 +104,7 @@ function Producto() {
                 <td scope="row">{producto.category}</td>
                 <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
-                <td scope="row">{producto.ability} ml</td>
+                <td scope="row">{producto.capacity}</td>
                 <td>
                   <img
                     //ruta para buscar imagen
@@ -119,15 +114,26 @@ function Producto() {
                   />
                 </td>
                 <td className="text-end">
-                  <Link to={`/adm/productos/edit/${producto._id}`} type="button" class="btn btn-warning m-3">Editar</Link>
-                  <button onClick={() => destroy(producto._id)} type="button" class="btn btn-danger m-3">Borrar</button>
+                  <Link
+                    to={`/adm/productos/edit/${producto._id}`}
+                    type="button"
+                    class="btn btn-warning m-3"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    onClick={() => destroy(producto._id)}
+                    type="button"
+                    class="btn btn-danger m-3"
+                  >
+                    Borrar
+                  </button>
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
-
-    </div >
+    </div>
   );
 }
 

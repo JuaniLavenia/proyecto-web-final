@@ -8,26 +8,25 @@ function ProductoCreate() {
     name: "",
     description: "",
     price: "",
-    stock:"",
-    category: "", 
-    ability: "",
-  })
+    stock: "",
+    category: "",
+    capacity: "",
+  });
   //Estado para la imagen
   const [image, setImage] = useState();
 
   //escuchador del formulario
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append("image", image)
-    formData.append("name", values.name)
-    formData.append("description", values.description)
-    formData.append("price", values.price)
-    formData.append("stock", values.stock)
-    formData.append("category", values.category)
-    formData.append("ability", values.ability)
-    
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("price", values.price);
+    formData.append("stock", values.stock);
+    formData.append("category", values.category);
+    formData.append("capacity", values.capacity);
 
     axios
       .post("http://localhost:3000/api/productos", formData, {
@@ -36,35 +35,34 @@ function ProductoCreate() {
         },
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         navigate("/productos");
       })
 
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   //navegacion a lista de productos
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   //escuchador de enventos
   const handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setValues({
       ...values,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   //escuchador de evento de imagen
   const handleChangeFile = (event) => {
-    if(event.target.files[0]){
-      setImage(event.target.files[0])
-    }  
-  }
+    if (event.target.files[0]) {
+      setImage(event.target.files[0]);
+    }
+  };
 
   return (
     <div className="container">
@@ -102,7 +100,6 @@ function ProductoCreate() {
           ></textarea>
         </div>
 
-
         <div className="mb-3">
           <label htmlFor="image" className="form-label">
             Imagen
@@ -116,7 +113,6 @@ function ProductoCreate() {
             onChange={handleChangeFile}
           />
         </div>
-
 
         <div className="mb-3">
           <div className="mb-3">
@@ -149,7 +145,6 @@ function ProductoCreate() {
           />
         </div>
 
-
         <div className="mb-3">
           <label htmlFor="stock" className="form-label">
             Stock
@@ -165,15 +160,15 @@ function ProductoCreate() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="ability" className="form-label">
+          <label htmlFor="capacity" className="form-label">
             Capacidad
           </label>
           <input
             type="number"
             className="form-control"
-            id="ability"
-            name="ability"
-            value={values.ability}
+            id="capacity"
+            name="capacity"
+            value={values.capacity}
             onChange={handleChange}
           />
         </div>
