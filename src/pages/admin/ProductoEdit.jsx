@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
 function ProductoEdit() {
-  //creamos un hook con estados vacios
+
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -14,13 +14,10 @@ function ProductoEdit() {
   });
   const [image, setImage] = useState();
 
-  //obtenemos el id para identificar al producto
   const { id } = useParams();
 
-  //navegacion a lista de productos
   const navigate = useNavigate();
 
-  //setiamos los valores anteriores del formulario
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/productos/${id}`)
@@ -33,7 +30,7 @@ function ProductoEdit() {
       });
   }, []);
 
-  //escuchador del formulario
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -62,7 +59,7 @@ function ProductoEdit() {
       });
   };
 
-  //escuchador de enventos
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 

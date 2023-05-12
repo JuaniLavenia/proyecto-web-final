@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 function ProductoCreate() {
-  //creamos un hook con estados vacios
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -12,10 +11,9 @@ function ProductoCreate() {
     category: "",
     capacity: "",
   });
-  //Estado para la imagen
+  
   const [image, setImage] = useState();
 
-  //escuchador del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,10 +42,9 @@ function ProductoCreate() {
       });
   };
 
-  //navegacion a lista de productos
   const navigate = useNavigate();
 
-  //escuchador de enventos
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -57,7 +54,7 @@ function ProductoCreate() {
     });
   };
 
-  //escuchador de evento de imagen
+  
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
       setImage(event.target.files[0]);
