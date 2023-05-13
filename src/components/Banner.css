@@ -1,28 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&family=Oswald:wght@200&family=Source+Sans+Pro&display=swap");
 
 :root {
   --color-l1: #fff004;
   --color-l2: #00b3f5;
   --color-bg: rgb(36, 35, 35);
   --font-family: "Rubik", sans-serif;
+  --font-family2: "Fira+Sans", sans-serif;
 }
 
 * {
   font-family: var(--font-family);
 }
 
-.banner{
+.banner {
   background-color: var(--color-bg);
 }
 
 .imgBan {
-  height: auto;
-  width: 35%;
-  margin-left: 2rem;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
+  width: 75%;
+  max-height: 30rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
   align-items: center;
-
   position: relative;
   overflow: hidden;
 }
@@ -51,52 +53,40 @@
   opacity: 1;
 }
 
-.card-img-overlay .text{
+.card-img-overlay .text {
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #fff !important; 
-  font-size: 2rem;
-  font-family: "Rubik", sans-serif;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--color-l1);
+  font-size: 5rem;
+  font-family: "Fira+Sans", sans-serif;
   opacity: 0;
   transition: opacity 0.3s;
 }
-
 
 .imgBan:hover .text {
   opacity: 1;
 }
 
-
 /*______________Media Queries______________*/
 @media (max-width: 800px) {
-  .imgBan  {
-    width: 50%;
+  /* .imgBan {
+    width: 60%;
+  } */
+  .card-img-overlay .text {
+    font-size: 3rem;
   }
-  .card-img-overlay .text{
+}
+
+@media (max-width: 500px) {
+  /* .imgBan {
+    width: 60%;
+  } */
+  .card-img-overlay .text {
     font-size: 2rem;
   }
 }
-
-
-@media (max-width: 500px) {
-  .imgBan  {
-    width: 60%;
-  }
-  .card-img-overlay .text{
-    font-size: 1.6rem;
-  }
-}
-
-
-
-
-
-
-
-
-

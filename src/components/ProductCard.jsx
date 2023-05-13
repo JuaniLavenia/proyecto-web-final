@@ -3,7 +3,7 @@ import "./ProductCard.css";
 
 function ProductCard({ image, name, description, capacity, category }) {
   return (
-    <div className="product-car row bg-dark">    
+    <div className="product-car row bg-dark">
       <div className="col-md-3 bg-dark">
         <img
           //ruta para buscar imagen
@@ -14,7 +14,9 @@ function ProductCard({ image, name, description, capacity, category }) {
       </div>
       <div className="product-text col-md-9 ">
         <div className="card-body">
-          <h5 className="card-title d-flex justify-content-center m-2">{name}</h5>
+          <h2 className="card-title d-flex justify-content-center m-2">
+            {name}
+          </h2>
           <p className="card-text">{description}</p>
           <div className="card-text d-flex">
             <p className="text-muted text-center w-50">{capacity}</p>
@@ -27,7 +29,6 @@ function ProductCard({ image, name, description, capacity, category }) {
           <button className="btn btn-warning">Agregar a favoritos</button>
         </div>
       </div>
-
     </div>
   );
 }

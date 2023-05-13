@@ -1,0 +1,20 @@
+.table {
+  width: 80%;
+  margin-left: 5rem;
+  margin-top: 5rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-img {
+  width: auto;
+}
+.td .text-end {
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .td .text-end {
+    flex-direction: column;
+  }
+}
