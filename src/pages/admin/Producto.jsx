@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./producto.css";
 
 function Producto() {
   const [productos, setProductos] = useState([]);
@@ -17,7 +18,6 @@ function Producto() {
   useEffect(() => {
     getProductos();
   }, []);
-
 
   const destroy = (id) => {
     if (confirm("¿Esta seguro ?")) {
@@ -99,11 +99,11 @@ function Producto() {
                 <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
                 <td scope="row">{producto.capacity}</td>
-                <td>
+                <td className="card-img">
                   <img
                     //ruta para buscar imagen
                     src={`http://localhost:3000/img/productos/${producto.image}`}
-                    width={100}
+                    // width={100}
                     alt={producto.nombre}
                   />
                 </td>
