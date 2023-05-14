@@ -2,8 +2,38 @@ import React, { useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 function Login() {
+	const [values, setValues] = useState({
+		email: "",
+		password: "",
+	});
+
+	const navigate = useNavigate();
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		axios
+			.post("http://localhost:3000/api/login", values)
+			.then((res) => {
+				console.log(res);
+				localStorage.setItem("token", res.data.token);
+				navigate("/");
+			})
+			.catch((err) => console.log(err));
+	};
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setValues({
+			...values,
+			[name]: value,
+		});
+	};
+
 	const [showRegister, setShowRegister] = useState(false);
 	const [showForgotPassword, setShowForgotPassword] = useState(false);
 
@@ -20,7 +50,7 @@ function Login() {
 	};
 
 	return (
-		<>
+		<div className="container">
 			<div
 				className="modal fade "
 				id="exampleModal"
@@ -42,57 +72,70 @@ function Login() {
 							></button>
 						</div>
 						<div className="modal-body ">
-							<form action="">
+							<form onSubmit={handleSubmit}>
 								<div>
+									<label htmlFor="email" className="form-label">
+										Correo electrónico
+									</label>
 									<input
-										className="input-email"
 										type="email"
+										className="form-control"
+										id="emailLogin"
+										aria-describedby="emailHelp"
+										required
 										name="email"
-										id="emailLoginForm"
-										placeholder="Correo electrónico"
-										autoFocus
+										value={values.email}
+										onChange={handleChange}
 									/>
 								</div>
 								<div>
+									<label htmlFor="registerPassword" className="form-label">
+										Contraseña
+									</label>
 									<input
-										className="input-password"
 										type="password"
+										className="form-control"
+										id="PasswordLogin"
+										required
+										minLength={6}
+										maxLength={12}
 										name="password"
-										id="passwordLoginForm"
-										placeholder="Contraseña"
+										value={values.password}
+										onChange={handleChange}
 									/>
+								</div>
+								<div className="modal-footer">
+									<button
+										type="button"
+										className="btn btn-secondary btn-registrarse"
+										onClick={handleRegisterClick}
+										data-bs-toggle="modal"
+										data-bs-target="#modalRegistro"
+									>
+										Quiero registrarme
+									</button>
+									<button
+										id="iniciarSesion"
+										type="submit"
+										className=" btn btn-primary btn-inicio-sesion"
+										onClick={handleLoginClick}
+										onSubmit={handleSubmit}
+									>
+										Iniciar Sesión
+									</button>
+									<br />
+									<button
+										type="button"
+										id="olvideContrasena"
+										className="btn btn-div btn-contrasena"
+										onClick={handleForgotPasswordClick}
+										data-bs-toggle="modal"
+										data-bs-target="#olvideContrasenaForm"
+									>
+										Olvidé mi contraseña
+									</button>
 								</div>
 							</form>
-						</div>
-						<div className="modal-footer">
-							<button
-								type="button"
-								className="btn btn-secondary btn-registrarse"
-								onClick={handleRegisterClick}
-								data-bs-toggle="modal"
-								data-bs-target="#modalRegistro"
-							>
-								Quiero registrarme
-							</button>
-							<button
-								id="iniciarSesion"
-								type="button"
-								className=" btn btn-primary btn-inicio-sesion"
-								onClick={handleLoginClick}
-							>
-								Iniciar Sesión
-							</button>
-							<br />
-							<button
-								type="button"
-								id="olvideContrasena"
-								className="btn btn-div btn-contrasena"
-								onClick={handleForgotPasswordClick}
-								data-bs-toggle="modal"
-								data-bs-target="#olvideContrasenaForm"
-							>
-								Olvidé mi contraseña
-							</button>
 						</div>
 					</div>
 				</div>
@@ -102,7 +145,7 @@ function Login() {
 			{showForgotPassword && (
 				<OlvideMiContrasena setShowForgotPassword={setShowForgotPassword} />
 			)}
-		</>
+		</div>
 	);
 }
 

@@ -1,11 +1,40 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import "./Register.css";
 
 function Register() {
+	const [values, setValues] = useState({
+		email: "",
+		password: "",
+		password_confirmation: "",
+	});
+
+	const navigate = useNavigate();
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		axios
+			.post("http://localhost:3000/api/register", values)
+			.then((res) => {
+				console.log(res);
+				navigate("/");
+			})
+			.catch((err) => console.log(err));
+	};
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setValues({
+			...values,
+			[name]: value,
+		});
+	};
+
 	return (
-		<>
+		<div className="container">
 			<div
-				className="modal fade"
+				className="modal fade "
 				id="modalRegistro"
 				tabIndex="-1"
 				aria-labelledby="exampleModalLabel"
@@ -25,58 +54,66 @@ function Register() {
 							></button>
 						</div>
 						<div className="modal-body">
-							<form className="formRegistro">
-								<div className="nombreApellido mb-3">
-									<input
-										type="text"
-										className="form-control inputForm"
-										id="nombre"
-										placeholder="Nombre"
-									/>
-									<input
-										type="text"
-										className="form-control inputForm"
-										id="apellido"
-										placeholder="Apeliido"
-									/>
-								</div>
-								<div className="mb-3 emailForm">
+							<form onSubmit={handleSubmit}>
+								<div className="mb-3">
+									<label htmlFor="email" className="form-label">
+										Correo electrónico
+									</label>
 									<input
 										type="email"
-										className="form-control inputForm"
-										id="emailRegisterForm"
-										placeholder="Correo electrónico"
+										className="form-control"
+										id="emailRegister"
+										aria-describedby="emailHelp"
+										required
+										name="email"
+										value={values.email}
+										onChange={handleChange}
 									/>
 								</div>
-								<div className="mb-3 passwordForm">
+								<div className="mb-3">
+									<label htmlFor="registerPassword" className="form-label">
+										Contraseña
+									</label>
 									<input
 										type="password"
-										className="form-control inputForm"
-										id="passwordRegisterForm"
-										placeholder="Contraseña"
+										className="form-control"
+										id="passwordRegister"
+										required
+										minLength={6}
+										maxLength={12}
+										name="password"
+										value={values.password}
+										onChange={handleChange}
 									/>
+									<label htmlFor="password_confirmation" className="form-label">
+										Confirmar contraseña
+									</label>
 									<input
 										type="password"
-										className="form-control inputForm"
-										id="passwordCheckRegisterForm"
-										placeholder="Repetir contraseña"
+										className="form-control"
+										id="password_confirmation"
+										required
+										minLength={6}
+										maxLength={12}
+										name="password_confirmation"
+										value={values.password_confirmation}
+										onChange={handleChange}
 									/>
-									<label htmlFor="password" className="caracteristicaPassword">
-										Debe contener entre 6 y 12 caracteres, una mayúscula y un
-										caracter especial
+									<label htmlFor="password_comfirmation">
+										La contraseña tiene que tener entre 6 y 12 caracteres
 									</label>
 								</div>
+								<div className="modal-footer">
+									<button type="submit" className="btn btn-primary">
+										Registrarse
+									</button>
+								</div>
 							</form>
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-primary btn-registro">
-								Registrarse
-							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

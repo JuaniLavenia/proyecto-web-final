@@ -1,49 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
 
 :root {
-  --color-l1: #fff004;
-  --color-l2: #00b3f5;
-  --color-bg: rgb(36, 35, 35);
-  --font-family: "Rubik", sans-serif;
+	--color-l1: #fff004;
+	--color-l2: #00b3f5;
+	--color-bg: rgb(36, 35, 35);
+	--font-family: "Rubik", sans-serif;
 }
 
 * {
-  font-family: var(--font-family);
+	font-family: var(--font-family);
 }
 
 .modal-content {
-  background-color: var(--color-bg);
-  color: white;
-  display: flex;
-  justify-content: center;
+	background-color: var(--color-bg);
+	color: white;
+	display: flex;
+	justify-content: center;
 }
 
 .modal-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-self: center;
 }
 
 .input-email,
 .input-password {
-  width: 25rem;
-  height: 2.5rem;
-  margin: 0.5rem;
-  border-radius: 20px;
-  padding: 1rem;
+	width: 100%;
+	height: 2.5rem;
+	margin: 0.5rem;
+	border-radius: 20px;
+	padding: 1rem;
 }
 
 .btn-inicio-sesion {
-  background: var(--color-l2);
-  color: white;
+	background: var(--color-l2);
+	color: white;
 }
 
 .btn-contrasena {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 .btn-registrarse {
-  background: var(--color-l1);
-  color: black;
+	background: var(--color-l1);
+	color: black;
+}
+
+@media (min-width: 768px) {
 }
