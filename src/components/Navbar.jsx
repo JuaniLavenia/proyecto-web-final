@@ -76,6 +76,11 @@ function Navbar() {
                   Iniciar Sesion
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/adm/productos">
+                  Administrador
+                </Link>
+              </li>
             </ul>
             <form className="d-flex search" role="search">
               <input
