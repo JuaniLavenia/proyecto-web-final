@@ -74,9 +74,9 @@
 
 /*______________Media Queries______________*/
 @media (max-width: 800px) {
-  /* .imgBan {
+  .imgBan {
     width: 60%;
-  } */
+  }
   .card-img-overlay .text {
     font-size: 3rem;
   }

@@ -11,8 +11,8 @@ function Category() {
   return (
     <div className="banner">
       <h1 className="text-center text-light">Categorias</h1>
-      <Banner imagen={interiores} categoria="Exteriores" />
-      <Banner imagen={exteriores} categoria="Interiores" />
+      <Banner imagen={exteriores}  categoria="Exteriores" />
+      <Banner imagen={interiores} categoria="Interiores" />
       <Banner imagen={lineaprofesional} categoria="Línea Profesional" />
       <Banner imagen={lineaindustrial} categoria="Línea Industrial" />
       <Banner imagen={perfumes} categoria="Perfumes" />

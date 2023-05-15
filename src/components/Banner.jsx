@@ -7,16 +7,16 @@ function Banner({ imagen, categoria }) {
 
   useEffect(() => {
     setEstado({ categoria });
-  });
+  }, []);
 
   return (
     <section className="d-flex align-items-center flex-column conteinerBanner">
       <div className="text-white col-6 card-banner imgBan">
         <img src={imagen} className="card-img" />
-        <div className="card-img-overlay d-flex align-items-center justify-content-center">
+        <div className="d-flex align-items-center justify-content-center card-img-overlay ">
           <Link
             className="text"
-            to={`/productos/category/${encodeURIComponent(categoria)}`}
+            to={`/productos/category/${categoria}`}
           >
             {categoria}
           </Link>
