@@ -69,28 +69,26 @@ function CardProductos({
   };
 
   return (
-    <Card className="cardP m-3 bg-dark text-light d-flex">
-      <Card.Img
-        variant="top"
-        src={`http://localhost:3000/img/productos/${image}`}
+    <div className="card cardP m-3 bg-dark text-light d-flex">
+      <img
         className="imgCard d-flex"
+        src={`http://localhost:3000/img/productos/${image}`}
         alt={name}
       />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+      <div className="card-body">
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">{description}</p>
         <div className="card-text d-flex pt-3">
           <p className="text-muted text-center w-50">{capacity}</p>
           <strong className="text-muted align-self-center pb-3">|</strong>
           <p className="text-muted text-center w-50">{category}</p>
         </div>
-      </Card.Body>
-      <Card.Footer>
+      </div>
+      <div className="card-footer">
         <div className="card-price p-1">$ {price}</div>
         <div className="car-buttons d-flex justify-content-center">
-          <Button
-            variant="primary"
-            className="me-2"
+          <button
+            className="btn btn-primary me-2"
             onClick={() => {
               handleAddToCart({
                 image,
@@ -104,9 +102,9 @@ function CardProductos({
             }}
           >
             Agregar al carrito
-          </Button>
-          <Button
-            variant="warning"
+          </button>
+          <button
+            className="btn btn-warning"
             onClick={() => {
               addFavorite({
                 image,
@@ -120,10 +118,10 @@ function CardProductos({
             }}
           >
             Agregar a favoritos
-          </Button>
+          </button>
         </div>
-      </Card.Footer>
-    </Card>
+      </div>
+    </div>
   );
 }
 export default CardProductos;
