@@ -53,14 +53,12 @@ function Producto() {
 
   return (
     <div className=" p-5 bg-dark text-light">
-
       <div className="list d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
         <Link to="/adm/productos/create" className="btn btn-primary float-end">
           Crear
         </Link>
       </div>
-
 
       <div className="input-group mb-5">
         <input
@@ -79,7 +77,6 @@ function Producto() {
           Buscar
         </button>
       </div>
-
 
       <table className="table text-light ">
         <thead className="thead">
@@ -102,7 +99,7 @@ function Producto() {
                 <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
                 <td scope="row">{producto.capacity}</td>
-                <td scope="row" >
+                <td scope="row">
                   <img
                     //ruta para buscar imagen
                     src={`http://localhost:3000/img/productos/${producto.image}`}
@@ -131,7 +128,6 @@ function Producto() {
             ))}
         </tbody>
       </table>
-
     </div>
   );
 }
