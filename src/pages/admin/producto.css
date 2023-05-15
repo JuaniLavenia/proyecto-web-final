@@ -11,7 +11,53 @@
   font-family: var(--font-family);
 }
 
-/*______________Media Queries______________*/
+.contentPrinc {
+  min-width: 380px;
+}
+
+@media screen and (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+  .table-responsive table {
+    width: 100%;
+  }
+  .table-responsive thead {
+    display: none;
+  }
+  .table-responsive tbody tr {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .table-responsive tbody td {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    width: 100%;
+    position: relative;
+    padding: 0.5rem;
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .table-responsive .tableBody th:nth-of-type(2),
+  .table-responsive .tableBody td:nth-of-type(2),
+  .table-responsive .tableBody th:nth-of-type(3),
+  .table-responsive .tableBody td:nth-of-type(3),
+  .table-responsive .tableBody th:nth-of-type(4),
+  .table-responsive .tableBody td:nth-of-type(4),
+  .table-responsive .tableBody th:nth-of-type(5),
+  .table-responsive .tableBody td:nth-of-type(5) {
+    display: none;
+  }
+}
+
+/* .tableBody {
+  width: 800px;
+  min-width: 380px;
+}
+
 
 @media (max-width: 700px) {
   .table {
@@ -46,7 +92,7 @@
 
 @media (max-width: 480px) {
   .table {
-    font-size: 0.34rem;
+    font-size: 1rem;
   }
 
   .tbody .img {
@@ -79,4 +125,4 @@
     height: 1.5rem;
     font-size: 0.5rem;
   }
-}
+} */
