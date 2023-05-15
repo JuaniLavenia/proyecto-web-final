@@ -7,11 +7,14 @@ import Dream from "../assets/img/dream-carr.png";
 import Megui from "../assets/img/meguiars-carr.png";
 import Menzerna from "../assets/img/menzerna-carr.png";
 
-
 function HomePage() {
   return (
     <div className="home-page text-light">
-      <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="true">
+      <div
+        id="carouselExampleIndicators"
+        className="carousel slide w-100"
+        data-bs-ride="true"
+      >
         <div className="carousel-indicators">
           <button
             type="button"
@@ -60,26 +63,26 @@ function HomePage() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src={Toxic} alt="" />
+            <img src={Toxic} alt="" className="img-fluid" />
           </div>
           <div className="carousel-item">
-            <img src={Megui} alt="" />
+            <img src={Megui} alt="" className="img-fluid" />
           </div>
           <div className="carousel-item">
-            <img src={Fullcar} alt="" />
+            <img src={Fullcar} alt="" className="img-fluid" />
           </div>
           <div className="carousel-item">
-            <img src={Dream} alt="" />
+            <img src={Dream} alt="" className="img-fluid" />
           </div>
           <div className="carousel-item">
-            <img src={Ternnova} alt="" />
+            <img src={Ternnova} alt="" className="img-fluid" />
           </div>
           <div className="carousel-item">
-            <img src={Drop} alt="" />
+            <img src={Drop} alt="" className="img-fluid" />
           </div>
 
           <div className="carousel-item">
-            <img src={Menzerna} alt="" />
+            <img src={Menzerna} alt="" className="img-fluid" />
           </div>
         </div>
         <button
@@ -106,7 +109,6 @@ function HomePage() {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
-
       </div>
     </div>
   );
