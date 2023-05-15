@@ -50,7 +50,7 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <div
         className="modal fade "
         id="exampleModal"
@@ -59,7 +59,7 @@ function Login() {
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
+          <div className="modal-content bg-dark text-light">
             <div className="modal-header ">
               <h1 className="modal-title" id="exampleModalLabel">
                 Iniciar Sesión
@@ -127,7 +127,7 @@ function Login() {
                   <button
                     type="button"
                     id="olvideContrasena"
-                    className="btn btn-div btn-contrasena"
+                    className="btn btn-div btn-contrasena text-light"
                     onClick={handleForgotPasswordClick}
                     data-bs-toggle="modal"
                     data-bs-target="#olvideContrasenaForm"
