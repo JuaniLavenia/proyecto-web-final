@@ -11,9 +11,9 @@ function Banner({ imagen, categoria }) {
 
   return (
     <section className="d-flex align-items-center flex-column conteinerBanner">
-      <div className="text-white col-6 card-banner imgBan">
+      <div className="imgBan">
         <img src={imagen} className="card-img" />
-        <div className="d-flex align-items-center justify-content-center card-img-overlay ">
+        <div className="card-img-overlay">
           <Link
             className="text"
             to={`/productos/category/${categoria}`}

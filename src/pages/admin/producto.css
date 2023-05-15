@@ -1,20 +1,86 @@
-.table {
-  width: 80%;
-  margin-left: 5rem;
-  margin-top: 5rem;
-  flex-direction: row;
-  align-items: center;
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+:root {
+  --color-l1: #fff004;
+  --color-l2: #00b3f5;
+  --color-bg: rgb(36, 35, 35);
+  --font-family: "Rubik", sans-serif;
 }
 
-.card-img {
-  width: auto;
+* {
+  font-family: var(--font-family);
+
 }
-.td .text-end {
-  align-items: center;
-}
+
+/*______________Media Queries______________*/
 
 @media (max-width: 700px) {
-  .td .text-end {
-    flex-direction: column;
+  .table {
+    font-size: 0.7rem;
+
+  }
+
+  .tbody .img{
+    width: 5rem;
+  }
+
+  .tbody .btn{
+    width: 4rem;
+    font-size: 0.7rem;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .table {
+    font-size: 0.6rem;
+  }
+
+  .tbody .img{
+    width: 3rem;
+  }
+
+  .tbody .btn{
+    width: 3rem;
+    font-size: 0.5rem;
+    margin: 1rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .table {
+    font-size: 0.34rem;
+  }
+
+  .tbody .img{
+    width: 1.3rem;
+  }
+
+  .tbody .btn{
+    width: 2.5rem;
+    height: 1 rem;
+    font-size: 0.3rem;
+  }
+ 
+  .list h1 {
+    font-size: 1rem;
+  }
+
+  .list .btn{
+    font-size: 0.5rem;
+    width: 3.2rem;
+    height: 1.5rem;
+  }
+
+  .input-group{
+    margin-bottom: 1rem !important;
+  }
+  .input-group .form-control{
+    height: 1.5rem;
+  }
+  .input-group .btn{
+    height: 1.5rem;
+    font-size: 0.5rem;
   }
 }

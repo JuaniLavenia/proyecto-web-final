@@ -23,6 +23,10 @@
   background: var(--color-bg);
 }
 
+.tbody .btn{
+  margin: ;
+}
+
 /*______________Media Queries______________*/
 
 @media (max-width: 768px) {
@@ -40,5 +44,28 @@
 
   .card-footer {
     margin-top: 1rem;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .product-car .col-md-3 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+ .table .file{
+  width: 10%;
+ }
+  
+  .card-footer {
+    margin-top: 0.2rem;
+  }
+
+  .card-footer button {
+    width: 8rem;
+    height: 100%;
+    font-size: 0.6rem;
   }
 }

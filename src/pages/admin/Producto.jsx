@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./producto.css";
+import "./Producto.css";
 
 function Producto() {
   const [productos, setProductos] = useState([]);
@@ -52,13 +52,15 @@ function Producto() {
   //Estado de buscador
 
   return (
-    <div className="p-5 bg-dark text-light">
-      <div className="d-flex justify-content-between align-items-center">
+    <div className=" p-5 bg-dark text-light">
+
+      <div className="list d-flex justify-content-between align-items-center">
         <h1 className="text-center">Lista de productos</h1>
         <Link to="/adm/productos/create" className="btn btn-primary float-end">
           Crear
         </Link>
       </div>
+
 
       <div className="input-group mb-5">
         <input
@@ -78,8 +80,9 @@ function Producto() {
         </button>
       </div>
 
-      <table className="table text-light">
-        <thead>
+
+      <table className="table text-light ">
+        <thead className="thead">
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Categoria</th>
@@ -90,35 +93,36 @@ function Producto() {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="tbody">
           {productos &&
             productos.map((producto) => (
-              <tr key={producto._id}>
+              <tr key={producto._id} className="file">
                 <td scope="row">{producto.name}</td>
                 <td scope="row">{producto.category}</td>
                 <td scope="row">$ {producto.price}</td>
                 <td scope="row">{producto.stock}</td>
                 <td scope="row">{producto.capacity}</td>
-                <td className="card-img">
+                <td scope="row" >
                   <img
                     //ruta para buscar imagen
                     src={`http://localhost:3000/img/productos/${producto.image}`}
-                    // width={100}
+                    width={100}
                     alt={producto.nombre}
+                    className="img"
                   />
                 </td>
-                <td className="text-end">
+                <td scope="row">
                   <Link
                     to={`/adm/productos/edit/${producto._id}`}
                     type="button"
-                    className="btn btn-warning m-3"
+                    className="btn btn-warning m-1"
                   >
                     Editar
                   </Link>
                   <button
                     onClick={() => destroy(producto._id)}
                     type="button"
-                    className="btn btn-danger m-3"
+                    className="btn btn-danger m-1"
                   >
                     Borrar
                   </button>
@@ -127,6 +131,7 @@ function Producto() {
             ))}
         </tbody>
       </table>
+
     </div>
   );
 }

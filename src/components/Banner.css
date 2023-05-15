@@ -18,7 +18,7 @@
 }
 
 .imgBan {
-  width: 75%;
+  width: 70%;
   max-height: 30rem;
   margin-right: 3rem;
   margin-left: 3rem;
@@ -53,6 +53,10 @@
   opacity: 1;
 }
 
+.imgBan .card-img{
+  width: 100%;
+}
+
 .card-img-overlay .text {
   display: flex;
   align-items: center;
@@ -73,12 +77,21 @@
 }
 
 /*______________Media Queries______________*/
+@media (max-width: 1000px) {
+  .imgBan {
+    width: 70%;
+  }
+  .card-img-overlay .text {
+    font-size: 3.5rem;
+  }
+}
+
 @media (max-width: 800px) {
   .imgBan {
     width: 60%;
   }
   .card-img-overlay .text {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -87,6 +100,6 @@
     width: 60%;
   } */
   .card-img-overlay .text {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 }
