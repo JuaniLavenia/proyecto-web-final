@@ -76,7 +76,10 @@ function Carrito() {
                   key={index}
                 >
                   <div className="card-image">
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={`http://localhost:3000/img/productos/${item.image}`}
+                      alt={item.name}
+                    />
                   </div>
                   <div className="card-details">
                     <div className="card-name">

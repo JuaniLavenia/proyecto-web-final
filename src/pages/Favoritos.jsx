@@ -46,7 +46,7 @@ function Favoritos() {
                 <Card bg="dark" text="light" className="cardFavorites">
                   <Card.Img
                     variant="top"
-                    src={item.image}
+                    src={`http://localhost:3000/img/productos/${item.image}`}
                     alt={item.name}
                     className="imgFav"
                   />
