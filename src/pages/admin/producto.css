@@ -9,7 +9,6 @@
 
 * {
   font-family: var(--font-family);
-
 }
 
 /*______________Media Queries______________*/
@@ -17,18 +16,16 @@
 @media (max-width: 700px) {
   .table {
     font-size: 0.7rem;
-
   }
 
-  .tbody .img{
+  .tbody .img {
     width: 5rem;
   }
 
-  .tbody .btn{
+  .tbody .btn {
     width: 4rem;
     font-size: 0.7rem;
   }
-
 }
 
 @media (max-width: 560px) {
@@ -36,16 +33,15 @@
     font-size: 0.6rem;
   }
 
-  .tbody .img{
+  .tbody .img {
     width: 3rem;
   }
 
-  .tbody .btn{
+  .tbody .btn {
     width: 3rem;
     font-size: 0.5rem;
     margin: 1rem;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -53,33 +49,33 @@
     font-size: 0.34rem;
   }
 
-  .tbody .img{
+  .tbody .img {
     width: 1.3rem;
   }
 
-  .tbody .btn{
+  .tbody .btn {
     width: 2.5rem;
     height: 1 rem;
     font-size: 0.3rem;
   }
- 
+
   .list h1 {
     font-size: 1rem;
   }
 
-  .list .btn{
+  .list .btn {
     font-size: 0.5rem;
     width: 3.2rem;
     height: 1.5rem;
   }
 
-  .input-group{
+  .input-group {
     margin-bottom: 1rem !important;
   }
-  .input-group .form-control{
+  .input-group .form-control {
     height: 1.5rem;
   }
-  .input-group .btn{
+  .input-group .btn {
     height: 1.5rem;
     font-size: 0.5rem;
   }
