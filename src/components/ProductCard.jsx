@@ -4,7 +4,7 @@ import "./ProductCard.css";
 function ProductCard({ image, name, description, capacity, category }) {
   return (
     <div className="product-car row bg-dark">
-      <div className="col-md-3 bg-dark">
+      <div className="col-md-3 bg-dark ">
         <img
           //ruta para buscar imagen
           className="img"
@@ -12,7 +12,7 @@ function ProductCard({ image, name, description, capacity, category }) {
           alt={name}
         />
       </div>
-      <div className="product-text col-md-9 ">
+      <div className="product-text col-md-9">
         <div className="card-body">
           <h2 className="card-title d-flex justify-content-center m-2">
             {name}
