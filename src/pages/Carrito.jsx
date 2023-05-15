@@ -72,7 +72,7 @@ function Carrito() {
             {cartItems.map((item, index) => (
               <div className="card-container" key={index}>
                 <div
-                  className="card cardCart bg-dark text-light carritoItems w-100"
+                  className=" cardCart bg-dark text-light carritoItems w-100"
                   key={index}
                 >
                   <div className="card-image">
@@ -123,14 +123,14 @@ function Carrito() {
       {showModal && (
         <>
           <Modal show={showModal} onHide={handleCloseModal}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className="bg-dark text-light">
               <Modal.Title>Información del pago</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="bg-dark text-light">
               <Formcarrito />
               <Envio />
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-dark text-light">
               <Button variant="danger" onClick={handleCloseModal}>
                 Cancelar
               </Button>

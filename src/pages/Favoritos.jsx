@@ -43,31 +43,32 @@ function Favoritos() {
             </div>
             {favorites.map((item, index) => (
               <div className="cardFav" key={index}>
-                <Card bg="dark" text="light" className="cardFavorites">
-                  <Card.Img
-                    variant="top"
+                <div className="cardFavorites bg-dark text-light">
+                  <img
                     src={`http://localhost:3000/img/productos/${item.image}`}
                     alt={item.name}
                     className="imgFav"
                   />
-                  <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>{item.description}</Card.Text>
+                  <div className="card-body">
+                    <h3 className="card-title titl">{item.name}</h3>
+                    <p className="card-text descrpt mt-4">{item.description}</p>
                     <div className="cardBtnFav">
-                      <Button
-                        variant="danger"
+                      <button
+                        className="btn btn-danger"
                         onClick={() => removeFavorite(item)}
                       >
                         Eliminar
-                      </Button>
-                      <Button variant="primary">Ver más productos</Button>
-                      <Button variant="warning">Comprar</Button>
+                      </button>
+                      <button className="btn btn-primary">
+                        Ver más productos
+                      </button>
+                      <button className="btn btn-warning">Comprar</button>
                     </div>
-                  </Card.Body>
-                  <Card.Footer>
+                  </div>
+                  <div className="card-footer">
                     <div className="cardPriceFav">$ {item.price}</div>
-                  </Card.Footer>
-                </Card>
+                  </div>
+                </div>
               </div>
             ))}
           </>
