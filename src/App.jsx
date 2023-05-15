@@ -5,8 +5,8 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
-import ModalRegistro from "./components/ModalRegistro";
-import OlvideContrasena from "./components/OlvideContrasena";
+import Register from "./components/Register";
+import OlvideMiContrasena from "./components/OlvideMiContrasena";
 import SearchResult from "./pages/SearchResult";
 import SearchClean from "./pages/SearchClean";
 import Carrito from "./pages/Carrito";
@@ -20,16 +20,16 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/ModalRegistro" element={<ModalRegistro />} />
-        <Route path="/OlvideMiContraseña" element={<OlvideContrasena />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/OlvideMiContraseña" element={<OlvideMiContrasena />} />
         <Route path="/busqueda/:filter" element={<SearchResult />} />
         <Route path="/busqueda/" element={<SearchClean />} />
         <Route path="/cart" element={<Carrito />} />
         <Route path="/favorites" element={<Favoritos />} />
       </Routes>
       <Login />
-      <ModalRegistro />
-      <OlvideContrasena />
+      <Register />
+      <OlvideMiContrasena />
       <Footer />
     </>
   );
