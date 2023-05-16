@@ -4,9 +4,15 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import OlvideMiContrasena from "./components/OlvideMiContrasena";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<BrowserRouter>
 		<App />
+		<Register />
+		<Login />
+		<OlvideMiContrasena />
 	</BrowserRouter>
 );
