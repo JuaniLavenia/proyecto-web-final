@@ -17,7 +17,7 @@ function Register() {
 		axios
 			.post("http://localhost:3000/api/register", values)
 			.then((res) => {
-				console.log(res);
+				setValues(res);
 				alert("Usuario registrado correctamente");
 				navigate("/");
 			})
