@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import "./Favoritos.css";
-import { Button, Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-function Favoritos() {
+function Favoritos({ setFavoritesCount }) {
   const [favorites, setFavorites] = useState([]);
-  const [favoritesCount, setFavoritesCount] = useState(0);
 
-  const updateLocalStorageCount = (key, count) => {
-    localStorage.setItem(key, count);
-    if (key === "favoritesCount") {
-      setFavoritesCount(count);
-    }
-  };
+  useEffect(() => {
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+
+    const favCount = favItems.length;
+
+    setFavoritesCount(favCount);
+  }, []);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("favItems"));
@@ -20,7 +20,6 @@ function Favoritos() {
     }
   }, []);
 
-  // Función para eliminar un favorito de la lista
   const removeFavorite = (producto) => {
     const newFavItems = favorites.filter((item) => item._id !== producto._id);
     if (newFavItems.length !== favorites.length) {

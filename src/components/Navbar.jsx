@@ -5,7 +5,12 @@ import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
 
-function Navbar() {
+function Navbar({
+  cartCount,
+  favoritesCount,
+  setCartCount,
+  setFavoritesCount,
+}) {
   function handleSubmit(e) {
     return Login;
   }
@@ -24,18 +29,19 @@ function Navbar() {
     }
   };
 
-  const [cartCount, setCartCount] = useState(0);
-  const [favoritesCount, setFavoritesCount] = useState(0);
-
   useEffect(() => {
-    const cartCountFromLocalStorage = localStorage.getItem("cartCount");
-    const favoritesCountFromLocalStorage =
-      localStorage.getItem("favoritesCount");
-    setCartCount(cartCountFromLocalStorage || 0);
-    setFavoritesCount(favoritesCountFromLocalStorage || 0);
-  }, []);
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
 
-  // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
+
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, [setCartCount, setFavoritesCount]);
 
   return (
     <>
@@ -69,7 +75,7 @@ function Navbar() {
                 <Link
                   onClick={handleSubmit}
                   className="nav-link text-light"
-                  to="#"
+                  to=""
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >

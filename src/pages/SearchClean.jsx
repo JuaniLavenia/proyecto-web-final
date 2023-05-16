@@ -4,9 +4,23 @@ import axios from "axios";
 import "./SearchResult.css";
 import CategoryButton from "../components/CategoryBtn";
 
-function SearchClean() {
+function SearchClean({ setCartCount, setFavoritesCount }) {
   const [products, setProducts] = useState([]);
   const [categoria, setCategoria] = useState("");
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
+
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, []);
 
   const getProductos = () => {
     axios
@@ -88,7 +102,11 @@ function SearchClean() {
           <h1 className="text-center">Productos</h1>
           {products.map((product, index) => (
             <div className="col-md-4 " key={index}>
-              <CardProductos {...product} />
+              <CardProductos
+                {...product}
+                setCartCount={setCartCount}
+                setFavoritesCount={setFavoritesCount}
+              />
             </div>
           ))}
         </div>

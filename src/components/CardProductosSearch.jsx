@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "./CardProductosSearch.css";
-import { Button, Card } from "react-bootstrap";
 
 function CardProductos({
   image,
@@ -10,62 +9,45 @@ function CardProductos({
   category,
   _id,
   price,
+  setCartCount,
+  setFavoritesCount,
 }) {
-  const [cartCount, setCartCount] = useState(0);
-  const [favoritesCount, setFavoritesCount] = useState(0);
-
-  const updateLocalStorageCount = (key, count) => {
-    localStorage.setItem(key, count);
-    if (key === "cartCount") {
-      setCartCount(count);
-    } else if (key === "favoritesCount") {
-      setFavoritesCount(count);
-    }
-  };
-
   const handleAddToCart = (product) => {
-    // Primero, obtén el carrito actual del almacenamiento local (si lo hay).
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    // Luego, verifica si el producto ya está en el carrito.
     let existingProduct = cart.find((p) => p._id === product._id);
 
     if (existingProduct) {
-      // Si el producto ya está en el carrito, actualiza su cantidad.
       existingProduct.quantity += 1;
     } else {
-      // Si el producto no está en el carrito, agrega el producto al carrito con una cantidad de 1.
       cart.push({ ...product, quantity: 1 });
     }
 
-    // Finalmente, guarda el carrito actualizado en el almacenamiento local.
     localStorage.setItem("cartItems", JSON.stringify(cart));
     alert("Se agrego al carrito!");
 
-    const count = cart.length;
-    updateLocalStorageCount("cartCount", count);
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+
+    const updatedCartCount = cartCount;
+    setCartCount(updatedCartCount);
   };
 
   const addFavorite = (favorite) => {
-    // Primero, obtén el carrito actual del almacenamiento local (si lo hay).
     let fav = JSON.parse(localStorage.getItem("favItems")) || [];
 
-    // Luego, verifica si el producto ya está en el carrito.
     let existingProduct = fav.find((p) => p._id === favorite._id);
 
     if (existingProduct) {
-      // Si el producto ya está en el carrito, actualiza su cantidad.
       alert("El producto ya existe en favoritos");
     } else {
-      // Si el producto no está en el carrito, agrega el producto al carrito con una cantidad de 1.
-
       fav.push({ ...favorite, quantity: 1 });
       localStorage.setItem("favItems", JSON.stringify(fav));
       alert("Se agrego a favoritos!");
     }
 
-    const count = fav.length;
-    updateLocalStorageCount("favoritesCount", count);
+    const favoritesCount = fav.length;
+    const updatedFavCount = favoritesCount;
+    setFavoritesCount(updatedFavCount);
   };
 
   return (

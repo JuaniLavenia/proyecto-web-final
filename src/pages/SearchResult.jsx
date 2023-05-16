@@ -5,9 +5,23 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
 
-function SearchResult() {
+function SearchResult({ setCartCount, setFavoritesCount }) {
   const { filter } = useParams();
   const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
+
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, []);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -37,57 +51,9 @@ function SearchResult() {
     buscarProductos();
   }, [filter]);
 
-  // const [products, setProducts] = useState([]);
-  // const [search, setSearch] = useState("");
-
-  // const getProductos = () => {
-  //   axios
-  //     .get("http://localhost:3000/api/productos")
-  //     .then((res) => setProducts(res.data))
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getProductos();
-  // }, []);
-
-  // const handleChangeSearch = (event) => {
-  //   setSearch(event.target.value);
-  // };
-
-  // const buscar = () => {
-  //   if (search == "") {
-  //     getProductos();
-  //   } else {
-  //     axios
-  //       .get(`http://localhost:3000/api/productos/search/${search}`)
-  //       .then((res) => setProducts(res.data))
-  //       .catch((err) => console.log(err));
-  //   }
-  // };
-
   return (
     <>
       <div className="p-5 bg-dark text-light">
-        {/* <div className="input-group mb-3 d-flex">
-          <input
-            type="search"
-            className="form-control"
-            name="search"
-            value={search}
-            onChange={handleChangeSearch}
-          />
-          <button
-            className="btn btn-outline-warning"
-            onClick={buscar}
-            type="button"
-          >
-            Buscar
-          </button>
-        </div> */}
-
         <div className="row">
           {productos.length > 0 ? (
             <div className="row">
@@ -96,7 +62,11 @@ function SearchResult() {
               </h1>
               {searchResults.map((product, index) => (
                 <div className="col-md-4 " key={index}>
-                  <CardProductos {...product} />
+                  <CardProductos
+                    {...product}
+                    setCartCount={setCartCount}
+                    setFavoritesCount={setFavoritesCount}
+                  />
                 </div>
               ))}
             </div>

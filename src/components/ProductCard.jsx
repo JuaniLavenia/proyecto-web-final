@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProductCard.css";
 import { Button } from "react-bootstrap";
 
@@ -10,19 +10,9 @@ function ProductCard({
   category,
   _id,
   price,
+  setCartCount,
+  setFavoritesCount,
 }) {
-  const [cartCount, setCartCount] = useState(0);
-  const [favoritesCount, setFavoritesCount] = useState(0);
-
-  const updateLocalStorageCount = (key, count) => {
-    localStorage.setItem(key, count);
-    if (key === "cartCount") {
-      setCartCount(count);
-    } else if (key === "favoritesCount") {
-      setFavoritesCount(count);
-    }
-  };
-
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
@@ -37,8 +27,10 @@ function ProductCard({
     localStorage.setItem("cartItems", JSON.stringify(cart));
     alert("Se agrego al carrito!");
 
-    const count = cart.length;
-    updateLocalStorageCount("cartCount", count);
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+
+    const updatedCartCount = cartCount;
+    setCartCount(updatedCartCount);
   };
 
   const addFavorite = (favorite) => {
@@ -53,16 +45,15 @@ function ProductCard({
       localStorage.setItem("favItems", JSON.stringify(fav));
       alert("Se agrego a favoritos!");
     }
-
-    const count = fav.length;
-    updateLocalStorageCount("favoritesCount", count);
+    const favoritesCount = fav.length;
+    const updatedFavCount = favoritesCount;
+    setFavoritesCount(updatedFavCount);
   };
 
   return (
     <div className="product-car row bg-dark">
       <div className="col-md-3 bg-dark ">
         <img
-          //ruta para buscar imagen
           className="img"
           src={`http://localhost:3000/img/productos/${image}`}
           alt={name}

@@ -4,17 +4,20 @@ import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 
-function Carrito() {
+function Carrito({ setCartCount }) {
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
 
-  const updateLocalStorageCount = (key, count) => {
-    localStorage.setItem(key, count);
-    if (key === "cartCount") {
-      setCartCount(count);
-    }
-  };
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+
+    setCartCount(cartCount);
+  }, []);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartItems"));
@@ -45,7 +48,7 @@ function Carrito() {
     if (newCartItems.length !== cartItems.length) {
       setCartItems(newCartItems);
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-      const count = newCartItems.length; // calcular el recuento de elementos actualizado
+      const count = newCartItems.length;
       updateLocalStorageCount("cartCount", count);
     }
   };

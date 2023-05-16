@@ -4,8 +4,22 @@ import ProductCard from "./ProductCard";
 import { useParams } from "react-router";
 import "./ProductCard.css";
 
-function ProductList() {
+function ProductList({ setCartCount, setFavoritesCount }) {
   const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
+
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, []);
 
   const { category } = useParams();
 
@@ -31,7 +45,11 @@ function ProductList() {
         <div className="d-flex align-items-center flex-column">
           {productos.map((producto) => (
             <div className="card" key={producto._id}>
-              <ProductCard {...producto} />
+              <ProductCard
+                {...producto}
+                setCartCount={setCartCount}
+                setFavoritesCount={setFavoritesCount}
+              />
             </div>
           ))}
         </div>
