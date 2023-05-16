@@ -21,9 +21,9 @@ function Login() {
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data.token);
-        navigate("/");
+        navigate("/productos");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("El usuario y/o contraseña son incorrectos"));
   };
 
   const handleChange = (event) => {
@@ -120,6 +120,7 @@ function Login() {
                     className=" btn btn-primary btn-inicio-sesion"
                     onClick={handleLoginClick}
                     onSubmit={handleSubmit}
+                    data-bs-dismiss="modal"
                   >
                     Iniciar Sesión
                   </button>
