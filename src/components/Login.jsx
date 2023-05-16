@@ -6,15 +6,15 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 function Login() {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
+	const [values, setValues] = useState({
+		email: "",
+		password: "",
+	});
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
     axios
       .post("http://localhost:3000/api/login", values)
@@ -26,28 +26,28 @@ function Login() {
       .catch((err) => alert("El usuario y/o contraseña son incorrectos"));
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setValues({
+			...values,
+			[name]: value,
+		});
+	};
 
-  const [showRegister, setShowRegister] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+	const [showRegister, setShowRegister] = useState(false);
+	const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-  const handleRegisterClick = () => {
-    setShowRegister(true);
-  };
+	const handleRegisterClick = () => {
+		setShowRegister(true);
+	};
 
-  const handleForgotPasswordClick = () => {
-    setShowForgotPassword(true);
-  };
+	const handleForgotPasswordClick = () => {
+		setShowForgotPassword(true);
+	};
 
-  const handleLoginClick = () => {
-    // Lógica para iniciar sesión
-  };
+	const handleLoginClick = () => {
+		// Lógica para iniciar sesión
+	};
 
   return (
     <div className="container">
@@ -142,12 +142,12 @@ function Login() {
         </div>
       </div>
 
-      {showRegister && <Register setShowRegister={setShowRegister} />}
-      {showForgotPassword && (
-        <OlvideMiContrasena setShowForgotPassword={setShowForgotPassword} />
-      )}
-    </div>
-  );
+			{showRegister && <Register setShowRegister={setShowRegister} />}
+			{showForgotPassword && (
+				<OlvideMiContrasena setShowForgotPassword={setShowForgotPassword} />
+			)}
+		</div>
+	);
 }
 
 export default Login;

@@ -18,9 +18,13 @@ function Register() {
 			.post("http://localhost:3000/api/register", values)
 			.then((res) => {
 				console.log(res);
+				alert("Usuario registrado correctamente");
 				navigate("/");
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				alert(err.response.data.errors[0].msg || "Server error");
+			});
 	};
 
 	const handleChange = (event) => {
@@ -71,7 +75,7 @@ function Register() {
 									/>
 								</div>
 								<div className="mb-3">
-									<label htmlFor="registerPassword" className="form-label">
+									<label htmlFor="passwordRegister" className="form-label">
 										Contraseña
 									</label>
 									<input
