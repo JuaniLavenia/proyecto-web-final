@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Favoritos.css";
 import { Button } from "react-bootstrap";
 
-function Favoritos({ setFavoritesCount }) {
+function Favoritos({ setFavoritesCount, setCartCount }) {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -26,8 +26,43 @@ function Favoritos({ setFavoritesCount }) {
       setFavorites(newFavItems);
       localStorage.setItem("favItems", JSON.stringify(newFavItems));
       const count = newFavItems.length;
-      updateLocalStorageCount("favoritesCount", count);
+      setFavoritesCount(count);
     }
+  };
+
+  const handleAddToCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let existingProductIndex = cart.findIndex((p) => p.id === product.id);
+
+    if (existingProductIndex !== -1) {
+      cart[existingProductIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+    alert("Se agregó al carrito!");
+
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+    setCartCount(cartCount);
+  };
+
+  const addToCart = () => {
+    const products = favorites.map((item) => {
+      return {
+        id: item._id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        description: item.description,
+        capacity: item.capacity,
+        category: item.category,
+      };
+    });
+
+    products.forEach((product) => {
+      handleAddToCart(product);
+    });
   };
 
   return (
@@ -36,7 +71,7 @@ function Favoritos({ setFavoritesCount }) {
         {favorites.length > 0 ? (
           <>
             <div className="total-comprar mt-3">
-              <Button variant="success">
+              <Button variant="success" onClick={addToCart}>
                 Agregar todo al carrito ({favorites.length})
               </Button>
             </div>

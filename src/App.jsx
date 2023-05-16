@@ -56,7 +56,12 @@ function App() {
         <Route path="/cart" element={<Carrito setCartCount={setCartCount} />} />
         <Route
           path="/favorites"
-          element={<Favoritos setFavoritesCount={setFavoritesCount} />}
+          element={
+            <Favoritos
+              setFavoritesCount={setFavoritesCount}
+              setCartCount={setCartCount}
+            />
+          }
         />
         <Route path="/productos" element={<Category />} />
         <Route

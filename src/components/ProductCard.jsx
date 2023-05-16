@@ -64,7 +64,7 @@ function ProductCard({
           <h2 className="card-title d-flex justify-content-center m-2">
             {name}
           </h2>
-          <p className="card-text">{description}</p>
+          <p className="card-text text-center">{description}</p>
           <div className="card-text d-flex">
             <p className="text-muted text-center w-50">{capacity}</p>
             <strong className="text-muted align-self-center pb-3">|</strong>

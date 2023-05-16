@@ -49,7 +49,7 @@ function Carrito({ setCartCount }) {
       setCartItems(newCartItems);
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
       const count = newCartItems.length;
-      updateLocalStorageCount("cartCount", count);
+      setCartCount(count);
     }
   };
 
