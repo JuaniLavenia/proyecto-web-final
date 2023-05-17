@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import "./ResetPassword.css";
+import { swal } from "sweetalert";
 
 function ResetPassword() {
 	const [values, setValues] = useState({
@@ -21,7 +22,7 @@ function ResetPassword() {
 		axios
 			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
 			.then((res) => {
-				alert("¡Contraseña generada correctamente!");
+				swal("¡Contraseña generada correctamente!");
 
 				navigate("/");
 			})
