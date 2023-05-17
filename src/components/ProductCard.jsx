@@ -51,15 +51,15 @@ function ProductCard({
   };
 
   return (
-    <div className="product-car row bg-dark">
-      <div className="col-md-3 bg-dark ">
+    <div className="product-car d-flex flex-column align-items-center col-lg-12 col-sm-12 col-12 bg-dark">
+      <div className="bg-dark">
         <img
-          className="img"
+          className="imgCardP"
           src={`http://localhost:3000/img/productos/${image}`}
           alt={name}
         />
       </div>
-      <div className="product-text col-md-9">
+      <div className="product-text">
         <div className="card-body">
           <h2 className="card-title d-flex justify-content-center m-2">
             {name}
@@ -70,11 +70,12 @@ function ProductCard({
             <strong className="text-muted align-self-center pb-3">|</strong>
             <p className="text-muted text-center w-50">{category}</p>
           </div>
+          <div className="card-price p-1">$ {price}</div>
         </div>
-        <div className="card-footer d-flex justify-content-center">
+        <div className="card-footer d-flex justify-content-center p-3">
           <Button
             variant="primary"
-            className="me-2"
+            className="btnCardP"
             onClick={() => {
               handleAddToCart({
                 image,
@@ -91,6 +92,7 @@ function ProductCard({
           </Button>
           <Button
             variant="warning"
+            className="btnCardP"
             onClick={() => {
               addFavorite({
                 image,

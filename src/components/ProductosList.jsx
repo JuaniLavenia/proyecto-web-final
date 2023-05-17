@@ -42,9 +42,12 @@ function ProductList({ setCartCount, setFavoritesCount }) {
     <div className="bg-dark text-light productDep">
       <h1 className="text-center">Productos {category}</h1>
       <div className="container-fluid">
-        <div className="d-flex align-items-center flex-column">
+        <div className="d-flex row justify-content-center">
           {productos.map((producto) => (
-            <div className="card" key={producto._id}>
+            <div
+              className="card col-lg-2 col-md-3 col-sm-5 col-12 bg-dark m-1"
+              key={producto._id}
+            >
               <ProductCard
                 {...producto}
                 setCartCount={setCartCount}
