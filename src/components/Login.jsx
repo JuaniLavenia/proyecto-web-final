@@ -12,17 +12,20 @@ function Login() {
 	});
 
 	const navigate = useNavigate();
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		axios.post("http://localhost:3000/api/login", values).then((res) => {
-			console.log(res);
-			alert("Login exitoso!");
-			localStorage.setItem("token", res.data.token);
-			navigate("/productos");
-		});
-		alert(err.response.data.error);
+		axios
+			.post("http://localhost:3000/api/login", values)
+			.then((res) => {
+				setValues(res);
+				alert("¡Login exitoso!");
+				navigate("/");
+			})
+			.catch((err) => {
+				console.log(err);
+				alert(err.response.data.errors[0].msg || "Server error");
+			});
 	};
 
 	const handleChange = (event) => {
