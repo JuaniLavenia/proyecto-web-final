@@ -64,6 +64,7 @@ function Carrito({ setCartCount }) {
       setCartItems([]);
       localStorage.removeItem("cartItems");
       localStorage.removeItem("validation");
+      window.location.reload();
     }
   };
 
