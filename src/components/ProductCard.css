@@ -62,7 +62,7 @@
 
   .btn{
     width: 5rem;
-    font-size: 0.77rem;
+    font-size: 0.7rem !important;
   }
 
 }
