@@ -17,10 +17,10 @@ function Register() {
     axios
       .post("http://localhost:3000/api/register", values)
       .then((res) => {
-        console.log(res);
+        alert("Usuario registrado con exito");
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Los datos proporcionados son incorrectos"));
   };
 
   const handleChange = (event) => {
@@ -107,7 +107,11 @@ function Register() {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-primary">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
                     Registrarse
                   </button>
                 </div>

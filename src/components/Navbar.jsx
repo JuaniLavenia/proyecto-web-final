@@ -4,6 +4,7 @@ import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
+import axios from "axios";
 
 function Navbar({
   cartCount,
@@ -43,6 +44,46 @@ function Navbar({
     setFavoritesCount(favCount);
   }, [setCartCount, setFavoritesCount]);
 
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  const checkToken = () => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    alert("Se cerró la sesión");
+  };
+
+  const handleAdminClick = () => {
+    if (token) {
+      const email = prompt("Por favor ingrese el correo del usuarioAdmin:");
+      const password = prompt(
+        "Por favor ingrese la contraseña del usuarioAdmin:"
+      );
+
+      axios
+        .post("http://localhost:3000/api/admin-login", { email, password })
+        .then((res) => {
+          if (res.data.success) {
+            navigate("/adm/productos");
+            localStorage.setItem("token", res.data.token);
+            setToken(res.data.token);
+            alert("Ingreso permitido");
+          } else {
+            alert("Los datos ingresados no son correctos");
+          }
+        })
+        .catch((err) => alert("Acceso denegado"));
+    }
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg px-2 fixed-top position-sticky">
@@ -71,21 +112,32 @@ function Navbar({
                   Productos
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  onClick={handleSubmit}
-                  className="nav-link text-light"
-                  to=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Iniciar Sesion
-                </Link>
+              <li className="nav-item" id="login-register">
+                {token ? (
+                  <Link className="nav-link text-light" to="/" onClick={logout}>
+                    Cerrar Sesión
+                  </Link>
+                ) : (
+                  <Link
+                    onClick={handleSubmit}
+                    className="nav-link text-light"
+                    to="/"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Iniciar Sesion
+                  </Link>
+                )}
               </li>
-              <li className="nav-item">
-                <Link className="nav-link text-light" to="/adm/productos">
-                  Administrador
-                </Link>
+              <li className="nav-item" id="pag-admin">
+                {token && (
+                  <Link
+                    className="nav-link text-light"
+                    onClick={handleAdminClick}
+                  >
+                    Administrador
+                  </Link>
+                )}
               </li>
             </ul>
             <form className="d-flex search" role="search">

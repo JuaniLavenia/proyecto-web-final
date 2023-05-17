@@ -19,11 +19,11 @@ function Login() {
     axios
       .post("http://localhost:3000/api/login", values)
       .then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.data.token);
-        navigate("/");
+        alert("Sesion iniciada");
+        window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Los datos proporcionados no son correctos"));
   };
 
   const handleChange = (event) => {
@@ -120,6 +120,7 @@ function Login() {
                     className=" btn btn-primary btn-inicio-sesion"
                     onClick={handleLoginClick}
                     onSubmit={handleSubmit}
+                    data-bs-dismiss="modal"
                   >
                     Iniciar Sesión
                   </button>
