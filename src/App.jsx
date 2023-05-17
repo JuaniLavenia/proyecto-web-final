@@ -13,26 +13,26 @@ import Carrito from "./pages/Carrito";
 import Favoritos from "./pages/Favoritos";
 
 function App() {
-  return (
-    <>
-      <Navbar path="/cart" />
+	return (
+		<>
+			<Navbar path="/cart" />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/OlvideMiContraseña" element={<OlvideMiContrasena />} />
-        <Route path="/busqueda/:filter" element={<SearchResult />} />
-        <Route path="/busqueda/" element={<SearchClean />} />
-        <Route path="/cart" element={<Carrito />} />
-        <Route path="/favorites" element={<Favoritos />} />
-      </Routes>
-      <Login />
-      <Register />
-      <OlvideMiContrasena />
-      <Footer />
-    </>
-  );
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/forgot" element={<OlvideMiContrasena />} />
+				<Route path="/busqueda/:filter" element={<SearchResult />} />
+				<Route path="/busqueda/" element={<SearchClean />} />
+				<Route path="/cart" element={<Carrito />} />
+				<Route path="/favorites" element={<Favoritos />} />
+			</Routes>
+			<Login />
+			<Register />
+			<OlvideMiContrasena />
+			<Footer />
+		</>
+	);
 }
 
 export default App;

@@ -16,6 +16,7 @@ function Login() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+<<<<<<< HEAD
     axios
       .post("http://localhost:3000/api/login", values)
       .then((res) => {
@@ -25,6 +26,23 @@ function Login() {
       })
       .catch((err) => alert("El usuario y/o contraseña son incorrectos"));
   };
+=======
+		axios
+			.post("http://localhost:3000/api/login", values)
+			.then((res) => {
+				console.log(res);
+
+				alert("Login exitoso!");
+
+				localStorage.setItem("token", res.data.token);
+				navigate("/");
+			})
+			.catch((err) => {
+				console.log(err);
+				alert(err.response.data.error);
+			});
+	};
+>>>>>>> 0d1b878 (previo a traer externo)
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
