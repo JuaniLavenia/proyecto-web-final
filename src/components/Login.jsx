@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
@@ -12,7 +12,6 @@ function Login() {
   });
 
   const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,10 +42,6 @@ function Login() {
 
   const handleForgotPasswordClick = () => {
     setShowForgotPassword(true);
-  };
-
-  const handleLoginClick = () => {
-    // Lógica para iniciar sesión
   };
 
   return (
@@ -118,7 +113,6 @@ function Login() {
                     id="iniciarSesion"
                     type="submit"
                     className=" btn btn-primary btn-inicio-sesion"
-                    onClick={handleLoginClick}
                     onSubmit={handleSubmit}
                     data-bs-dismiss="modal"
                   >

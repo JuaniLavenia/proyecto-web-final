@@ -17,6 +17,7 @@ import ProductoCreate from "./pages/admin/ProductoCreate";
 import ProductList from "./components/ProductosList";
 import Category from "./pages/Category";
 import { useState } from "react";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -32,9 +33,10 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/OlvideMiContraseña" element={<OlvideMiContrasena />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<OlvideMiContrasena />} />
+        <Route path="/reset/:id" element={<ResetPassword />} />
         <Route
           path="/busqueda/:filter"
           element={
@@ -77,9 +79,7 @@ function App() {
         <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
         <Route path="/adm/productos/create" element={<ProductoCreate />} />
       </Routes>
-      <Login />
-      <Register />
-      <OlvideMiContrasena />
+
       <Footer />
     </>
   );
