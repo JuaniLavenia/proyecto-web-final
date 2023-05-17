@@ -4,8 +4,14 @@ import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
+import axios from "axios";
 
-function Navbar() {
+function Navbar({
+  cartCount,
+  favoritesCount,
+  setCartCount,
+  setFavoritesCount,
+}) {
   function handleSubmit(e) {
     return Login;
   }
@@ -24,18 +30,59 @@ function Navbar() {
     }
   };
 
-  const [cartCount, setCartCount] = useState(0);
-  const [favoritesCount, setFavoritesCount] = useState(0);
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
+
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, [setCartCount, setFavoritesCount]);
+
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    const cartCountFromLocalStorage = localStorage.getItem("cartCount");
-    const favoritesCountFromLocalStorage =
-      localStorage.getItem("favoritesCount");
-    setCartCount(cartCountFromLocalStorage || 0);
-    setFavoritesCount(favoritesCountFromLocalStorage || 0);
+    checkToken();
   }, []);
 
-  // onClick={() => {setNumFavorites(numFavorites + 1)} Agregar esto al boton al agregarAFavoritos
+  const checkToken = () => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    alert("Se cerró la sesión");
+  };
+
+  const handleAdminClick = () => {
+    if (token) {
+      const email = prompt("Por favor ingrese el correo del usuarioAdmin:");
+      const password = prompt(
+        "Por favor ingrese la contraseña del usuarioAdmin:"
+      );
+
+      axios
+        .post("http://localhost:3000/api/admin-login", { email, password })
+        .then((res) => {
+          if (res.data.success) {
+            navigate("/adm/productos");
+            localStorage.setItem("token", res.data.token);
+            setToken(res.data.token);
+            alert("Ingreso permitido");
+          } else {
+            alert("Los datos ingresados no son correctos");
+          }
+        })
+        .catch((err) => alert("Acceso denegado"));
+    }
+  };
 
   return (
     <>
@@ -61,20 +108,36 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link text-light" to="#">
+                <Link className="nav-link text-light" to="/productos">
                   Productos
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  onClick={handleSubmit}
-                  className="nav-link text-light"
-                  to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Iniciar Sesion
-                </Link>
+              <li className="nav-item" id="login-register">
+                {token ? (
+                  <Link className="nav-link text-light" to="/" onClick={logout}>
+                    Cerrar Sesión
+                  </Link>
+                ) : (
+                  <Link
+                    onClick={handleSubmit}
+                    className="nav-link text-light"
+                    to="/"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Iniciar Sesion
+                  </Link>
+                )}
+              </li>
+              <li className="nav-item" id="pag-admin">
+                {token && (
+                  <Link
+                    className="nav-link text-light"
+                    onClick={handleAdminClick}
+                  >
+                    Administrador
+                  </Link>
+                )}
               </li>
             </ul>
             <form className="d-flex search" role="search">

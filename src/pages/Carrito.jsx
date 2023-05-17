@@ -4,17 +4,20 @@ import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 
-function Carrito() {
+function Carrito({ setCartCount }) {
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
 
-  const updateLocalStorageCount = (key, count) => {
-    localStorage.setItem(key, count);
-    if (key === "cartCount") {
-      setCartCount(count);
-    }
-  };
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+
+    setCartCount(cartCount);
+  }, []);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartItems"));
@@ -45,8 +48,8 @@ function Carrito() {
     if (newCartItems.length !== cartItems.length) {
       setCartItems(newCartItems);
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-      const count = newCartItems.length; // calcular el recuento de elementos actualizado
-      updateLocalStorageCount("cartCount", count);
+      const count = newCartItems.length;
+      setCartCount(count);
     }
   };
 
@@ -61,6 +64,7 @@ function Carrito() {
       setCartItems([]);
       localStorage.removeItem("cartItems");
       localStorage.removeItem("validation");
+      window.location.reload();
     }
   };
 
@@ -72,11 +76,14 @@ function Carrito() {
             {cartItems.map((item, index) => (
               <div className="card-container" key={index}>
                 <div
-                  className="card cardCart bg-dark text-light carritoItems w-100"
+                  className=" cardCart bg-dark text-light carritoItems w-100"
                   key={index}
                 >
                   <div className="card-image">
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={`http://localhost:3000/img/productos/${item.image}`}
+                      alt={item.name}
+                    />
                   </div>
                   <div className="card-details">
                     <div className="card-name">
@@ -120,14 +127,14 @@ function Carrito() {
       {showModal && (
         <>
           <Modal show={showModal} onHide={handleCloseModal}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className="bg-dark text-light">
               <Modal.Title>Información del pago</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="bg-dark text-light">
               <Formcarrito />
               <Envio />
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-dark text-light">
               <Button variant="danger" onClick={handleCloseModal}>
                 Cancelar
               </Button>

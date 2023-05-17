@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import "./CardProductosSearch.css";
+import React from "react";
+import "./ProductCard.css";
+import { Button } from "react-bootstrap";
 
-function CardProductos({
+function ProductCard({
   image,
   name,
   description,
@@ -44,33 +45,37 @@ function CardProductos({
       localStorage.setItem("favItems", JSON.stringify(fav));
       alert("Se agrego a favoritos!");
     }
-
     const favoritesCount = fav.length;
     const updatedFavCount = favoritesCount;
     setFavoritesCount(updatedFavCount);
   };
 
   return (
-    <div className="card cardP m-3 bg-dark text-light d-flex">
-      <img
-        className="imgCard d-flex"
-        src={`http://localhost:3000/img/productos/${image}`}
-        alt={name}
-      />
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
-        <p className="card-text">{description}</p>
-        <div className="card-text d-flex pt-3">
-          <p className="text-muted text-center w-50">{capacity}</p>
-          <strong className="text-muted align-self-center pb-3">|</strong>
-          <p className="text-muted text-center w-50">{category}</p>
-        </div>
+    <div className="product-car d-flex flex-column align-items-center col-lg-12 col-sm-12 col-12 bg-dark">
+      <div className="bg-dark">
+        <img
+          className="imgCardP"
+          src={`http://localhost:3000/img/productos/${image}`}
+          alt={name}
+        />
       </div>
-      <div className="card-footer">
-        <div className="card-price p-1">$ {price}</div>
-        <div className="car-buttons d-flex justify-content-center">
-          <button
-            className="btn btn-primary me-2"
+      <div className="product-text">
+        <div className="card-body">
+          <h2 className="card-title d-flex justify-content-center m-2">
+            {name}
+          </h2>
+          <p className="card-text text-center">{description}</p>
+          <div className="card-text d-flex">
+            <p className="text-muted text-center w-50">{capacity}</p>
+            <strong className="text-muted align-self-center pb-3">|</strong>
+            <p className="text-muted text-center w-50">{category}</p>
+          </div>
+          <div className="card-price p-1">$ {price}</div>
+        </div>
+        <div className="card-footer d-flex justify-content-center p-3">
+          <Button
+            variant="primary"
+            className="btnCardP"
             onClick={() => {
               handleAddToCart({
                 image,
@@ -84,9 +89,10 @@ function CardProductos({
             }}
           >
             Agregar al carrito
-          </button>
-          <button
-            className="btn btn-warning"
+          </Button>
+          <Button
+            variant="warning"
+            className="btnCardP"
             onClick={() => {
               addFavorite({
                 image,
@@ -100,10 +106,11 @@ function CardProductos({
             }}
           >
             Agregar a favoritos
-          </button>
+          </Button>
         </div>
       </div>
     </div>
   );
 }
-export default CardProductos;
+
+export default ProductCard;
