@@ -17,7 +17,7 @@ function Register() {
 		axios
 			.post("http://localhost:3000/api/register", values)
 			.then((res) => {
-				setValues(res);
+				console.log(res);
 				alert("Usuario registrado correctamente");
 				navigate("/");
 			})
@@ -75,7 +75,7 @@ function Register() {
 									/>
 								</div>
 								<div className="mb-3">
-									<label htmlFor="passwordRegister" className="form-label">
+									<label htmlFor="registerPassword" className="form-label">
 										Contraseña
 									</label>
 									<input

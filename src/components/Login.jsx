@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
@@ -23,8 +23,7 @@ function Login() {
 				navigate("/");
 			})
 			.catch((err) => {
-				console.log(err);
-				alert(err.response.data.errors[0].msg || "Server error");
+				alert(err.response.error || "Server error");
 			});
 	};
 
@@ -47,9 +46,9 @@ function Login() {
 		setShowForgotPassword(true);
 	};
 
-	const handleLoginClick = () => {
-		// Lógica para iniciar sesión
-	};
+	// const handleLoginClick = () => {
+	// 	// Lógica para iniciar sesión
+	// };
 
 	return (
 		<div className="container">
@@ -120,7 +119,7 @@ function Login() {
 										id="iniciarSesion"
 										type="submit"
 										className=" btn btn-primary btn-inicio-sesion"
-										onClick={handleLoginClick}
+										// onClick={handleLoginClick}
 										onSubmit={handleSubmit}
 										data-bs-dismiss="modal"
 									>

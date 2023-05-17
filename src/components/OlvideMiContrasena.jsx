@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./OlvideMiContrasena.css";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function OlvideMiContrasena() {
@@ -37,7 +37,7 @@ function OlvideMiContrasena() {
 	return (
 		<>
 			<div
-				className="modal fade"
+				className="modal fade "
 				id="olvideContrasenaForm"
 				tabIndex="-1"
 				aria-labelledby="exampleModalLabel"
