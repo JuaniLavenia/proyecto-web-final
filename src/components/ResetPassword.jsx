@@ -21,7 +21,7 @@ function ResetPassword() {
 		axios
 			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
 			.then((res) => {
-				// alert("¡Contraseña generada correctamente!");
+				alert("¡Contraseña generada correctamente!");
 
 				navigate("/");
 			})
@@ -43,7 +43,9 @@ function ResetPassword() {
 		<form onSubmit={handleSubmit} className="resetPasswordForm">
 			<div className="mb-3">
 				<label htmlFor="resetPassword" className="form-label">
-					Restablecer contraseña
+					<h1>
+						<strong>Restablecer contraseña</strong>
+					</h1>
 				</label>
 				<input
 					type="password"
