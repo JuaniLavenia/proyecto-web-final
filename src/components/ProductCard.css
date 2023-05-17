@@ -11,68 +11,58 @@
   font-family: var(--font-family);
 }
 
-.card {
-  border-color: var(--color-bg);
-  border: 0px;
-  margin: 2rem;
-  width: 70%;
-}
 
-.card-product {
-  height: 100%;
-  background: var(--color-bg);
+.card-title{
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
 }
 
 
 /*______________Media Queries______________*/
-
-@media (max-width: 768px) {
-  .product-car .col-md-3 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
+@media (max-width: 569px) {
   .product-text {
-    flex-direction: column;
-    align-items: center;
+    font-size: 0.9rem;
     text-align: center;
   }
+  
+  .img{
+    width: 12rem;
+  }
 
-  .card-footer {
-    margin-top: 1rem;
+  .card-footer .button{
+    width: 7rem;
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width: 570px) {
+  .product-text {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .btn{
+    width: 6rem;
+    font-size: 0.7rem;
   }
 }
 
 
-@media (max-width: 450px) {
-  .product-car .col-md-3 {
+@media (min-width: 990px) {
+  .product-car{
     width: 100%;
-    text-align: center;
-    margin-bottom: 0.5rem;
   }
 
-  .product-car .img{
-    height: 12rem;
-  }
-  .product-car h2  {
-    font-size: 1rem;
-  }
-  .product-car p  {
+  .product-text {
     font-size: 0.8rem;
   }
 
- .table .file{
-  width: 10%;
- }
-  
-  .card-footer {
-    margin-top: 0.2rem;
+  .img{
+    width: 13rem;
   }
 
-  .card-footer button {
-    width: 8rem;
-    height: 100%;
-    font-size: 0.6rem;
+  .btn{
+    width: 5rem;
+    font-size: 0.77rem;
   }
+
 }
