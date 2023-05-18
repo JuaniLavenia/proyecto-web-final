@@ -82,12 +82,28 @@ function Navbar({
 						navigate("/adm/productos");
 						localStorage.setItem("token", res.data.token);
 						setToken(res.data.token);
-						alert("Ingreso permitido");
+						Swal.fire({
+							position: "top-center",
+							icon: "success",
+							title: "Ingreso permitido",
+							showConfirmButton: false,
+							timer: 1500,
+						});
 					} else {
-						alert("Los datos ingresados no son correctos");
+						Swal.fire({
+							icon: "error",
+							title: "Oops...",
+							text: "Los datos ingresados no son correctos",
+						});
 					}
 				})
-				.catch((err) => alert("Acceso denegado"));
+				.catch((err) =>
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: "Acceso denegado",
+					})
+				);
 		}
 	};
 
