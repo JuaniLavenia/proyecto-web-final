@@ -4,6 +4,7 @@ import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Login() {
 	const [values, setValues] = useState({
@@ -19,10 +20,21 @@ function Login() {
 			.post("http://localhost:3000/api/login", values)
 			.then((res) => {
 				localStorage.setItem("token", res.data.token);
-				alert("Sesion iniciada");
-				window.location.reload();
+				Swal.fire({
+					position: "top-end",
+					icon: "success",
+					title: "Sesion iniciada",
+					showConfirmButton: false,
+					timer: 1500,
+				});
 			})
-			.catch((err) => alert("Los datos proporcionados no son correctos"));
+			.catch((err) =>
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "Los datos proporcionados no son correctos",
+				})
+			);
 	};
 
 	const handleChange = (event) => {

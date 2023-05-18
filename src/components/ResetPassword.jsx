@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import "./ResetPassword.css";
-import { swal } from "sweetalert";
+import Swal from "sweetalert2";
 
 function ResetPassword() {
 	const [values, setValues] = useState({
@@ -22,13 +22,22 @@ function ResetPassword() {
 		axios
 			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
 			.then((res) => {
-				swal("¡Contraseña generada correctamente!");
+				Swal.fire({
+					position: "top-end",
+					icon: "success",
+					title: "Contraseña restablecida",
+					showConfirmButton: false,
+					timer: 1500,
+				});
 
 				navigate("/");
 			})
 			.catch((err) => {
-				console.log(err);
-				alert(err.response.data.error || "Server error");
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: err.response.data.error || "Server error",
+				});
 			});
 	};
 
