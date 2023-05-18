@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import "./ResetPassword.css";
+import Swal from "sweetalert2";
 
 function ResetPassword() {
 	const [values, setValues] = useState({
@@ -21,13 +22,22 @@ function ResetPassword() {
 		axios
 			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
 			.then((res) => {
-				// alert("¡Contraseña generada correctamente!");
+				Swal.fire({
+					position: "top-center",
+					icon: "success",
+					title: "Contraseña restablecida",
+					showConfirmButton: false,
+					timer: 1500,
+				});
 
 				navigate("/");
 			})
 			.catch((err) => {
-				console.log(err);
-				alert(err.response.data.error || "Server error");
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: err.response.data.error || "Server error",
+				});
 			});
 	};
 
@@ -43,7 +53,9 @@ function ResetPassword() {
 		<form onSubmit={handleSubmit} className="resetPasswordForm">
 			<div className="mb-3">
 				<label htmlFor="resetPassword" className="form-label">
-					Restablecer contraseña
+					<h1>
+						<strong>Restablecer contraseña</strong>
+					</h1>
 				</label>
 				<input
 					type="password"
