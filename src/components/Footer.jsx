@@ -11,7 +11,7 @@ import logofot from "../assets/img/logo4.png";
 function Footer() {
   return (
     <>
-      <footer className="foot">
+      <footer className="foot w-100">
         <div className="d-flex justify-content-around row text-center me-0">
           <div className="col-lg-4 col-sm-12">
             <h5 className="text-white mt-4">Contacto</h5>
@@ -48,14 +48,14 @@ function Footer() {
           </div>
           <div className="col-lg-4 col-sm-12">
             <h5 className="text-white mt-4 mb-3">Información</h5>
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Medios de Pago</p>
             </Link>
 
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Trabajá con Nosotros</p>
             </Link>
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Política de Privacidad</p>
             </Link>
           </div>
