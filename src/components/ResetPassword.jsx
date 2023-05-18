@@ -23,7 +23,7 @@ function ResetPassword() {
 			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
 			.then((res) => {
 				Swal.fire({
-					position: "top-end",
+					position: "top-center",
 					icon: "success",
 					title: "Contraseña restablecida",
 					showConfirmButton: false,

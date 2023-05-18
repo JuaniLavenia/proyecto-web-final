@@ -21,12 +21,16 @@ function Login() {
 			.then((res) => {
 				localStorage.setItem("token", res.data.token);
 				Swal.fire({
-					position: "top-end",
+					position: "top-center",
 					icon: "success",
 					title: "Sesion iniciada",
 					showConfirmButton: false,
 					timer: 1500,
 				});
+
+				setTimeout(function () {
+					window.location.reload();
+				}, 2000);
 			})
 			.catch((err) =>
 				Swal.fire({

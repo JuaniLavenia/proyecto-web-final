@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import "./Register.css";
+import Swal from "sweetalert2";
 
 function Register() {
 	const [values, setValues] = useState({
@@ -18,7 +19,7 @@ function Register() {
 			.post("http://localhost:3000/api/register", values)
 			.then((res) => {
 				Swal.fire({
-					position: "top-end",
+					position: "top-center",
 					icon: "success",
 					title: "Nuevo usuario registrado",
 					showConfirmButton: false,
