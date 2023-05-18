@@ -13,16 +13,14 @@ function OlvideMiContrasena() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/api/forgot", values)
+      .post("https://proyecto-web-final-backend.vercel.app/api/forgot", values)
       .then((res) => {
-        console.log(res);
         alert(
           "Se envió un correo a tu cuenta de email, en caso de no encontrarlo en la bandeja principal, revisa la carpeta de spam."
         );
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
         alert(err.response.data.error);
       });
   };
@@ -74,6 +72,7 @@ function OlvideMiContrasena() {
                       id="emailForgot"
                       aria-describedby="emailHelp"
                       required
+                      maxLength={40}
                       name="email"
                       value={values.email}
                       onChange={handleChange}

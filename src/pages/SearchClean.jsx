@@ -24,7 +24,7 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const getProductos = () => {
     axios
-      .get("http://localhost:3000/api/productos")
+      .get("https://proyecto-web-final-backend.vercel.app/api/productos")
       .then((res) => setProducts(res.data))
       .catch((err) => {
         console.log(err);
@@ -37,7 +37,7 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const handleCategoryClick = async (category) => {
     const response = await fetch(
-      `http://localhost:3000/api/productos/category/${category}`
+      `https://proyecto-web-final-backend.vercel.app/api/productos/category/${category}`
     );
     const data = await response.json();
     setProducts(data);

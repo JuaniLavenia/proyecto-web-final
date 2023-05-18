@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
 function ProductoEdit() {
-
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -20,16 +19,14 @@ function ProductoEdit() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/productos/${id}`)
+      .get(`https://proyecto-web-final-backend.vercel.app/api/productos/${id}`)
       .then((res) => {
-        console.log(res);
         setValues(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,13 +41,16 @@ function ProductoEdit() {
     formData.append("capacity", values.capacity);
 
     axios
-      .put(`http://localhost:3000/api/productos/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://proyecto-web-final-backend.vercel.app/api/productos/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
         navigate("/productos");
       })
 
@@ -58,7 +58,6 @@ function ProductoEdit() {
         console.log(err);
       });
   };
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,6 +86,7 @@ function ProductoEdit() {
           <input
             type="text"
             className="form-control"
+            maxLength={40}
             id="name"
             required
             name="name"
@@ -103,6 +103,7 @@ function ProductoEdit() {
             className="form-control"
             name="description"
             id="description"
+            maxLength={200}
             cols="30"
             rows="5"
             required
@@ -133,6 +134,7 @@ function ProductoEdit() {
             <input
               type="text"
               className="form-control"
+              maxLength={40}
               id="category"
               required
               name="category"
@@ -149,10 +151,13 @@ function ProductoEdit() {
           <input
             type="number"
             className="form-control"
+            max={999999}
+            maxLength={6}
             id="price"
             name="price"
             value={values.price}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -163,10 +168,13 @@ function ProductoEdit() {
           <input
             type="number"
             className="form-control"
+            max={999999}
+            maxLength={6}
             id="stock"
             name="stock"
             value={values.stock}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -177,10 +185,12 @@ function ProductoEdit() {
           <input
             type="text"
             className="form-control"
+            maxLength={40}
             id="capacity"
             name="capacity"
             value={values.capacity}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

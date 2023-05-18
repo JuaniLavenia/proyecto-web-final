@@ -7,9 +7,6 @@ function Formcarrito(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes enviar la información de pago y envío a un servidor para procesar el pago y envío
-    // ...
-    // Luego redirige al usuario a una página de confirmación de pedido
     props.history.push("/confirmacion-pedido");
   };
 

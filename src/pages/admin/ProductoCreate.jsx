@@ -11,7 +11,7 @@ function ProductoCreate() {
     category: "",
     capacity: "",
   });
-  
+
   const [image, setImage] = useState();
 
   const handleSubmit = (e) => {
@@ -27,13 +27,16 @@ function ProductoCreate() {
     formData.append("capacity", values.capacity);
 
     axios
-      .post("http://localhost:3000/api/productos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://proyecto-web-final-backend.vercel.app/api/productos",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
         navigate("/productos");
       })
 
@@ -44,7 +47,6 @@ function ProductoCreate() {
 
   const navigate = useNavigate();
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -54,7 +56,6 @@ function ProductoCreate() {
     });
   };
 
-  
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
       setImage(event.target.files[0]);
@@ -73,6 +74,7 @@ function ProductoCreate() {
           <input
             type="text"
             className="form-control"
+            maxLength={40}
             id="name"
             required
             name="name"
@@ -88,6 +90,7 @@ function ProductoCreate() {
           <textarea
             className="form-control"
             name="description"
+            maxLength={200}
             id="description"
             cols="30"
             rows="5"
@@ -119,6 +122,7 @@ function ProductoCreate() {
             <input
               type="text"
               className="form-control"
+              maxLength={40}
               id="category"
               required
               name="category"
@@ -135,10 +139,13 @@ function ProductoCreate() {
           <input
             type="number"
             className="form-control"
+            max={999999}
+            maxLength={6}
             id="price"
             name="price"
             value={values.price}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -149,10 +156,13 @@ function ProductoCreate() {
           <input
             type="number"
             className="form-control"
+            max={999999}
+            maxLength={6}
             id="stock"
             name="stock"
             value={values.stock}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -163,10 +173,12 @@ function ProductoCreate() {
           <input
             type="text"
             className="form-control"
+            maxLength={40}
             id="capacity"
             name="capacity"
             value={values.capacity}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">
