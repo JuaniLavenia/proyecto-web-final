@@ -13,7 +13,10 @@ function OlvideMiContrasena() {
     e.preventDefault();
 
     axios
-      .post("https://proyecto-web-final-backend.vercel.app/api/forgot", values)
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/forgot",
+        values
+      )
       .then((res) => {
         alert(
           "Se envió un correo a tu cuenta de email, en caso de no encontrarlo en la bandeja principal, revisa la carpeta de spam."

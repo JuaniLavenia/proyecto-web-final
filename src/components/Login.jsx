@@ -17,7 +17,10 @@ function Login() {
     e.preventDefault();
 
     axios
-      .post("https://proyecto-web-final-backend.vercel.app/api/login", values)
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/login",
+        values
+      )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         Swal.fire({

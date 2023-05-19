@@ -28,7 +28,7 @@ function ProductoCreate() {
 
     axios
       .post(
-        "https://proyecto-web-final-backend.vercel.app/api/productos",
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
         formData,
         {
           headers: {

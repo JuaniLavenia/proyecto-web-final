@@ -26,7 +26,7 @@ function ProductList({ setCartCount, setFavoritesCount }) {
   const getProductos = () => {
     axios
       .get(
-        `https://proyecto-web-final-backend.vercel.app/api/productos/category/${category}`
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
       )
       .then((res) => {
         setProductos(res.data);

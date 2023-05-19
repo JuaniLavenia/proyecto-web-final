@@ -24,7 +24,9 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const getProductos = () => {
     axios
-      .get("https://proyecto-web-final-backend.vercel.app/api/productos")
+      .get(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos"
+      )
       .then((res) => setProducts(res.data))
       .catch((err) => {
         console.log(err);
@@ -37,7 +39,7 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const handleCategoryClick = async (category) => {
     const response = await fetch(
-      `https://proyecto-web-final-backend.vercel.app/api/productos/category/${category}`
+      `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
     );
     const data = await response.json();
     setProducts(data);

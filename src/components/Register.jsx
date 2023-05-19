@@ -17,7 +17,7 @@ function Register() {
 
     axios
       .post(
-        "https://proyecto-web-final-backend.vercel.app/api/register",
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
         values
       )
       .then((res) => {

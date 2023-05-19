@@ -76,10 +76,13 @@ function Navbar({
       );
 
       axios
-        .post("https://proyecto-web-final-backend.vercel.app/api/admin-login", {
-          email,
-          password,
-        })
+        .post(
+          "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/admin-login",
+          {
+            email,
+            password,
+          }
+        )
         .then((res) => {
           if (res.data.success) {
             navigate("/adm/productos");

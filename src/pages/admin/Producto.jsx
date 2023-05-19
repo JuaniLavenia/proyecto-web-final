@@ -10,7 +10,9 @@ function Producto() {
 
   const getProductos = () => {
     axios
-      .get(`https://proyecto-web-final-backend.vercel.app/api/productos`)
+      .get(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos`
+      )
       .then((res) => setProductos(res.data))
       .catch((err) => console.log(err));
   };
@@ -23,7 +25,7 @@ function Producto() {
     if (confirm("¿Esta seguro ?")) {
       axios
         .delete(
-          `https://proyecto-web-final-backend.vercel.app/api/productos/${id}`
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
         )
         .then((res) => {
           getProductos();
@@ -42,7 +44,7 @@ function Producto() {
     } else {
       axios
         .get(
-          `https://proyecto-web-final-backend.vercel.app/api/productos/search/${search}`
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${search}`
         )
         .then((res) => {
           setProductos(res.data);
@@ -102,7 +104,7 @@ function Producto() {
                   <td scope="row">{producto.capacity}</td>
                   <td scope="row">
                     <img
-                      src={`https://proyecto-web-final-backend.vercel.app/img/productos/${producto.image}`}
+                      src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${producto.image}`}
                       width={100}
                       alt={producto.nombre}
                       className="img"

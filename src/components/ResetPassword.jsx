@@ -21,7 +21,7 @@ function ResetPassword() {
 
     axios
       .post(
-        `https://proyecto-web-final-backend.vercel.app/api/reset/${id}/${token}`,
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/reset/${id}/${token}`,
         values
       )
       .then((res) => {
