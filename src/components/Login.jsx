@@ -16,29 +16,42 @@ function Login() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		axios
-			.post("http://localhost:3000/api/login", values)
-			.then((res) => {
-				localStorage.setItem("token", res.data.token);
-				Swal.fire({
-					position: "top-center",
-					icon: "success",
-					title: "Sesion iniciada",
-					showConfirmButton: false,
-					timer: 1500,
-				});
+		// Validate input data
+		if (values.email && values.password) {
+			// If input data is valid, submit form and dismiss modal
+			axios
+				.post("http://localhost:3000/api/login", values)
+				.then((res) => {
+					localStorage.setItem("token", res.data.token);
+					Swal.fire({
+						position: "top-center",
+						icon: "success",
+						title: "Sesion iniciada",
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					setValues({ email: "", password: "" });
 
-				setTimeout(function () {
-					window.location.reload();
-				}, 2000);
-			})
-			.catch((err) =>
-				Swal.fire({
-					icon: "error",
-					title: "Oops...",
-					text: "Los datos proporcionados no son correctos",
+					// Dismiss modal
+					const modalElement = document.getElementById("exampleModal");
+					const modal = bootstrap.Modal.getInstance(modalElement);
+					modal.hide();
 				})
-			);
+				.catch((err) =>
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: "Los datos proporcionados no son correctos",
+					})
+				);
+		} else {
+			// If input data is not valid, display error message
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Please enter a valid email and password",
+			});
+		}
 	};
 
 	const handleChange = (event) => {
@@ -130,7 +143,6 @@ function Login() {
 										type="submit"
 										className=" btn btn-primary btn-inicio-sesion"
 										onSubmit={handleSubmit}
-										data-bs-dismiss="modal"
 									>
 										Iniciar Sesión
 									</button>
