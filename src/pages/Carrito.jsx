@@ -89,7 +89,7 @@ function Carrito({ setCartCount }) {
                 >
                   <div className="card-image">
                     <img
-                      src={`https://proyecto-web-final-backend.vercel.app/img/productos/${item.image}`}
+                      src={`http://localhost:3000/img/productos/${item.image}`}
                       alt={item.name}
                     />
                   </div>

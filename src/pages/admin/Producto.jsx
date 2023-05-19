@@ -10,7 +10,7 @@ function Producto() {
 
   const getProductos = () => {
     axios
-      .get(`https://proyecto-web-final-backend.vercel.app/api/productos`)
+      .get(`http://localhost:3000/api/productos`)
       .then((res) => setProductos(res.data))
       .catch((err) => console.log(err));
   };
@@ -22,9 +22,7 @@ function Producto() {
   const destroy = (id) => {
     if (confirm("¿Esta seguro ?")) {
       axios
-        .delete(
-          `https://proyecto-web-final-backend.vercel.app/api/productos/${id}`
-        )
+        .delete(`http://localhost:3000/api/productos/${id}`)
         .then((res) => {
           getProductos();
         })
@@ -41,9 +39,7 @@ function Producto() {
       getProductos();
     } else {
       axios
-        .get(
-          `https://proyecto-web-final-backend.vercel.app/api/productos/search/${search}`
-        )
+        .get(`http://localhost:3000/api/productos/search/${search}`)
         .then((res) => {
           setProductos(res.data);
         })
@@ -102,7 +98,7 @@ function Producto() {
                   <td scope="row">{producto.capacity}</td>
                   <td scope="row">
                     <img
-                      src={`https://proyecto-web-final-backend.vercel.app/img/productos/${producto.image}`}
+                      src={`http://localhost:3000/img/productos/${producto.image}`}
                       width={100}
                       alt={producto.nombre}
                       className="img"

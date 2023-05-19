@@ -72,7 +72,7 @@ function ProductCard({
       <div className="bg-dark">
         <img
           className="imgCardP"
-          src={`https://proyecto-web-final-backend.vercel.app/img/productos/${image}`}
+          src={`http://localhost:3000/img/productos/${image}`}
           alt={name}
         />
       </div>

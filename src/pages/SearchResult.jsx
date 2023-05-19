@@ -26,7 +26,7 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
   useEffect(() => {
     const fetchSearchResults = async () => {
       const response = await axios.get(
-        `https://proyecto-web-final-backend.vercel.app/api/productos/search/${filter}`
+        `http://localhost:3000/api/productos/search/${filter}`
       );
       setSearchResults(response.data);
     };
@@ -40,7 +40,7 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
     const buscarProductos = async () => {
       try {
         const response = await fetch(
-          `https://proyecto-web-final-backend.vercel.app/api/productos/search/${filter}`
+          `http://localhost:3000/api/productos/search/${filter}`
         );
         const data = await response.json();
         setProductos(data);

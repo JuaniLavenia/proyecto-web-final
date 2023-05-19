@@ -27,15 +27,11 @@ function ProductoCreate() {
     formData.append("capacity", values.capacity);
 
     axios
-      .post(
-        "https://proyecto-web-final-backend.vercel.app/api/productos",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("http://localhost:3000/api/productos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         navigate("/productos");
       })

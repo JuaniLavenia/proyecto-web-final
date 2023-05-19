@@ -19,7 +19,7 @@ function ProductoEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://proyecto-web-final-backend.vercel.app/api/productos/${id}`)
+      .get(`http://localhost:3000/api/productos/${id}`)
       .then((res) => {
         setValues(res.data);
       })
@@ -41,15 +41,11 @@ function ProductoEdit() {
     formData.append("capacity", values.capacity);
 
     axios
-      .put(
-        `https://proyecto-web-final-backend.vercel.app/api/productos/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .put(`http://localhost:3000/api/productos/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         navigate("/productos");
       })

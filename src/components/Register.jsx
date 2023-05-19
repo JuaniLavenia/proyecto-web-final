@@ -16,10 +16,7 @@ function Register() {
     e.preventDefault();
 
     axios
-      .post(
-        "https://proyecto-web-final-backend.vercel.app/api/register",
-        values
-      )
+      .post("http://localhost:3000/api/register", values)
       .then((res) => {
         Swal.fire({
           position: "top-center",
