@@ -81,7 +81,7 @@ function ProductCard({
           <h2 className="card-title d-flex justify-content-center m-2">
             {name}
           </h2>
-          <p className="card-text text-center">{description}</p>
+          <p className="card-text text-start">{description}</p>
           <div className="card-text d-flex">
             <p className="text-muted text-center w-50">{capacity}</p>
             <strong className="text-muted align-self-center pb-3">|</strong>
@@ -89,41 +89,41 @@ function ProductCard({
           </div>
           <div className="card-price p-1">$ {price}</div>
         </div>
-        <div className="card-footer d-flex justify-content-center p-3">
-          <Button
-            variant="primary"
-            className="btnCardP"
-            onClick={() => {
-              handleAddToCart({
-                image,
-                name,
-                description,
-                capacity,
-                category,
-                _id,
-                price,
-              });
-            }}
-          >
-            Agregar al carrito
-          </Button>
-          <Button
-            variant="warning"
-            className="btnCardP"
-            onClick={() => {
-              addFavorite({
-                image,
-                name,
-                description,
-                capacity,
-                category,
-                _id,
-                price,
-              });
-            }}
-          >
-            Agregar a favoritos
-          </Button>
+        <div className="card-footer">
+          <div className="car-buttons btnCardP d-flex justify-content-center">
+            <button
+              className="btn btn-primary me-2 w-50 btncartt"
+              onClick={() => {
+                handleAddToCart({
+                  image,
+                  name,
+                  description,
+                  capacity,
+                  category,
+                  _id,
+                  price,
+                });
+              }}
+            >
+              Comprar
+            </button>
+            <button
+              className="btn btn-warning w-50 btnfavv"
+              onClick={() => {
+                addFavorite({
+                  image,
+                  name,
+                  description,
+                  capacity,
+                  category,
+                  _id,
+                  price,
+                });
+              }}
+            >
+              <span className="material-icons-outlined">favorite</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

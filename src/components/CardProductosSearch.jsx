@@ -85,9 +85,9 @@ function CardProductos({
       </div>
       <div className="card-footer">
         <div className="card-price p-1">$ {price}</div>
-        <div className="car-buttons d-flex justify-content-center">
+        <div className="car-buttons btnCardPr d-flex justify-content-center">
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary me-2 w-50 btncart"
             onClick={() => {
               handleAddToCart({
                 image,
@@ -100,10 +100,10 @@ function CardProductos({
               });
             }}
           >
-            Agregar al carrito
+            Comprar
           </button>
           <button
-            className="btn btn-warning"
+            className="btn btn-warning w-50 btnfav"
             onClick={() => {
               addFavorite({
                 image,
@@ -116,7 +116,7 @@ function CardProductos({
               });
             }}
           >
-            Agregar a favoritos
+            <span className="material-icons-outlined">favorite</span>
           </button>
         </div>
       </div>
