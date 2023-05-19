@@ -34,7 +34,7 @@ function ProductoCreate() {
       })
       .then((res) => {
         console.log(res.data);
-        navigate("/productos");
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
@@ -116,7 +116,7 @@ function ProductoCreate() {
             <label htmlFor="category" className="form-label">
               Categoria
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
               id="category"
@@ -124,7 +124,14 @@ function ProductoCreate() {
               name="category"
               value={values.category}
               onChange={handleChange}
-            />
+            >
+              <option></option>
+              <option>Interiores</option>
+              <option>Exteriores</option>
+              <option>Línea Profesional</option>
+              <option>Linea Industrial</option>
+              <option>Perfumes</option>
+            </select>
           </div>
         </div>
 
@@ -137,8 +144,12 @@ function ProductoCreate() {
             className="form-control"
             id="price"
             name="price"
+            min="0" 
+            step="0.01"
+            placeholder="0"
             value={values.price}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -151,8 +162,12 @@ function ProductoCreate() {
             className="form-control"
             id="stock"
             name="stock"
+            min="0" 
+            step="0.01"
+            placeholder="0"
             value={values.stock}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -167,6 +182,7 @@ function ProductoCreate() {
             name="capacity"
             value={values.capacity}
             onChange={handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">
