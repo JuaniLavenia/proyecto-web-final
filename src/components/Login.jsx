@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import AuthProvider from "../context/AuthContext";
 
 function Login() {
   const [values, setValues] = useState({
@@ -17,9 +18,13 @@ function Login() {
     e.preventDefault();
 
     axios
-      .post("https://proyecto-web-final-backend.vercel.app/api/login", values)
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/login",
+        values
+      )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -27,10 +32,6 @@ function Login() {
           showConfirmButton: false,
           timer: 1500,
         });
-
-        setTimeout(function () {
-          window.location.reload();
-        }, 2000);
       })
       .catch((err) =>
         Swal.fire({

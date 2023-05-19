@@ -87,7 +87,7 @@ function Favoritos({ setFavoritesCount, setCartCount }) {
               <div className="cardFav" key={index}>
                 <div className="cardFavorites bg-dark text-light">
                   <img
-                    src={`https://proyecto-web-final-backend.vercel.app/img/productos/${item.image}`}
+                    src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${item.image}`}
                     alt={item.name}
                     className="imgFav"
                   />
