@@ -142,7 +142,7 @@ function Navbar({
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-light" to="/productos">
+                <Link className="nav-link text-light" to="/AboutUs">
                   Acerca de Nosotros
                 </Link>
               </li>

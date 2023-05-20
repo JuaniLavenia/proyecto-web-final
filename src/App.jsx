@@ -19,6 +19,7 @@ import Category from "./pages/Category";
 import { useState } from "react";
 import ResetPassword from "./components/ResetPassword";
 import Publicidad from "./components/Publicidad";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -80,6 +81,7 @@ function App() {
         <Route path="/adm/productos" element={<Producto />} />
         <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
         <Route path="/adm/productos/create" element={<ProductoCreate />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
       </Routes>
       <Routes>
         <Route path="/" element={<Publicidad />} />
