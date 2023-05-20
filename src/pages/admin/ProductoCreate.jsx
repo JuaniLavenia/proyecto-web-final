@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function ProductoCreate() {
   const [values, setValues] = useState({
@@ -27,17 +28,14 @@ function ProductoCreate() {
     formData.append("capacity", values.capacity);
 
     axios
-      .post(
-        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("http://localhost:3000/api/productos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
-        navigate("/productos");
+        console.log(res.data);
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
@@ -58,7 +56,7 @@ function ProductoCreate() {
 
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
-      setImage(event.target.files[0]);
+      console.log(event.target.files[0]);
     }
   };
 
@@ -74,10 +72,11 @@ function ProductoCreate() {
           <input
             type="text"
             className="form-control"
-            maxLength={40}
             id="name"
             required
             name="name"
+            minLength={1}
+            maxLength={20}
             value={values.name}
             onChange={handleChange}
           />
@@ -90,11 +89,12 @@ function ProductoCreate() {
           <textarea
             className="form-control"
             name="description"
-            maxLength={200}
             id="description"
             cols="30"
             rows="5"
             required
+            minLength={10}
+            maxLength={200}
             value={values.description}
             onChange={handleChange}
           ></textarea>
@@ -119,16 +119,22 @@ function ProductoCreate() {
             <label htmlFor="category" className="form-label">
               Categoria
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
-              maxLength={40}
               id="category"
               required
               name="category"
               value={values.category}
               onChange={handleChange}
-            />
+            >
+              <option></option>
+              <option>Interiores</option>
+              <option>Exteriores</option>
+              <option>Línea Profesional</option>
+              <option>Linea Industrial</option>
+              <option>Perfumes</option>
+            </select>
           </div>
         </div>
 
@@ -139,10 +145,12 @@ function ProductoCreate() {
           <input
             type="number"
             className="form-control"
-            max={999999}
-            maxLength={6}
             id="price"
             name="price"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.price}
             onChange={handleChange}
             required
@@ -156,10 +164,12 @@ function ProductoCreate() {
           <input
             type="number"
             className="form-control"
-            max={999999}
-            maxLength={6}
             id="stock"
             name="stock"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.stock}
             onChange={handleChange}
             required
@@ -173,7 +183,6 @@ function ProductoCreate() {
           <input
             type="text"
             className="form-control"
-            maxLength={40}
             id="capacity"
             name="capacity"
             value={values.capacity}
@@ -181,9 +190,16 @@ function ProductoCreate() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Enviar
+        <button type="submit" className="btn btn-primary m-1">
+          Guardar
         </button>
+        <Link
+          to={`/adm/productos`}
+          type="button"
+          className="btn btn-warning m-1"
+        >
+          Volver
+        </Link>
       </form>
     </div>
   );

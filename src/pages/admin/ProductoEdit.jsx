@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 function ProductoEdit() {
   const [values, setValues] = useState({
@@ -195,9 +196,16 @@ function ProductoEdit() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Enviar
+        <button type="submit" className="btn btn-primary m-1">
+          Guardar
         </button>
+        <Link
+          to={`/adm/productos`}
+          type="button"
+          className="btn btn-warning m-1"
+        >
+          Volver
+        </Link>
       </form>
     </div>
   );
