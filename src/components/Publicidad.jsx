@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import publi from "../assets/img/publi.png";
 import publi2 from "../assets/img/publi-2.png";
 import publi3 from "../assets/img/publi-3.png";
@@ -9,7 +10,7 @@ function Publicidad() {
       <div className="carousel-container">
         <div
           id="carouselExampleControls"
-          className="carousel slide bg-dark"
+          className="carousel slide bg-secondary"
           data-bs-ride="carousel"
         >
           <div className="carousel-inner">

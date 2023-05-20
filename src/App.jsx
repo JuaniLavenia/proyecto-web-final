@@ -32,9 +32,9 @@ function App() {
         setCartCount={setCartCount}
         setFavoritesCount={setFavoritesCount}
       />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Publicidad" element={<Publicidad />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<OlvideMiContrasena />} />
@@ -81,7 +81,9 @@ function App() {
         <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
         <Route path="/adm/productos/create" element={<ProductoCreate />} />
       </Routes>
-
+      <Routes>
+        <Route path="/" element={<Publicidad />} />
+      </Routes>
       <Footer />
     </>
   );

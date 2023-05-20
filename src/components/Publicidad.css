@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
 
 .carousel-container {
+  max-width: 35%;
   position: fixed;
-  top: 50%;
+  top: 75%;
   right: 0;
   transform: translateY(-50%);
   z-index: 999;
