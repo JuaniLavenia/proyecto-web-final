@@ -1,10 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
 
-.carousel-container {
-  max-width: 35%;
+.publicidad {
+  max-width: 40%;
   position: fixed;
-  top: 75%;
-  right: 0;
+  top: 70%;
+  right: 10px;
   transform: translateY(-50%);
   z-index: 999;
+  background-color: #484444;
+  padding: 10px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-cerrar {
+  margin-left: 20px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
