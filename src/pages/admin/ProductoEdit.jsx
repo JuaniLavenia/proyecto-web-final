@@ -16,8 +16,6 @@ function ProductoEdit() {
 
   const { id } = useParams();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     axios
       .get(
@@ -54,13 +52,15 @@ function ProductoEdit() {
         }
       )
       .then((res) => {
-        navigate("/adm/roductos");
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
