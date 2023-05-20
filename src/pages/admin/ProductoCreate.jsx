@@ -19,22 +19,26 @@ function ProductoCreate() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", image);
     formData.append("name", values.name);
     formData.append("description", values.description);
+    formData.append("image", image);
     formData.append("price", values.price);
     formData.append("stock", values.stock);
     formData.append("category", values.category);
     formData.append("capacity", values.capacity);
 
     axios
-      .post("http://localhost:3000/api/productos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
+        setValues(res.data);
         navigate("/adm/productos");
       })
 
@@ -56,7 +60,7 @@ function ProductoCreate() {
 
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
-      console.log(event.target.files[0]);
+      setImage(event.target.files[0]);
     }
   };
 
