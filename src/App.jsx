@@ -18,6 +18,7 @@ import ProductList from "./components/ProductosList";
 import Category from "./pages/Category";
 import { useState } from "react";
 import ResetPassword from "./components/ResetPassword";
+import Publicidad from "./components/Publicidad";
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -33,6 +34,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/Publicidad" element={<Publicidad />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<OlvideMiContrasena />} />
