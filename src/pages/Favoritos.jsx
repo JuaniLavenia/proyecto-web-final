@@ -23,30 +23,48 @@ function Favoritos({ setFavoritesCount, setCartCount }) {
   }, []);
 
   const removeFavorite = (producto) => {
-    const newFavItems = favorites.filter((item) => item._id !== producto._id);
-    if (newFavItems.length !== favorites.length) {
-      setFavorites(newFavItems);
-      localStorage.setItem("favItems", JSON.stringify(newFavItems));
-      const count = newFavItems.length;
-      setFavoritesCount(count);
-    }
+    Swal.fire({
+      title: "Eliminar producto",
+      text: `¿Estás seguro que deseas eliminar ${producto.name} de favoritos?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newFavItems = favorites.filter(
+          (item) => item._id !== producto._id
+        );
+        if (newFavItems.length !== favorites.length) {
+          setFavorites(newFavItems);
+          localStorage.setItem("favItems", JSON.stringify(newFavItems));
+          const count = newFavItems.reduce(
+            (count, item) => count + item.quantity,
+            0
+          );
+          setFavoritesCount(count);
+        }
+      }
+    });
   };
 
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    let existingProductIndex = cart.findIndex((p) => p.id === product.id);
 
-    if (existingProductIndex !== -1) {
-      cart[existingProductIndex].quantity += 1;
+    let existingProduct = cart.find((p) => p._id === product._id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
     } else {
       cart.push({ ...product, quantity: 1 });
     }
 
     localStorage.setItem("cartItems", JSON.stringify(cart));
+
     Swal.fire({
-      position: "top-center",
+      position: "center",
       icon: "success",
-      title: "Se agregó al carrito",
+      title: "Se agregó el producto al carrito",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -55,22 +73,8 @@ function Favoritos({ setFavoritesCount, setCartCount }) {
     setCartCount(cartCount);
   };
 
-  const addToCart = () => {
-    const products = favorites.map((item) => {
-      return {
-        id: item._id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        description: item.description,
-        capacity: item.capacity,
-        category: item.category,
-      };
-    });
-
-    products.forEach((product) => {
-      handleAddToCart(product);
-    });
+  const addToCart = (product) => {
+    handleAddToCart(product);
   };
 
   return (
@@ -78,11 +82,6 @@ function Favoritos({ setFavoritesCount, setCartCount }) {
       <div className="favContainer">
         {favorites.length > 0 ? (
           <>
-            <div className="total-comprar mt-3">
-              <Button variant="success" onClick={addToCart}>
-                Agregar todo al carrito ({favorites.length})
-              </Button>
-            </div>
             {favorites.map((item, index) => (
               <div className="cardFav" key={index}>
                 <div className="cardFavorites bg-dark text-light">
@@ -102,11 +101,19 @@ function Favoritos({ setFavoritesCount, setCartCount }) {
                         Eliminar
                       </button>
                       <button className="btn btn-primary">
-                        <Link to="/productos" className="text-light">
+                        <Link
+                          to="/productos"
+                          className="text-light text-decoration-none"
+                        >
                           Ver más productos
                         </Link>
                       </button>
-                      <button className="btn btn-warning">Comprar</button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => addToCart(item)}
+                      >
+                        Comprar
+                      </button>
                     </div>
                   </div>
                   <div className="card-footer">

@@ -4,6 +4,7 @@ import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 function Carrito({ setCartCount }) {
   const [showModal, setShowModal] = useState(false);
@@ -121,7 +122,12 @@ function Carrito({ setCartCount }) {
                         Eliminar
                       </button>
                       <button className="btn btn-primary">
-                        Ver más productos
+                        <Link
+                          to="/productos"
+                          className="text-light text-decoration-none"
+                        >
+                          Ver más productos
+                        </Link>
                       </button>
                       <Button variant="warning" onClick={handleShowModal}>
                         Comprar Ahora ({item.quantity})
