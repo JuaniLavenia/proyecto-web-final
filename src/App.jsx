@@ -18,34 +18,39 @@ import ProductList from "./components/ProductosList";
 import Category from "./pages/Category";
 import ResetPassword from "./components/ResetPassword";
 import { CartContextProvider } from "./context/ContextProvider";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <>
-      <CartContextProvider>
-        <Navbar path="/cart" />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot" element={<OlvideMiContrasena />} />
-          <Route path="/reset/:id" element={<ResetPassword />} />
-          <Route path="/busqueda/:filter" element={<SearchResult />} />
-          <Route path="/busqueda/" element={<SearchClean />} />
-          <Route path="/cart" element={<Carrito />} />
-          <Route path="/favorites" element={<Favoritos />} />
-          <Route path="/productos" element={<Category />} />
-          <Route
-            path="/productos/category/:category"
-            element={<ProductList />}
-          />
-          <Route path="/adm/productos" element={<Producto />} />
-          <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
-          <Route path="/adm/productos/create" element={<ProductoCreate />} />
-        </Routes>
-
-        <Footer />
-      </CartContextProvider>
+      <AuthContextProvider>
+        <CartContextProvider>
+          <Navbar path="/cart" />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<OlvideMiContrasena />} />
+            <Route path="/reset/:id" element={<ResetPassword />} />
+            <Route path="/busqueda/:filter" element={<SearchResult />} />
+            <Route path="/busqueda/" element={<SearchClean />} />
+            <Route path="/cart" element={<Carrito />} />
+            <Route path="/favorites" element={<Favoritos />} />
+            <Route path="/productos" element={<Category />} />
+            <Route
+              path="/productos/category/:category"
+              element={<ProductList />}
+            />
+            <Route path="/adm/productos" element={<Producto />} />
+            <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
+            <Route path="/adm/productos/create" element={<ProductoCreate />} />
+          </Routes>
+          <Register />
+          <Login />
+          <OlvideMiContrasena />
+          <Footer />
+        </CartContextProvider>
+      </AuthContextProvider>
     </>
   );
 }

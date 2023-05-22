@@ -7,10 +7,12 @@ import logonav from "../assets/img/logo3.png";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { CartContext } from "../context/ContextProvider";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
   const { setCartCount, setFavoritesCount, cartCount, favoritesCount } =
     useContext(CartContext);
+  const { token, logout } = useContext(AuthContext);
 
   function handleSubmit(e) {
     return Login;
@@ -44,20 +46,9 @@ function Navbar() {
     setFavoritesCount(favCount);
   }, [setCartCount, setFavoritesCount]);
 
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  const checkToken = () => {
-    const storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  };
-
-  const logout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("token");
-    setToken("");
+    logout("");
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -142,7 +133,11 @@ function Navbar() {
               </li>
               <li className="nav-item" id="login-register">
                 {token ? (
-                  <Link className="nav-link text-light" to="/" onClick={logout}>
+                  <Link
+                    className="nav-link text-light"
+                    to="/"
+                    onClick={handleLogout}
+                  >
                     Cerrar Sesión
                   </Link>
                 ) : (

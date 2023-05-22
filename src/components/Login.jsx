@@ -5,14 +5,18 @@ import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
+  const { token, login } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -22,12 +26,14 @@ function Login() {
         values
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        const { token } = res.data;
+        localStorage.setItem("token", token);
+        login(token);
 
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "Sesion iniciada",
+          title: "Sesión iniciada",
           showConfirmButton: false,
           timer: 1500,
         });
