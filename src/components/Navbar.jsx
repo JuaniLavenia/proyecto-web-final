@@ -12,7 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 function Navbar() {
   const { setCartCount, setFavoritesCount, cartCount, favoritesCount } =
     useContext(CartContext);
-  const { token, logout } = useContext(AuthContext);
+  const { token, logout, userId } = useContext(AuthContext);
 
   function handleSubmit(e) {
     return Login;
@@ -56,51 +56,6 @@ function Navbar() {
       showConfirmButton: false,
       timer: 1500,
     });
-  };
-
-  const handleAdminClick = () => {
-    if (token) {
-      const email = prompt("Por favor ingrese el correo del usuarioAdmin:");
-      const password = prompt(
-        "Por favor ingrese la contraseña del usuarioAdmin:"
-      );
-
-      axios
-        .post(
-          "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/admin-login",
-          {
-            email,
-            password,
-          }
-        )
-        .then((res) => {
-          if (res.data.success) {
-            navigate("/adm/productos");
-            localStorage.setItem("token", res.data.token);
-            setToken(res.data.token);
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: "Ingreso permitido",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Los datos ingresados no son correctos",
-            });
-          }
-        })
-        .catch((err) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Acceso denegado",
-          })
-        );
-    }
   };
 
   return (
@@ -153,11 +108,8 @@ function Navbar() {
                 )}
               </li>
               <li className="nav-item" id="pag-admin">
-                {token && (
-                  <Link
-                    className="nav-link text-light"
-                    onClick={handleAdminClick}
-                  >
+                {token && userId === "64641124d8ab8071b667c088" && (
+                  <Link className="nav-link text-light" to={"/adm/productos"}>
                     Administrador
                   </Link>
                 )}

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 function Login() {
-  const { token, login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const [values, setValues] = useState({
     email: "",
@@ -26,12 +26,11 @@ function Login() {
         values
       )
       .then((res) => {
-        const { token } = res.data;
+        const { token, userId } = res.data;
         localStorage.setItem("token", token);
-        login(token);
+        login(token, userId);
 
         Swal.fire({
-          position: "top-center",
           icon: "success",
           title: "Sesión iniciada",
           showConfirmButton: false,
