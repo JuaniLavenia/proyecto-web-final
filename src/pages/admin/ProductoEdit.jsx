@@ -149,7 +149,7 @@ function ProductoEdit() {
               <option>Interiores</option>
               <option>Exteriores</option>
               <option>Línea Profesional</option>
-              <option>Linea Industrial</option>
+              <option>Línea Industrial</option>
               <option>Perfumes</option>
             </select>
           </div>
