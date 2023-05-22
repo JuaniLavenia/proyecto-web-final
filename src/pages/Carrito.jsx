@@ -1,11 +1,13 @@
 import "./Carrito.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
-function Carrito({ setCartCount }) {
+function Carrito() {
+  const { setCartCount } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 

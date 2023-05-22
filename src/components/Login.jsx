@@ -5,7 +5,6 @@ import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import AuthProvider from "../context/AuthContext";
 
 function Login() {
   const [values, setValues] = useState({

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ProductCard.css";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
 function ProductCard({
   image,
@@ -11,9 +12,8 @@ function ProductCard({
   category,
   _id,
   price,
-  setCartCount,
-  setFavoritesCount,
 }) {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 

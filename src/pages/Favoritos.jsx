@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Favoritos.css";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/ContextProvider";
 
-function Favoritos({ setFavoritesCount, setCartCount }) {
+function Favoritos() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {

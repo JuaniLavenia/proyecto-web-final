@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import "./CardProductosSearch.css";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
 function CardProductos({
   image,
@@ -10,9 +11,8 @@ function CardProductos({
   category,
   _id,
   price,
-  setCartCount,
-  setFavoritesCount,
 }) {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 

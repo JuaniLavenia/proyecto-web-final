@@ -6,13 +6,12 @@ import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
-function Navbar({
-  cartCount,
-  favoritesCount,
-  setCartCount,
-  setFavoritesCount,
-}) {
+function Navbar() {
+  const { setCartCount, setFavoritesCount, cartCount, favoritesCount } =
+    useContext(CartContext);
+
   function handleSubmit(e) {
     return Login;
   }
