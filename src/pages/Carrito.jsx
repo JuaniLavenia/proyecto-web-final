@@ -77,23 +77,43 @@ function Carrito() {
   const handlePayment = () => {
     const valKey = localStorage.getItem("validation");
     const valKeyTwo = localStorage.getItem("validation2");
-    if (valKey && valKeyTwo) {
+    const token = localStorage.getItem("token");
+
+    if (valKey === "true" && valKeyTwo === "true") {
+      if (token) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title:
+            "¡Compra realizada con éxito, se enviará su factura al correo electrónico!",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+
+        handleCloseModal();
+        setCartCount(0);
+        setCartItems([]);
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("validation");
+        localStorage.removeItem("validation2");
+        navigate("/");
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Debe iniciar sesión para realizar la compra",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+    } else {
       Swal.fire({
         position: "center",
-        icon: "success",
-        title:
-          "¡Compra realizada con exito, se enviara su factura al correo electronico!",
+        icon: "info",
+        title: "Verifique los datos ingresados",
         showConfirmButton: false,
         timer: 2500,
       });
-
-      handleCloseModal();
-      setCartCount(0);
-      setCartItems([]);
-      localStorage.removeItem("cartItems");
-      localStorage.removeItem("validation");
-      localStorage.removeItem("validation2");
-      navigate("/");
     }
   };
 
