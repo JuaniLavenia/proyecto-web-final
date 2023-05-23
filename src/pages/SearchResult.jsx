@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
+import { CartContext } from "../context/ContextProvider";
+import Swal from "sweetalert2";
 
-function SearchResult({ setCartCount, setFavoritesCount }) {
+function SearchResult() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const { filter } = useParams();
   const [searchResults, setSearchResults] = useState([]);
 
@@ -45,7 +48,11 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
         const data = await response.json();
         setProductos(data);
       } catch (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       }
     };
     buscarProductos();

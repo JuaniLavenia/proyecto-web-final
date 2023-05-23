@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import { useParams } from "react-router";
 import "./ProductCard.css";
+import { CartContext } from "../context/ContextProvider";
 
-function ProductList({ setCartCount, setFavoritesCount }) {
+function ProductList() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -32,7 +34,11 @@ function ProductList({ setCartCount, setFavoritesCount }) {
         setProductos(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       });
   };
 
