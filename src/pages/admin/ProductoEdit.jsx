@@ -20,7 +20,7 @@ function ProductoEdit() {
   useEffect(() => {
     axios
       .get(
-        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
+        `http://localhost:3000/api/productos/${id}`
       )
       .then((res) => {
         setValues(res.data);
@@ -44,7 +44,7 @@ function ProductoEdit() {
 
     axios
       .put(
-        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`,
+        `http://localhost:3000/api/productos/${id}`,
         formData,
         {
           headers: {

@@ -30,7 +30,7 @@ function ProductoCreate() {
 
     axios
       .post(
-        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
+        "http://localhost:3000/api/productos",
         formData,
         {
           headers: {
