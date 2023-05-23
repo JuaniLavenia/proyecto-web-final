@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./ProductCard.css";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
 function ProductCard({
   image,
@@ -11,12 +12,11 @@ function ProductCard({
   category,
   _id,
   price,
-  setCartCount,
-  setFavoritesCount,
   stock,
 }) {
   const [quantitySelect, setQuantitySelect] = useState(1);
 
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     Swal.fire({
       title: "Ingrese la cantidad de productos",
@@ -99,7 +99,7 @@ function ProductCard({
       <div className="bg-dark">
         <img
           className="imgCardP"
-          src={`http://localhost:3000/img/productos/${image}`}
+          src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${image}`}
           alt={name}
         />
       </div>

@@ -19,7 +19,9 @@ function ProductoEdit() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/productos/${id}`)
+      .get(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
+      )
       .then((res) => {
         setValues(res.data);
       })
@@ -41,11 +43,15 @@ function ProductoEdit() {
     formData.append("capacity", values.capacity);
 
     axios
-      .put(`http://localhost:3000/api/productos/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         navigate("/productos");
       })

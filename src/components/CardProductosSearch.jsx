@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./CardProductosSearch.css";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
 
 function CardProductos({
   image,
@@ -10,12 +11,11 @@ function CardProductos({
   category,
   _id,
   price,
-  setCartCount,
-  setFavoritesCount,
   stock,
 }) {
   const [quantitySelect, setQuantitySelect] = useState(1);
 
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     Swal.fire({
       title: "Ingrese la cantidad de productos",
@@ -98,7 +98,7 @@ function CardProductos({
     <div className="card cardP m-3 bg-dark text-light d-flex">
       <img
         className="imgCard d-flex"
-        src={`http://localhost:3000/img/productos/${image}`}
+        src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${image}`}
         alt={name}
       />
       <div className="card-body">

@@ -10,7 +10,9 @@ function Producto() {
 
   const getProductos = () => {
     axios
-      .get(`http://localhost:3000/api/productos`)
+      .get(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos`
+      )
       .then((res) => setProductos(res.data))
       .catch((err) => console.log(err));
   };
@@ -22,7 +24,9 @@ function Producto() {
   const destroy = (id) => {
     if (confirm("¿Esta seguro ?")) {
       axios
-        .delete(`http://localhost:3000/api/productos/${id}`)
+        .delete(
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
+        )
         .then((res) => {
           getProductos();
         })
@@ -39,7 +43,9 @@ function Producto() {
       getProductos();
     } else {
       axios
-        .get(`http://localhost:3000/api/productos/search/${search}`)
+        .get(
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${search}`
+        )
         .then((res) => {
           setProductos(res.data);
         })
@@ -98,7 +104,7 @@ function Producto() {
                   <td scope="row">{producto.capacity}</td>
                   <td scope="row">
                     <img
-                      src={`http://localhost:3000/img/productos/${producto.image}`}
+                      src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${producto.image}`}
                       width={100}
                       alt={producto.nombre}
                       className="img"

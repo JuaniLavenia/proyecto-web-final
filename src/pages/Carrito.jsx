@@ -1,12 +1,14 @@
 import "./Carrito.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/ContextProvider";
 
-function Carrito({ setCartCount }) {
+function Carrito() {
+  const { setCartCount } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
@@ -106,7 +108,7 @@ function Carrito({ setCartCount }) {
                 >
                   <div className="card-image">
                     <img
-                      src={`http://localhost:3000/img/productos/${item.image}`}
+                      src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${item.image}`}
                       alt={item.name}
                     />
                   </div>

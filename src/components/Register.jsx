@@ -16,7 +16,10 @@ function Register() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/api/register", values)
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
+        values
+      )
       .then((res) => {
         Swal.fire({
           position: "top-center",

@@ -27,11 +27,15 @@ function ProductoCreate() {
     formData.append("capacity", values.capacity);
 
     axios
-      .post("http://localhost:3000/api/productos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         navigate("/productos");
       })
