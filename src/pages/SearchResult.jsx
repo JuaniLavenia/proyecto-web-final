@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
+import { CartContext } from "../context/ContextProvider";
 
-function SearchResult({ setCartCount, setFavoritesCount }) {
+function SearchResult() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const { filter } = useParams();
   const [searchResults, setSearchResults] = useState([]);
 
@@ -26,7 +28,7 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
   useEffect(() => {
     const fetchSearchResults = async () => {
       const response = await axios.get(
-        `http://localhost:3000/api/productos/search/${filter}`
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${filter}`
       );
       setSearchResults(response.data);
     };
@@ -40,7 +42,7 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
     const buscarProductos = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/productos/search/${filter}`
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${filter}`
         );
         const data = await response.json();
         setProductos(data);

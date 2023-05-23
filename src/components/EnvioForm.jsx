@@ -10,9 +10,6 @@ function Envio() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedo enviar la información de pago y envío a un servidor para procesarlo
-    // ...
-    // Luego redirijo al usuario a una página de confirmación de pedido
   };
 
   const validateForm = () => {

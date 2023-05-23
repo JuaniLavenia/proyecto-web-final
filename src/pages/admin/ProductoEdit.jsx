@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProductoEdit() {
-
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -16,13 +17,12 @@ function ProductoEdit() {
 
   const { id } = useParams();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/productos/${id}`)
+      .get(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
+      )
       .then((res) => {
-        console.log(res);
         setValues(res.data);
       })
       .catch((err) => {
@@ -30,28 +30,37 @@ function ProductoEdit() {
       });
   }, []);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", image);
     formData.append("name", values.name);
     formData.append("description", values.description);
+    formData.append("image", image);
     formData.append("price", values.price);
     formData.append("stock", values.stock);
     formData.append("category", values.category);
     formData.append("capacity", values.capacity);
 
     axios
-      .put(`http://localhost:3000/api/productos/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
-        navigate("/productos");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Se edito el producto con exito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
@@ -59,6 +68,7 @@ function ProductoEdit() {
       });
   };
 
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -90,6 +100,8 @@ function ProductoEdit() {
             id="name"
             required
             name="name"
+            minLength={1}
+            maxLength={20}
             value={values.name}
             onChange={handleChange}
           />
@@ -106,6 +118,8 @@ function ProductoEdit() {
             cols="30"
             rows="5"
             required
+            minLength={10}
+            maxLength={200}
             value={values.description}
             onChange={handleChange}
           ></textarea>
@@ -130,7 +144,7 @@ function ProductoEdit() {
             <label htmlFor="category" className="form-label">
               Categoria
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
               id="category"
@@ -138,7 +152,14 @@ function ProductoEdit() {
               name="category"
               value={values.category}
               onChange={handleChange}
-            />
+            >
+              <option></option>
+              <option>Interiores</option>
+              <option>Exteriores</option>
+              <option>Línea Profesional</option>
+              <option>Línea Industrial</option>
+              <option>Perfumes</option>
+            </select>
           </div>
         </div>
 
@@ -151,8 +172,13 @@ function ProductoEdit() {
             className="form-control"
             id="price"
             name="price"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.price}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -165,8 +191,13 @@ function ProductoEdit() {
             className="form-control"
             id="stock"
             name="stock"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.stock}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -181,11 +212,19 @@ function ProductoEdit() {
             name="capacity"
             value={values.capacity}
             onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Enviar
+        <button type="submit" className="btn btn-primary m-1">
+          Guardar
         </button>
+        <Link
+          to={`/adm/productos`}
+          type="button"
+          className="btn btn-warning m-1"
+        >
+          Volver
+        </Link>
       </form>
     </div>
   );

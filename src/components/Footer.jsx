@@ -48,14 +48,14 @@ function Footer() {
           </div>
           <div className="col-lg-4 col-sm-12">
             <h5 className="text-white mt-4 mb-3">Información</h5>
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Medios de Pago</p>
             </Link>
 
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Trabajá con Nosotros</p>
             </Link>
-            <Link to="">
+            <Link to="/">
               <p className="text-white">Política de Privacidad</p>
             </Link>
           </div>

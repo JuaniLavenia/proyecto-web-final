@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import "./SearchResult.css";
 import CategoryButton from "../components/CategoryBtn";
+import { CartContext } from "../context/ContextProvider";
 
-function SearchClean({ setCartCount, setFavoritesCount }) {
+function SearchClean() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [categoria, setCategoria] = useState("");
 
@@ -24,7 +26,9 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const getProductos = () => {
     axios
-      .get("http://localhost:3000/api/productos")
+      .get(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos"
+      )
       .then((res) => setProducts(res.data))
       .catch((err) => {
         console.log(err);
@@ -37,7 +41,7 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
   const handleCategoryClick = async (category) => {
     const response = await fetch(
-      `http://localhost:3000/api/productos/category/${category}`
+      `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
     );
     const data = await response.json();
     setProducts(data);

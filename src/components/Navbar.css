@@ -138,6 +138,7 @@
   .carrito {
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
   }
   .imgNav {
     display: flex;
@@ -153,5 +154,14 @@
     position: relative;
     left: 25px;
     top: -25px;
+  }
+  .lupa {
+    position: relative;
+    right: 48px;
+    top: 2px;
+  }
+  .searchbar {
+    height: 51px;
+    margin-left: 2.6rem;
   }
 }

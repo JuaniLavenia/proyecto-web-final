@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProductoCreate() {
   const [values, setValues] = useState({
@@ -11,30 +13,41 @@ function ProductoCreate() {
     category: "",
     capacity: "",
   });
-  
+
   const [image, setImage] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", image);
     formData.append("name", values.name);
     formData.append("description", values.description);
+    formData.append("image", image);
     formData.append("price", values.price);
     formData.append("stock", values.stock);
     formData.append("category", values.category);
     formData.append("capacity", values.capacity);
 
     axios
-      .post("http://localhost:3000/api/productos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
-        console.log(res.data);
-        navigate("/productos");
+        setValues(res.data);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Se creo un produto con exito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
@@ -43,7 +56,6 @@ function ProductoCreate() {
   };
 
   const navigate = useNavigate();
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -54,7 +66,6 @@ function ProductoCreate() {
     });
   };
 
-  
   const handleChangeFile = (event) => {
     if (event.target.files[0]) {
       setImage(event.target.files[0]);
@@ -76,6 +87,8 @@ function ProductoCreate() {
             id="name"
             required
             name="name"
+            minLength={1}
+            maxLength={20}
             value={values.name}
             onChange={handleChange}
           />
@@ -92,6 +105,8 @@ function ProductoCreate() {
             cols="30"
             rows="5"
             required
+            minLength={10}
+            maxLength={200}
             value={values.description}
             onChange={handleChange}
           ></textarea>
@@ -116,7 +131,7 @@ function ProductoCreate() {
             <label htmlFor="category" className="form-label">
               Categoria
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
               id="category"
@@ -124,7 +139,14 @@ function ProductoCreate() {
               name="category"
               value={values.category}
               onChange={handleChange}
-            />
+            >
+              <option></option>
+              <option>Interiores</option>
+              <option>Exteriores</option>
+              <option>Línea Profesional</option>
+              <option>Línea Industrial</option>
+              <option>Perfumes</option>
+            </select>
           </div>
         </div>
 
@@ -137,8 +159,13 @@ function ProductoCreate() {
             className="form-control"
             id="price"
             name="price"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.price}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -151,8 +178,13 @@ function ProductoCreate() {
             className="form-control"
             id="stock"
             name="stock"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.stock}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -167,11 +199,19 @@ function ProductoCreate() {
             name="capacity"
             value={values.capacity}
             onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Enviar
+        <button type="submit" className="btn btn-primary m-1">
+          Guardar
         </button>
+        <Link
+          to={`/adm/productos`}
+          type="button"
+          className="btn btn-warning m-1"
+        >
+          Volver
+        </Link>
       </form>
     </div>
   );

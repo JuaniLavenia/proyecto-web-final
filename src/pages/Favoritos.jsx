@@ -1,124 +1,136 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Favoritos.css";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/ContextProvider";
 
-function Favoritos({ setFavoritesCount, setCartCount }) {
-	const [favorites, setFavorites] = useState([]);
+function Favoritos() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
+  const [favorites, setFavorites] = useState([]);
 
-	useEffect(() => {
-		const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+  useEffect(() => {
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
 
-		const favCount = favItems.length;
+    const favCount = favItems.length;
 
-		setFavoritesCount(favCount);
-	}, []);
+    setFavoritesCount(favCount);
+  }, []);
 
-	useEffect(() => {
-		const items = JSON.parse(localStorage.getItem("favItems"));
-		if (items) {
-			setFavorites(items);
-		}
-	}, []);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("favItems"));
+    if (items) {
+      setFavorites(items);
+    }
+  }, []);
 
-	const removeFavorite = (producto) => {
-		const newFavItems = favorites.filter((item) => item._id !== producto._id);
-		if (newFavItems.length !== favorites.length) {
-			setFavorites(newFavItems);
-			localStorage.setItem("favItems", JSON.stringify(newFavItems));
-			const count = newFavItems.length;
-			setFavoritesCount(count);
-		}
-	};
+  const removeFavorite = (producto) => {
+    Swal.fire({
+      title: "Eliminar producto",
+      text: `¿Estás seguro que deseas eliminar ${producto.name} de favoritos?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newFavItems = favorites.filter(
+          (item) => item._id !== producto._id
+        );
+        if (newFavItems.length !== favorites.length) {
+          setFavorites(newFavItems);
+          localStorage.setItem("favItems", JSON.stringify(newFavItems));
+          const count = newFavItems.reduce(
+            (count, item) => count + item.quantity,
+            0
+          );
+          setFavoritesCount(count);
+        }
+      }
+    });
+  };
 
-	const handleAddToCart = (product) => {
-		let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-		let existingProductIndex = cart.findIndex((p) => p.id === product.id);
+  const handleAddToCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-		if (existingProductIndex !== -1) {
-			cart[existingProductIndex].quantity += 1;
-		} else {
-			cart.push({ ...product, quantity: 1 });
-		}
+    let existingProduct = cart.find((p) => p._id === product._id);
 
-		localStorage.setItem("cartItems", JSON.stringify(cart));
-		Swal.fire({
-			position: "top-center",
-			icon: "success",
-			title: "Se agregó al carrito",
-			showConfirmButton: false,
-			timer: 1500,
-		});
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
 
-		const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
-		setCartCount(cartCount);
-	};
+    localStorage.setItem("cartItems", JSON.stringify(cart));
 
-	const addToCart = () => {
-		const products = favorites.map((item) => {
-			return {
-				id: item._id,
-				name: item.name,
-				price: item.price,
-				image: item.image,
-				description: item.description,
-				capacity: item.capacity,
-				category: item.category,
-			};
-		});
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Se agregó el producto al carrito",
+      showConfirmButton: false,
+      timer: 1500,
+    });
 
-		products.forEach((product) => {
-			handleAddToCart(product);
-		});
-	};
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+    setCartCount(cartCount);
+  };
 
-	return (
-		<div className="favorites bg-dark text-light">
-			<div className="favContainer">
-				{favorites.length > 0 ? (
-					<>
-						<div className="total-comprar mt-3">
-							<Button variant="success" onClick={addToCart}>
-								Agregar todo al carrito ({favorites.length})
-							</Button>
-						</div>
-						{favorites.map((item, index) => (
-							<div className="cardFav" key={index}>
-								<div className="cardFavorites bg-dark text-light">
-									<img
-										src={`http://localhost:3000/img/productos/${item.image}`}
-										alt={item.name}
-										className="imgFav"
-									/>
-									<div className="card-body">
-										<h3 className="card-title titl">{item.name}</h3>
-										<p className="card-text descrpt mt-4">{item.description}</p>
-										<div className="cardBtnFav">
-											<button
-												className="btn btn-danger"
-												onClick={() => removeFavorite(item)}
-											>
-												Eliminar
-											</button>
-											<button className="btn btn-primary">
-												Ver más productos
-											</button>
-											<button className="btn btn-warning">Comprar</button>
-										</div>
-									</div>
-									<div className="card-footer">
-										<div className="cardPriceFav">$ {item.price}</div>
-									</div>
-								</div>
-							</div>
-						))}
-					</>
-				) : (
-					<p className="text-center">No tienes favoritos guardados.</p>
-				)}
-			</div>
-		</div>
-	);
+  const addToCart = (product) => {
+    handleAddToCart(product);
+  };
+
+  return (
+    <div className="favorites bg-dark text-light">
+      <div className="favContainer">
+        {favorites.length > 0 ? (
+          <>
+            {favorites.map((item, index) => (
+              <div className="cardFav" key={index}>
+                <div className="cardFavorites bg-dark text-light">
+                  <img
+                    src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${item.image}`}
+                    alt={item.name}
+                    className="imgFav"
+                  />
+                  <div className="card-body">
+                    <h3 className="card-title titl">{item.name}</h3>
+                    <p className="card-text descrpt mt-4">{item.description}</p>
+                    <div className="cardBtnFav">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeFavorite(item)}
+                      >
+                        Eliminar
+                      </button>
+                      <button className="btn btn-primary">
+                        <Link
+                          to="/productos"
+                          className="text-light text-decoration-none"
+                        >
+                          Ver más productos
+                        </Link>
+                      </button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => addToCart(item)}
+                      >
+                        Comprar
+                      </button>
+                    </div>
+                  </div>
+                  <div className="card-footer">
+                    <div className="cardPriceFav">$ {item.price}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p className="text-center">No tienes favoritos guardados.</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Favoritos;

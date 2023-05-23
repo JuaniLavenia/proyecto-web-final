@@ -1,212 +1,165 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
+import { AuthContext } from "../context/AuthContext";
 
-function Navbar({
-	cartCount,
-	favoritesCount,
-	setCartCount,
-	setFavoritesCount,
-}) {
-	function handleSubmit(e) {
-		return Login;
-	}
+function Navbar() {
+  const { setCartCount, setFavoritesCount, cartCount, favoritesCount } =
+    useContext(CartContext);
+  const { token, logout, userId } = useContext(AuthContext);
 
-	const [searchTerm, setSearchTerm] = useState("");
+  function handleSubmit(e) {
+    return Login;
+  }
 
-	const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
-	const handleChangeSearch = (event) => {
-		setSearchTerm(event.target.value);
-	};
+  const navigate = useNavigate();
 
-	const buscar = () => {
-		if (searchTerm === "") {
-			navigate("/busqueda");
-		}
-	};
+  const handleChangeSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-	useEffect(() => {
-		const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-		const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
+  const buscar = () => {
+    if (searchTerm === "") {
+      navigate("/busqueda");
+    }
+  };
 
-		const cartCount = cartItems.reduce(
-			(count, item) => count + item.quantity,
-			0
-		);
-		const favCount = favItems.length;
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const favItems = JSON.parse(localStorage.getItem("favItems")) || [];
 
-		setCartCount(cartCount);
-		setFavoritesCount(favCount);
-	}, [setCartCount, setFavoritesCount]);
+    const cartCount = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+    const favCount = favItems.length;
 
-	const [token, setToken] = useState("");
+    setCartCount(cartCount);
+    setFavoritesCount(favCount);
+  }, [setCartCount, setFavoritesCount]);
 
-	useEffect(() => {
-		checkToken();
-	}, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    logout("");
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Se cerró la sesion",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
-	const checkToken = () => {
-		const storedToken = localStorage.getItem("token");
-		setToken(storedToken);
-	};
+  return (
+    <>
+      <nav className="navbar navbar-expand-lg px-2 fixed-top position-sticky">
+        <div className="container-fluid">
+          <div className="imgNav">
+            <Link className="navbar-brand" to="/">
+              <img className="img-nav" src={logonav} alt="" />
+            </Link>
+          </div>
 
-	const logout = () => {
-		localStorage.removeItem("token");
-		setToken("");
-		Swal.fire({
-			position: "top-center",
-			icon: "success",
-			title: "Se cerró la sesion",
-			showConfirmButton: false,
-			timer: 1500,
-		});
-	};
+          <button
+            className="navbar-toggler buttonHamb"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/productos">
+                  Productos
+                </Link>
+              </li>
+              <li className="nav-item" id="login-register">
+                {token ? (
+                  <Link
+                    className="nav-link text-light"
+                    to="/"
+                    onClick={handleLogout}
+                  >
+                    Cerrar Sesión
+                  </Link>
+                ) : (
+                  <Link
+                    onClick={handleSubmit}
+                    className="nav-link text-light"
+                    to="/"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Iniciar Sesion
+                  </Link>
+                )}
+              </li>
+              <li className="nav-item" id="pag-admin">
+                {token && userId === "64641124d8ab8071b667c088" && (
+                  <Link className="nav-link text-light" to={"/adm/productos"}>
+                    Administrador
+                  </Link>
+                )}
+              </li>
+            </ul>
+            <form className="d-flex search" role="search">
+              <input
+                className="searchbar"
+                type="search"
+                maxLength={15}
+                placeholder="Buscar"
+                value={searchTerm}
+                onChange={handleChangeSearch}
+              />
 
-	const handleAdminClick = () => {
-		if (token) {
-			const email = prompt("Por favor ingrese el correo del usuarioAdmin:");
-			const password = prompt(
-				"Por favor ingrese la contraseña del usuarioAdmin:"
-			);
-
-			axios
-				.post("http://localhost:3000/api/admin-login", { email, password })
-				.then((res) => {
-					if (res.data.success) {
-						navigate("/adm/productos");
-						localStorage.setItem("token", res.data.token);
-						setToken(res.data.token);
-						Swal.fire({
-							position: "top-center",
-							icon: "success",
-							title: "Ingreso permitido",
-							showConfirmButton: false,
-							timer: 1500,
-						});
-					} else {
-						Swal.fire({
-							icon: "error",
-							title: "Oops...",
-							text: "Los datos ingresados no son correctos",
-						});
-					}
-				})
-				.catch((err) =>
-					Swal.fire({
-						icon: "error",
-						title: "Oops...",
-						text: "Acceso denegado",
-					})
-				);
-		}
-	};
-
-	return (
-		<>
-			<nav className="navbar navbar-expand-lg px-2 fixed-top position-sticky">
-				<div className="container-fluid">
-					<div className="imgNav">
-						<Link className="navbar-brand" to="/">
-							<img className="img-nav" src={logonav} alt="" />
-						</Link>
-					</div>
-
-					<button
-						className="navbar-toggler buttonHamb"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span className="navbar-toggler-icon"></span>
-					</button>
-					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-							<li className="nav-item">
-								<Link className="nav-link text-light" to="/productos">
-									Productos
-								</Link>
-							</li>
-							<li className="nav-item" id="login-register">
-								{token ? (
-									<Link className="nav-link text-light" to="/" onClick={logout}>
-										Cerrar Sesión
-									</Link>
-								) : (
-									<Link
-										onClick={handleSubmit}
-										className="nav-link text-light"
-										to="/"
-										data-bs-toggle="modal"
-										data-bs-target="#exampleModal"
-									>
-										Iniciar Sesion
-									</Link>
-								)}
-							</li>
-							<li className="nav-item" id="pag-admin">
-								{token && (
-									<Link
-										className="nav-link text-light"
-										onClick={handleAdminClick}
-									>
-										Administrador
-									</Link>
-								)}
-							</li>
-						</ul>
-						<form className="d-flex search" role="search">
-							<input
-								className="searchbar"
-								type="search"
-								placeholder="Buscar"
-								value={searchTerm}
-								onChange={handleChangeSearch}
-							/>
-
-							<Link
-								className="lupa"
-								onClick={buscar}
-								to={`/busqueda/${searchTerm}`}
-							>
-								<span className="material-icons-outlined">search</span>
-							</Link>
-						</form>
-						<div className="d-flex carrito p-1">
-							<Link to="/cart">
-								<button className="car">
-									<span className="material-icons-outlined md-48">
-										shopping_cart
-									</span>
-									{cartCount > 0 && (
-										<span className="badgeCart">{cartCount}</span>
-									)}
-								</button>
-							</Link>
-						</div>
-						<div>
-							<Link to="/favorites">
-								<button className="fav">
-									<span className="material-icons-outlined">favorite</span>
-									{favoritesCount > 0 && (
-										<span className="badgeFav">{favoritesCount}</span>
-									)}
-								</button>
-							</Link>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</>
-	);
+              <Link
+                className="lupa"
+                onClick={buscar}
+                to={`/busqueda/${searchTerm}`}
+              >
+                <span className="material-icons-outlined">search</span>
+              </Link>
+            </form>
+            <div className="d-flex carrito p-1">
+              <Link to="/cart">
+                <button className="car">
+                  <span className="material-icons-outlined md-48">
+                    shopping_cart
+                  </span>
+                  {cartCount > 0 && (
+                    <span className="badgeCart">{cartCount}</span>
+                  )}
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/favorites">
+                <button className="fav">
+                  <span className="material-icons-outlined">favorite</span>
+                  {favoritesCount > 0 && (
+                    <span className="badgeFav">{favoritesCount}</span>
+                  )}
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 }
 
 export default Navbar;
