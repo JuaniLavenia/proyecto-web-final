@@ -30,31 +30,38 @@ function Formcarrito(props) {
   const [expYear, setExpYear] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const handleCardNumberInput = (e) => {
-    document.querySelector(".card-number-box").innerText = cardNumber;
-  };
-
   const handleCardHolderInput = (e) => {
-    setCardHolder(e.target.value.toUpperCase());
-    document.querySelector(".card-holder-name").innerText = cardHolder;
+    const value = e.target.value.toUpperCase();
+    setCardHolder(value);
+    document.querySelector(".card-holder-name").innerText = value;
   };
 
-  const handleMonthInput = (e) => {
-    document.querySelector(".exp-month").innerText = expMonth;
+  const handleMonthInput = () => {
+    const select = document.getElementById("month-input");
+    const value = select.options[select.selectedIndex].text;
+    document.querySelector(".exp-month").innerText = value;
   };
 
-  const handleYearInput = (e) => {
-    document.querySelector(".exp-year").innerText = expYear;
+  const handleYearInput = () => {
+    const select = document.getElementById("year-input");
+    const value = select.options[select.selectedIndex].text;
+    document.querySelector(".exp-year").innerText = value;
+  };
+
+  const handleCardNumberInput = () => {
+    const value = document.getElementById("card-number-input").value;
+    document.querySelector(".card-number-box").innerText = value;
+  };
+
+  const handleCvvChange = () => {
+    const value = document.getElementById("cardCvv").value;
+    document.querySelector(".cvv-box").innerText = value;
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCardFlip = () => {
     setIsFlipped(!isFlipped);
-  };
-
-  const handleCvvChange = (event) => {
-    document.querySelector(".cvv-box").innerText = cvv;
   };
 
   const handleCVVFocus = () => {
@@ -74,7 +81,7 @@ function Formcarrito(props) {
           <div className="card-number-box">################</div>
           <div className="flexbox">
             <div className="box">
-              <span>TITULAR</span>
+              <span>TITULAR:</span>
               <div className="card-holder-name">################</div>
             </div>
             <div className="box">
@@ -107,6 +114,7 @@ function Formcarrito(props) {
               min={0}
               minLength={8}
               maxLength={30}
+              required
               type="number"
               value={cardNumber}
               onChange={(e) => {
@@ -207,6 +215,7 @@ function Formcarrito(props) {
               min={0}
               max={999}
               maxLength={3}
+              required
               minLength={3}
               type="number"
               id="cardCvv"
