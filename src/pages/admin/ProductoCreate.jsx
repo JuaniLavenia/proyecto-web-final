@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProductoCreate() {
   const [values, setValues] = useState({
@@ -39,6 +40,13 @@ function ProductoCreate() {
       )
       .then((res) => {
         setValues(res.data);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Se creo un produto con exito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/adm/productos");
       })
 

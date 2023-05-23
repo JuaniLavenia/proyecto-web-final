@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProductoEdit() {
   const [values, setValues] = useState({
@@ -52,6 +53,13 @@ function ProductoEdit() {
         }
       )
       .then((res) => {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Se edito el producto con exito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/adm/productos");
       })
 

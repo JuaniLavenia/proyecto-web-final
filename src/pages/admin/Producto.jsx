@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./producto.css";
+import Swal from "sweetalert2";
 
 function Producto() {
   const [productos, setProductos] = useState([]);
@@ -28,6 +29,13 @@ function Producto() {
           `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
         )
         .then((res) => {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Se borro el producto con exito",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           getProductos();
         })
         .catch((err) => console.log(err));
