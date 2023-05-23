@@ -50,7 +50,7 @@ function CardProductos({
         localStorage.setItem("cartItems", JSON.stringify(cart));
 
         Swal.fire({
-          position: "top-center",
+          position: "center",
           icon: "success",
           title: "Se agregó el producto al carrito",
           showConfirmButton: false,
@@ -81,7 +81,7 @@ function CardProductos({
       fav.push({ ...favorite, quantity: 1 });
       localStorage.setItem("favItems", JSON.stringify(fav));
       Swal.fire({
-        position: "top-center",
+        position: "center",
         icon: "success",
         title: "Se agregó a favoritos",
         showConfirmButton: false,

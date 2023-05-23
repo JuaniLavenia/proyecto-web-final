@@ -15,14 +15,12 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate input data
     if (
       values.email &&
       values.password &&
       values.password_confirmation &&
       values.password === values.password_confirmation
     ) {
-      // If input data is valid, submit form
       axios
         .post(
           "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
@@ -47,11 +45,10 @@ function Register() {
           })
         );
     } else {
-      // If input data is not valid, display error message
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Please enter a valid email and matching passwords",
+        text: "Porfavor, proporcione un email valido y/o contraseñas identicas",
       });
     }
   };

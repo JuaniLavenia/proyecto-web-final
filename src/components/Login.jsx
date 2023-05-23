@@ -9,6 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 
 function Login() {
   const { login } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
@@ -21,6 +22,8 @@ function Login() {
     e.preventDefault();
 
     if (values.email && values.password) {
+      setIsLoading(true);
+
       axios
         .post(
           "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/login",
@@ -32,9 +35,9 @@ function Login() {
           login(token, userId);
 
           Swal.fire({
-            position: "top-center",
+            position: "center",
             icon: "success",
-            title: "Sesion iniciada",
+            title: "Sesión iniciada",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -45,18 +48,21 @@ function Login() {
           const modal = bootstrap.Modal.getInstance(modalElement);
           modal.hide();
         })
-        .catch((err) =>
+        .catch((err) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Los datos proporcionados no son correctos",
-          })
-        );
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Please enter a valid email and password",
+        text: "Por favor, ingrese un correo y/o contraseña valido",
       });
     }
   };
@@ -149,10 +155,11 @@ function Login() {
                   <button
                     id="iniciarSesion"
                     type="submit"
-                    className=" btn btn-primary btn-inicio-sesion"
+                    className="btn btn-primary btn-inicio-sesion"
                     onSubmit={handleSubmit}
+                    disabled={isLoading}
                   >
-                    Iniciar Sesión
+                    {isLoading ? "Cargando..." : "Iniciar Sesión"}
                   </button>
                   <br />
                   <button

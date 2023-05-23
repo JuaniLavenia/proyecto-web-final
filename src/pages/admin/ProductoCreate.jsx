@@ -15,6 +15,7 @@ function ProductoCreate() {
   });
 
   const [image, setImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +28,8 @@ function ProductoCreate() {
     formData.append("stock", values.stock);
     formData.append("category", values.category);
     formData.append("capacity", values.capacity);
+
+    setIsLoading(true);
 
     axios
       .post(
@@ -43,7 +46,7 @@ function ProductoCreate() {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "Se creo un produto con exito",
+          title: "Se creo el producto con exito",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -51,7 +54,14 @@ function ProductoCreate() {
       })
 
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -140,7 +150,9 @@ function ProductoCreate() {
               value={values.category}
               onChange={handleChange}
             >
-              <option></option>
+              <option disabled selected value="">
+                Categorias
+              </option>
               <option>Interiores</option>
               <option>Exteriores</option>
               <option>Línea Profesional</option>
@@ -160,6 +172,7 @@ function ProductoCreate() {
             id="price"
             name="price"
             min={0}
+            max={99999}
             pattern="^[0-9]+"
             step={0.01}
             placeholder="0"
@@ -179,8 +192,9 @@ function ProductoCreate() {
             id="stock"
             name="stock"
             min={0}
+            max={999}
             pattern="^[0-9]+"
-            step={0.01}
+            step={1}
             placeholder="0"
             value={values.stock}
             onChange={handleChange}
@@ -197,13 +211,18 @@ function ProductoCreate() {
             className="form-control"
             id="capacity"
             name="capacity"
+            maxLength={20}
             value={values.capacity}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary m-1">
-          Guardar
+        <button
+          type="submit"
+          className="btn btn-primary m-1"
+          disabled={isLoading}
+        >
+          {isLoading ? "Guardando..." : "Guardar"}
         </button>
         <Link
           to={`/adm/productos`}

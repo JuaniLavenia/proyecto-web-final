@@ -14,7 +14,7 @@ function ProductoEdit() {
     capacity: "",
   });
   const [image, setImage] = useState();
-
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -26,7 +26,11 @@ function ProductoEdit() {
         setValues(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       });
   }, []);
 
@@ -41,6 +45,8 @@ function ProductoEdit() {
     formData.append("stock", values.stock);
     formData.append("category", values.category);
     formData.append("capacity", values.capacity);
+
+    setIsLoading(true);
 
     axios
       .put(
@@ -64,7 +70,14 @@ function ProductoEdit() {
       })
 
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -153,7 +166,7 @@ function ProductoEdit() {
               value={values.category}
               onChange={handleChange}
             >
-              <option></option>
+              <option disabled>Categorias</option>
               <option>Interiores</option>
               <option>Exteriores</option>
               <option>Línea Profesional</option>
@@ -173,6 +186,7 @@ function ProductoEdit() {
             id="price"
             name="price"
             min={0}
+            max={99999}
             pattern="^[0-9]+"
             step={0.01}
             placeholder="0"
@@ -192,8 +206,9 @@ function ProductoEdit() {
             id="stock"
             name="stock"
             min={0}
+            max={999}
             pattern="^[0-9]+"
-            step={0.01}
+            step={1}
             placeholder="0"
             value={values.stock}
             onChange={handleChange}
@@ -210,13 +225,18 @@ function ProductoEdit() {
             className="form-control"
             id="capacity"
             name="capacity"
+            maxLength={20}
             value={values.capacity}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary m-1">
-          Guardar
+        <button
+          type="submit"
+          className="btn btn-primary m-1"
+          disabled={isLoading}
+        >
+          {isLoading ? "Guardando..." : "Guardar"}
         </button>
         <Link
           to={`/adm/productos`}

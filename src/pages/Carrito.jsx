@@ -4,13 +4,14 @@ import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/ContextProvider";
 
 function Carrito() {
   const { setCartCount } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -78,20 +79,21 @@ function Carrito() {
     const valKeyTwo = localStorage.getItem("validation2");
     if (valKey && valKeyTwo) {
       Swal.fire({
-        position: "top-center",
+        position: "center",
         icon: "success",
         title:
           "¡Compra realizada con exito, se enviara su factura al correo electronico!",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2500,
       });
 
       handleCloseModal();
+      setCartCount(0);
       setCartItems([]);
       localStorage.removeItem("cartItems");
       localStorage.removeItem("validation");
       localStorage.removeItem("validation2");
-      window.location.reload();
+      navigate("/");
     }
   };
 

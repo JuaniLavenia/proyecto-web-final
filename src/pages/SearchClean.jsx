@@ -4,6 +4,7 @@ import axios from "axios";
 import "./SearchResult.css";
 import CategoryButton from "../components/CategoryBtn";
 import { CartContext } from "../context/ContextProvider";
+import Swal from "sweetalert2";
 
 function SearchClean() {
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
@@ -31,7 +32,11 @@ function SearchClean() {
       )
       .then((res) => setProducts(res.data))
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       });
   };
 

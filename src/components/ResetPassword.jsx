@@ -26,7 +26,7 @@ function ResetPassword() {
       )
       .then((res) => {
         Swal.fire({
-          position: "top-center",
+          position: "center",
           icon: "success",
           title: "Contraseña restablecida",
           showConfirmButton: false,

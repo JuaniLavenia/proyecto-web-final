@@ -4,7 +4,6 @@ import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { CartContext } from "../context/ContextProvider";
 import { AuthContext } from "../context/AuthContext";
@@ -50,7 +49,7 @@ function Navbar() {
     localStorage.removeItem("token");
     logout("");
     Swal.fire({
-      position: "top-center",
+      position: "center",
       icon: "success",
       title: "Se cerró la sesion",
       showConfirmButton: false,

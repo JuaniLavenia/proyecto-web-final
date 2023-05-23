@@ -34,7 +34,11 @@ function ProductList() {
         setProductos(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       });
   };
 

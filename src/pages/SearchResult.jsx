@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
 import { CartContext } from "../context/ContextProvider";
+import Swal from "sweetalert2";
 
 function SearchResult() {
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
@@ -47,7 +48,11 @@ function SearchResult() {
         const data = await response.json();
         setProductos(data);
       } catch (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
       }
     };
     buscarProductos();

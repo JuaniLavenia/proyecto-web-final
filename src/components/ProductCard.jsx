@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import "./ProductCard.css";
-import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { CartContext } from "../context/ContextProvider";
 
@@ -82,7 +81,7 @@ function ProductCard({
       fav.push({ ...favorite, quantity: 1 });
       localStorage.setItem("favItems", JSON.stringify(fav));
       Swal.fire({
-        position: "top-center",
+        position: "center",
         icon: "success",
         title: "Se agregó a favoritos",
         showConfirmButton: false,

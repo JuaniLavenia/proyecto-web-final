@@ -7,11 +7,10 @@ function Formcarrito(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.history.push("/confirmacion-pedido");
   };
 
   const validateForm = () => {
-    const form = document.querySelector(".formcarrito");
+    const form = document.querySelector(".formpay");
     const inputs = form.querySelectorAll("input");
     let isValid = true;
 
@@ -97,7 +96,7 @@ function Formcarrito(props) {
         </div>
       </div>
 
-      <div className="container formcarrito bg-dark text-light">
+      <div className="container bg-dark text-light formpay">
         <form onSubmit={handleSubmit} className="formCard bg-dark text-light">
           <div className="inputBox">
             <label htmlFor="card-number-input">Numero de la Tarjeta</label>
