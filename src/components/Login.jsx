@@ -16,13 +16,12 @@ function Login() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		// Validate input data
 		if (values.email && values.password) {
-			// If input data is valid, submit form and dismiss modal
 			axios
 				.post("http://localhost:3000/api/login", values)
 				.then((res) => {
 					localStorage.setItem("token", res.data.token);
+
 					Swal.fire({
 						position: "top-center",
 						icon: "success",
@@ -31,8 +30,8 @@ function Login() {
 						timer: 1500,
 					});
 					setValues({ email: "", password: "" });
+					navigate("/");
 
-					// Dismiss modal
 					const modalElement = document.getElementById("exampleModal");
 					const modal = bootstrap.Modal.getInstance(modalElement);
 					modal.hide();
@@ -45,7 +44,6 @@ function Login() {
 					})
 				);
 		} else {
-			// If input data is not valid, display error message
 			Swal.fire({
 				icon: "error",
 				title: "Oops...",

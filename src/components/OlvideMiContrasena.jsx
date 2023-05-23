@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./OlvideMiContrasena.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function OlvideMiContrasena() {
 	const [values, setValues] = useState({
@@ -22,9 +23,9 @@ function OlvideMiContrasena() {
 					title:
 						"Se envió un correo a tu cuenta de email, en caso de no encontrarlo en la bandeja principal, revisa la carpeta de spam.",
 					showConfirmButton: false,
-					timer: 1500,
+					timer: 2500,
 				});
-
+				setValues({ email: "" });
 				navigate("/");
 			})
 			.catch((err) => {
