@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
+  const { login } = useContext(AuthContext);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -22,18 +26,16 @@ function Login() {
         values
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        const { token, userId } = res.data;
+        localStorage.setItem("token", token);
+        login(token, userId);
+
         Swal.fire({
-          position: "top-center",
           icon: "success",
-          title: "Sesion iniciada",
+          title: "Sesión iniciada",
           showConfirmButton: false,
           timer: 1500,
         });
-
-        setTimeout(function () {
-          window.location.reload();
-        }, 2000);
       })
       .catch((err) =>
         Swal.fire({

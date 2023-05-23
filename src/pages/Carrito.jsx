@@ -1,11 +1,14 @@
 import "./Carrito.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Formcarrito from "../components/Formcarrito";
 import { Button, Modal } from "react-bootstrap";
 import Envio from "../components/EnvioForm";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/ContextProvider";
 
-function Carrito({ setCartCount }) {
+function Carrito() {
+  const { setCartCount } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
@@ -45,13 +48,29 @@ function Carrito({ setCartCount }) {
   };
 
   const handleRemoveFromCart = (producto) => {
-    const newCartItems = cartItems.filter((item) => item._id !== producto._id);
-    if (newCartItems.length !== cartItems.length) {
-      setCartItems(newCartItems);
-      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-      const count = newCartItems.length;
-      setCartCount(count);
-    }
+    Swal.fire({
+      title: "Eliminar producto",
+      text: `¿Estás seguro que deseas eliminar ${producto.name} del carrito?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newCartItems = cartItems.filter(
+          (item) => item._id !== producto._id
+        );
+        if (newCartItems.length !== cartItems.length) {
+          setCartItems(newCartItems);
+          localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+          const count = newCartItems.reduce(
+            (count, item) => count + item.quantity,
+            0
+          );
+          setCartCount(count);
+        }
+      }
+    });
   };
 
   const handlePayment = () => {
@@ -105,7 +124,12 @@ function Carrito({ setCartCount }) {
                         Eliminar
                       </button>
                       <button className="btn btn-primary">
-                        Ver más productos
+                        <Link
+                          to="/productos"
+                          className="text-light text-decoration-none"
+                        >
+                          Ver más productos
+                        </Link>
                       </button>
                       <Button variant="warning" onClick={handleShowModal}>
                         Comprar Ahora ({item.quantity})

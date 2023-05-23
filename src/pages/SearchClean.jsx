@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import "./SearchResult.css";
 import CategoryButton from "../components/CategoryBtn";
+import { CartContext } from "../context/ContextProvider";
 
-function SearchClean({ setCartCount, setFavoritesCount }) {
+function SearchClean() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [categoria, setCategoria] = useState("");
 

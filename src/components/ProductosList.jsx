@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import { useParams } from "react-router";
 import "./ProductCard.css";
+import { CartContext } from "../context/ContextProvider";
 
-function ProductList({ setCartCount, setFavoritesCount }) {
+function ProductList() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {

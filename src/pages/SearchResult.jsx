@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
+import { CartContext } from "../context/ContextProvider";
 
-function SearchResult({ setCartCount, setFavoritesCount }) {
+function SearchResult() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const { filter } = useParams();
   const [searchResults, setSearchResults] = useState([]);
 

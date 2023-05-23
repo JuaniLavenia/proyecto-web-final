@@ -1,18 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import "material-icons/iconfont/material-icons.css";
 import Login from "./Login";
 import logonav from "../assets/img/logo3.png";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/ContextProvider";
+import { AuthContext } from "../context/AuthContext";
 
-function Navbar({
-  cartCount,
-  favoritesCount,
-  setCartCount,
-  setFavoritesCount,
-}) {
+function Navbar() {
+  const { setCartCount, setFavoritesCount, cartCount, favoritesCount } =
+    useContext(CartContext);
+  const { token, logout, userId } = useContext(AuthContext);
+
   function handleSubmit(e) {
     return Login;
   }
@@ -45,20 +46,9 @@ function Navbar({
     setFavoritesCount(favCount);
   }, [setCartCount, setFavoritesCount]);
 
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  const checkToken = () => {
-    const storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  };
-
-  const logout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("token");
-    setToken("");
+    logout("");
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -66,51 +56,6 @@ function Navbar({
       showConfirmButton: false,
       timer: 1500,
     });
-  };
-
-  const handleAdminClick = () => {
-    if (token) {
-      const email = prompt("Por favor ingrese el correo del usuarioAdmin:");
-      const password = prompt(
-        "Por favor ingrese la contraseña del usuarioAdmin:"
-      );
-
-      axios
-        .post(
-          "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/admin-login",
-          {
-            email,
-            password,
-          }
-        )
-        .then((res) => {
-          if (res.data.success) {
-            navigate("/adm/productos");
-            localStorage.setItem("token", res.data.token);
-            setToken(res.data.token);
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: "Ingreso permitido",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Los datos ingresados no son correctos",
-            });
-          }
-        })
-        .catch((err) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Acceso denegado",
-          })
-        );
-    }
   };
 
   return (
@@ -143,7 +88,11 @@ function Navbar({
               </li>
               <li className="nav-item" id="login-register">
                 {token ? (
-                  <Link className="nav-link text-light" to="/" onClick={logout}>
+                  <Link
+                    className="nav-link text-light"
+                    to="/"
+                    onClick={handleLogout}
+                  >
                     Cerrar Sesión
                   </Link>
                 ) : (
@@ -159,11 +108,8 @@ function Navbar({
                 )}
               </li>
               <li className="nav-item" id="pag-admin">
-                {token && (
-                  <Link
-                    className="nav-link text-light"
-                    onClick={handleAdminClick}
-                  >
+                {token && userId === "64641124d8ab8071b667c088" && (
+                  <Link className="nav-link text-light" to={"/adm/productos"}>
                     Administrador
                   </Link>
                 )}
@@ -173,7 +119,7 @@ function Navbar({
               <input
                 className="searchbar"
                 type="search"
-                maxLength={20}
+                maxLength={15}
                 placeholder="Buscar"
                 value={searchTerm}
                 onChange={handleChangeSearch}
