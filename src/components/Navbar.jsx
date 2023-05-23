@@ -119,7 +119,7 @@ function Navbar() {
               <input
                 className="searchbar"
                 type="search"
-                maxLength={20}
+                maxLength={15}
                 placeholder="Buscar"
                 value={searchTerm}
                 onChange={handleChangeSearch}

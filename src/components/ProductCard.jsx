@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./ProductCard.css";
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
@@ -12,32 +12,59 @@ function ProductCard({
   category,
   _id,
   price,
+  stock,
 }) {
+  const [quantitySelect, setQuantitySelect] = useState(1);
+
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
-    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    let existingProduct = cart.find((p) => p._id === product._id);
-
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-
-    localStorage.setItem("cartItems", JSON.stringify(cart));
     Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Se agregó al carrito",
-      showConfirmButton: false,
-      timer: 1500,
+      title: "Ingrese la cantidad de productos",
+      input: "number",
+      inputAttributes: {
+        min: 1,
+        max: stock,
+      },
+      showCancelButton: true,
+      confirmButtonText: "Agregar al carrito",
+      showLoaderOnConfirm: true,
+      preConfirm: (quantitySelect) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(parseInt(quantitySelect));
+          }, 1000);
+        });
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const quantitySelect = result.value;
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        let existingProduct = cart.find((p) => p._id === product._id);
+
+        if (existingProduct) {
+          existingProduct.quantity += quantitySelect;
+        } else {
+          cart.push({ ...product, quantity: quantitySelect });
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Se agregó el producto al carrito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        const cartCount = cart.reduce(
+          (count, item) => count + item.quantity,
+          0
+        );
+        setCartCount(cartCount);
+      }
     });
-
-    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
-
-    const updatedCartCount = cartCount;
-    setCartCount(updatedCartCount);
   };
 
   const addFavorite = (favorite) => {
@@ -81,7 +108,7 @@ function ProductCard({
           <h2 className="card-title d-flex justify-content-center m-2">
             {name}
           </h2>
-          <p className="card-text text-center">{description}</p>
+          <p className="card-text text-start">{description}</p>
           <div className="card-text d-flex">
             <p className="text-muted text-center w-50">{capacity}</p>
             <strong className="text-muted align-self-center pb-3">|</strong>
@@ -89,41 +116,41 @@ function ProductCard({
           </div>
           <div className="card-price p-1">$ {price}</div>
         </div>
-        <div className="card-footer d-flex justify-content-center p-3">
-          <Button
-            variant="primary"
-            className="btnCardP"
-            onClick={() => {
-              handleAddToCart({
-                image,
-                name,
-                description,
-                capacity,
-                category,
-                _id,
-                price,
-              });
-            }}
-          >
-            Agregar al carrito
-          </Button>
-          <Button
-            variant="warning"
-            className="btnCardP"
-            onClick={() => {
-              addFavorite({
-                image,
-                name,
-                description,
-                capacity,
-                category,
-                _id,
-                price,
-              });
-            }}
-          >
-            Agregar a favoritos
-          </Button>
+        <div className="card-footer">
+          <div className="car-buttons btnCardP d-flex justify-content-center">
+            <button
+              className="btn btn-primary me-2 w-50 btncartt"
+              onClick={() => {
+                handleAddToCart({
+                  image,
+                  name,
+                  description,
+                  capacity,
+                  category,
+                  _id,
+                  price,
+                });
+              }}
+            >
+              Comprar
+            </button>
+            <button
+              className="btn btn-warning w-50 btnfavv"
+              onClick={() => {
+                addFavorite({
+                  image,
+                  name,
+                  description,
+                  capacity,
+                  category,
+                  _id,
+                  price,
+                });
+              }}
+            >
+              <span className="material-icons-outlined">favorite</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
