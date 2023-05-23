@@ -15,28 +15,45 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(
-        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
-        values
-      )
-      .then((res) => {
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Nuevo usuario registrado",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      })
-      .catch((err) =>
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Los datos proporcionados no son correctos",
+    // Validate input data
+    if (
+      values.email &&
+      values.password &&
+      values.password_confirmation &&
+      values.password === values.password_confirmation
+    ) {
+      // If input data is valid, submit form
+      axios
+        .post(
+          "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
+          values
+        )
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Nuevo usuario registrado",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setValues({ email: "", password: "", password_confirmation: "" });
+          navigate("/");
         })
-      );
+        .catch((err) =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Los datos proporcionados no son correctos",
+          })
+        );
+    } else {
+      // If input data is not valid, display error message
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter a valid email and matching passwords",
+      });
+    }
   };
 
   const handleChange = (event) => {
@@ -80,8 +97,8 @@ function Register() {
                     className="form-control"
                     id="emailRegister"
                     aria-describedby="emailHelp"
-                    required
                     maxLength={40}
+                    required
                     name="email"
                     value={values.email}
                     onChange={handleChange}
@@ -124,11 +141,7 @@ function Register() {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="submit" className="btn btn-primary">
                     Registrarse
                   </button>
                 </div>
