@@ -14,7 +14,7 @@ function OlvideMiContrasena() {
 		e.preventDefault();
 
 		axios
-			.post("http://localhost:3000/api/forgot", values)
+			.post("https://rolling-detail-pf.vercel.app/api/forgot", values)
 			.then((res) => {
 				console.log(res);
 				Swal.fire({

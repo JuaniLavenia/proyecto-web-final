@@ -18,7 +18,7 @@ function Login() {
 
 		if (values.email && values.password) {
 			axios
-				.post("http://localhost:3000/api/login", values)
+				.post("https://rolling-detail-pf.vercel.app/api/login", values)
 				.then((res) => {
 					localStorage.setItem("token", res.data.token);
 

@@ -20,7 +20,10 @@ function ResetPassword() {
 		const token = searchParams.get("token");
 
 		axios
-			.post(`http://localhost:3000/api/reset/${id}/${token}`, values)
+			.post(
+				`https://rolling-detail-pf.vercel.app/api/reset/${id}/${token}`,
+				values
+			)
 			.then((res) => {
 				Swal.fire({
 					position: "top-center",
