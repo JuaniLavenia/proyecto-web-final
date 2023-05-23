@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProductoEdit() {
   const [values, setValues] = useState({
@@ -14,8 +16,6 @@ function ProductoEdit() {
   const [image, setImage] = useState();
 
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -34,9 +34,9 @@ function ProductoEdit() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", image);
     formData.append("name", values.name);
     formData.append("description", values.description);
+    formData.append("image", image);
     formData.append("price", values.price);
     formData.append("stock", values.stock);
     formData.append("category", values.category);
@@ -53,13 +53,22 @@ function ProductoEdit() {
         }
       )
       .then((res) => {
-        navigate("/productos");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Se edito el producto con exito",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/adm/productos");
       })
 
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -88,10 +97,11 @@ function ProductoEdit() {
           <input
             type="text"
             className="form-control"
-            maxLength={40}
             id="name"
             required
             name="name"
+            minLength={1}
+            maxLength={20}
             value={values.name}
             onChange={handleChange}
           />
@@ -105,10 +115,11 @@ function ProductoEdit() {
             className="form-control"
             name="description"
             id="description"
-            maxLength={200}
             cols="30"
             rows="5"
             required
+            minLength={10}
+            maxLength={200}
             value={values.description}
             onChange={handleChange}
           ></textarea>
@@ -133,16 +144,22 @@ function ProductoEdit() {
             <label htmlFor="category" className="form-label">
               Categoria
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
-              maxLength={40}
               id="category"
               required
               name="category"
               value={values.category}
               onChange={handleChange}
-            />
+            >
+              <option></option>
+              <option>Interiores</option>
+              <option>Exteriores</option>
+              <option>Línea Profesional</option>
+              <option>Línea Industrial</option>
+              <option>Perfumes</option>
+            </select>
           </div>
         </div>
 
@@ -153,10 +170,12 @@ function ProductoEdit() {
           <input
             type="number"
             className="form-control"
-            max={999999}
-            maxLength={6}
             id="price"
             name="price"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.price}
             onChange={handleChange}
             required
@@ -170,10 +189,12 @@ function ProductoEdit() {
           <input
             type="number"
             className="form-control"
-            max={999999}
-            maxLength={6}
             id="stock"
             name="stock"
+            min={0}
+            pattern="^[0-9]+"
+            step={0.01}
+            placeholder="0"
             value={values.stock}
             onChange={handleChange}
             required
@@ -187,7 +208,6 @@ function ProductoEdit() {
           <input
             type="text"
             className="form-control"
-            maxLength={40}
             id="capacity"
             name="capacity"
             value={values.capacity}
@@ -195,9 +215,16 @@ function ProductoEdit() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Enviar
+        <button type="submit" className="btn btn-primary m-1">
+          Guardar
         </button>
+        <Link
+          to={`/adm/productos`}
+          type="button"
+          className="btn btn-warning m-1"
+        >
+          Volver
+        </Link>
       </form>
     </div>
   );
