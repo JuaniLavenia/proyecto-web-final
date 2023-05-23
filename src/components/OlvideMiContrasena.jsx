@@ -14,7 +14,10 @@ function OlvideMiContrasena() {
 		e.preventDefault();
 
 		axios
-			.post("https://rolling-detail-pf.vercel.app/api/forgot", values)
+			.post(
+				"https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/forgot",
+				values
+			)
 			.then((res) => {
 				console.log(res);
 				Swal.fire({

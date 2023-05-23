@@ -24,7 +24,10 @@ function Register() {
 		) {
 			// If input data is valid, submit form
 			axios
-				.post("https://rolling-detail-pf.vercel.app/api/register", values)
+				.post(
+					"https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
+					values
+				)
 				.then((res) => {
 					Swal.fire({
 						position: "center",
