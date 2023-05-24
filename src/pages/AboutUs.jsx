@@ -59,7 +59,7 @@ function AboutUs() {
 
 function Card({ imagenSrc, nombre, descripcion }) {
   return (
-    <div className="card bg-dark border-white">
+    <div className="card bg-dark border-none">
       <img
         src={imagenSrc}
         className="card-img-top rounded-circle"
