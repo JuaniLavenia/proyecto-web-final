@@ -9,3 +9,29 @@
 */ .allContent {
   min-width: 380px;
 }
+
+.container-card {
+  background-color: #444;
+  border: #fff004;
+}
+
+.card-body {
+  background-color: #444;
+  text-align: center;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.card-title {
+  color: yellow;
+}
+
+.card-text {
+  color: yellow;
+}

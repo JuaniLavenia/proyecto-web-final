@@ -4,7 +4,7 @@ function AboutUs() {
   return (
     <>
       <div className="allContent">
-        <div className="card border border-warning bg-dark text-light">
+        <div className="card bg-dark text-light">
           <img
             src="https://blog.advesa.com/wp-content/uploads/2019/11/about-us-page.png"
             className="card-img-top imgAbout w-50 d-flex align-self-center mt-4"
@@ -20,66 +20,56 @@ function AboutUs() {
             </p>
           </div>
         </div>
-
-        <div className="card-group row m-auto bg-dark text-light">
-          <div className="card border border-warning p-3 bg-dark text-light">
-            <img
-              src="https://ca.slack-edge.com/THQU1MGPN-U03Q9HH12RZ-4dbc2382e13c-512"
-              className="rounded-circle w-30 p-3 border border-warning card-img-top imgCard"
-              alt=""
-            />
-            <div className="card-body">
-              <h5 className="card-title text-center">Juan Ignacio Lavenia</h5>
+        <div className="container-card">
+          <div className="row bg-dark">
+            <div className="col-lg-3 col-md-6">
+              <Card
+                imagenSrc="https://ca.slack-edge.com/THQU1MGPN-U03Q9HH12RZ-4dbc2382e13c-512"
+                nombre="Juan Ignacio Lavenia"
+                descripcion="Scrum Master"
+              />
             </div>
-            <div className="card-footer text-center">
-              <small className="text-muted">Scrum Master</small>
+            <div className="col-lg-3 col-md-6">
+              <Card
+                imagenSrc="https://ca.slack-edge.com/THQU1MGPN-U03PRCPB9FV-9d578752aec1-512"
+                nombre="Nicolas Fernandez"
+                descripcion="Integrante"
+              />
             </div>
-          </div>
-
-          <div className="card border border-warning p-3 bg-dark text-light">
-            <img
-              src="https://ca.slack-edge.com/THQU1MGPN-U03PRCPB9FV-9d578752aec1-512"
-              className="rounded-circle w-30 p-3 border border-warning card-img-top imgCard"
-              alt=""
-            />
-            <div className="card-body">
-              <h5 className="card-title text-center">Nicolas Fernandez</h5>
+            <div className="col-lg-3 col-md-6">
+              <Card
+                imagenSrc="https://ca.slack-edge.com/THQU1MGPN-U03N3DC1WCC-b0a574a511e2-512"
+                nombre="Alba Dario"
+                descripcion="Integrante"
+              />
             </div>
-            <div className="card-footer text-center">
-              <small className="text-muted">Integrante</small>
-            </div>
-          </div>
-
-          <div className="card border border-warning p-3 bg-dark text-light">
-            <img
-              src="https://ca.slack-edge.com/THQU1MGPN-U03N3DC1WCC-b0a574a511e2-512"
-              className="rounded-circle w-30 p-3 border border-warning card-img-top imgCard"
-              alt=""
-            />
-            <div className="card-body">
-              <h5 className="card-title text-center">Marcos Coronel</h5>
-            </div>
-            <div className="card-footer text-center">
-              <small className="text-muted">Integrante</small>
-            </div>
-          </div>
-
-          <div className="card border border-warning p-3 bg-dark text-light">
-            <img
-              src="https://ca.slack-edge.com/THQU1MGPN-U046N12M1A7-g799cff9e206-512"
-              className="rounded-circle w-30 p-3 border border-warning card-img-top imgCard"
-              alt=""
-            />
-            <div className="card-body">
-              <h5 className="card-title text-center">Marcos Coronel</h5>
-            </div>
-            <div className="card-footer text-center">
-              <small className="text-muted">Integrante</small>
+            <div className="col-lg-3 col-md-6">
+              <Card
+                imagenSrc="https://ca.slack-edge.com/THQU1MGPN-U03Q8A47DDJ-76e55cbedc93-512"
+                nombre="Moreno Martin"
+                descripcion="Integrante"
+              />
             </div>
           </div>
         </div>
       </div>
     </>
+  );
+}
+
+function Card({ imagenSrc, nombre, descripcion }) {
+  return (
+    <div className="card bg-dark border-white">
+      <img
+        src={imagenSrc}
+        className="card-img-top rounded-circle"
+        alt="Foto de perfil"
+      />
+      <div className="card-body">
+        <h3 className="card-title">{nombre}</h3>
+        <p className="card-text">{descripcion}</p>
+      </div>
+    </div>
   );
 }
 
