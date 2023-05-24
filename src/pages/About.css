@@ -38,5 +38,6 @@
 
 .card-img-top:hover {
   transform: rotateY(360deg);
+  transition-delay: 0.2s;
   transition: transform 1s linear;
 }
