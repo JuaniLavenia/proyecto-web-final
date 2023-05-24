@@ -17,7 +17,7 @@ function Publicidad() {
         <div className="publicidad">
           <button
             type="button"
-            class="btn-close btn-close-white"
+            class="btn-close btn-close-white fixed-top"
             aria-label="Cerrar"
             onClick={handleCerrarPublicidad}
           ></button>
@@ -28,17 +28,17 @@ function Publicidad() {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={publi} className="img-fluid w-100" alt="" />
+                <img src={publi} className="img-fluid" alt="" />
               </div>
               <div className="carousel-item">
-                <img src={publi2} className="img-fluid w-100" alt="" />
+                <img src={publi2} className="img-fluid" alt="" />
               </div>
               <div className="carousel-item">
-                <img src={publi3} className="img-fluid w-100" alt="" />
+                <img src={publi3} className="img-fluid" alt="" />
               </div>
             </div>
             <button
-              className="carousel-control-prev"
+              className="carousel-control-prev d-none"
               type="button"
               data-bs-target="#carouselExampleControls"
               data-bs-slide="prev"
@@ -50,7 +50,7 @@ function Publicidad() {
               <span className="visually-hidden">Previous</span>
             </button>
             <button
-              className="carousel-control-next"
+              className="carousel-control-next d-none"
               type="button"
               data-bs-target="#carouselExampleControls"
               data-bs-slide="next"
