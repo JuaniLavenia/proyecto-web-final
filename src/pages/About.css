@@ -1,0 +1,41 @@
+.tituloAb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+.allContent {
+  min-width: 380px;
+}
+
+.cardAbout {
+  background-color: #444;
+  border: #fff004;
+}
+
+.aboutBody {
+  background-color: #444;
+  text-align: center;
+}
+
+.imgAbout {
+  height: auto;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+}
+
+.namesAbout {
+  color: yellow;
+}
+
+.descAbout {
+  color: yellow;
+}
+
+.cardsAbout {
+  display: flex;
+  justify-content: center;
+}

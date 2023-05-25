@@ -19,7 +19,7 @@
   width: 12rem;
 }
 
-.card-title{
+.card-title {
   font-size: 1.6rem;
 }
 
@@ -27,7 +27,6 @@
   width: 180px;
   height: 2.4rem;
 }
-
 
 /*______________Media Queries______________*/
 @media (max-width: 569px) {
@@ -45,7 +44,6 @@
   .product-text {
     font-size: 0.9rem;
   }
-
 }
 
 @media (min-width: 768px) {
@@ -74,7 +72,6 @@
 }
 
 @media (min-width: 1180px) {
-
   .product-text {
     font-size: 1.1rem;
   }
@@ -82,16 +79,13 @@
   .imgCardP {
     width: 13rem !important;
   }
-
 }
 
 @media (max-width: 1200px) {
   .btn-description {
     width: 10rem;
   }
-  
 }
-
 
 @media (min-width: 1260px) {
   .btnCardP {
