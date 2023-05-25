@@ -10,6 +10,7 @@ function Producto() {
   const [search, setSearch] = useState("");
 
   const getProductos = () => {
+    setIsLoading(true);
     axios
       .get(
         `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos`
@@ -21,6 +22,9 @@ function Producto() {
           title: "Conexión perdida",
           text: "No se pudo establecer conexión con el servidor.",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -38,6 +42,9 @@ function Producto() {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         axios
@@ -52,7 +59,6 @@ function Producto() {
               showConfirmButton: false,
               timer: 1500,
             });
-            getProductos();
           })
           .catch((err) =>
             Swal.fire({
@@ -60,7 +66,10 @@ function Producto() {
               title: "Conexión perdida",
               text: "No se pudo establecer conexión con el servidor.",
             })
-          );
+          )
+          .finally(() => {
+            getProductos();
+          });
       }
     });
   };
@@ -136,7 +145,9 @@ function Producto() {
             </tr>
           </thead>
           <tbody className="tbody">
-            {productos &&
+            {isLoading ? (
+              <p className="text-center">Cargando productos...</p>
+            ) : (
               productos.map((producto) => (
                 <tr key={producto._id} className="file">
                   <td scope="row">{producto.name}</td>
@@ -169,7 +180,8 @@ function Producto() {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>

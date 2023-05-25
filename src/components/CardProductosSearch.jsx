@@ -17,53 +17,33 @@ function CardProductos({
 
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
-    Swal.fire({
-      title: "Ingrese la cantidad de productos",
-      input: "number",
-      inputAttributes: {
-        min: 1,
-        max: stock,
-      },
-      showCancelButton: true,
-      confirmButtonText: "Agregar al carrito",
-      showLoaderOnConfirm: true,
-      preConfirm: (quantitySelect) => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(parseInt(quantitySelect));
-          }, 1000);
-        });
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const quantitySelect = result.value;
-        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-        let existingProduct = cart.find((p) => p._id === product._id);
+    let existingProduct = cart.find((p) => p._id === product._id);
 
-        if (existingProduct) {
-          existingProduct.quantity += quantitySelect;
-        } else {
-          cart.push({ ...product, quantity: quantitySelect });
-        }
+    if (existingProduct) {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Ya tienes este producto en el carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      cart.push({ ...product, quantity: 1 });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Se agregó el producto al carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
 
-        localStorage.setItem("cartItems", JSON.stringify(cart));
+    localStorage.setItem("cartItems", JSON.stringify(cart));
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Se agregó el producto al carrito",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-        const cartCount = cart.reduce(
-          (count, item) => count + item.quantity,
-          0
-        );
-        setCartCount(cartCount);
-      }
-    });
+    const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+    setCartCount(cartCount);
   };
 
   const addFavorite = (favorite) => {
@@ -95,7 +75,7 @@ function CardProductos({
   };
 
   return (
-    <div className="card cardP m-3 bg-dark text-light d-flex">
+    <div className="card cardP m-3 bg-dark text-light d-flex h-100">
       <img
         className="imgCard d-flex"
         src={`https://proyecto-web-final-backend--juan-ignacio245.repl.co/img/productos/${image}`}
@@ -125,6 +105,7 @@ function CardProductos({
                   category,
                   _id,
                   price,
+                  stock,
                 },
                 quantitySelect
               )
