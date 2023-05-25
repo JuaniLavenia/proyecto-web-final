@@ -44,6 +44,13 @@ function Favoritos() {
             0
           );
           setFavoritesCount(count);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Se borró el producto con éxito",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       }
     });
