@@ -15,6 +15,8 @@ function ProductCard({
 }) {
   const [quantitySelect, setQuantitySelect] = useState(1);
 
+  const [mostrarComponente, setMostrarComponente] = useState(false)
+
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -74,7 +76,7 @@ function ProductCard({
   };
 
   return (
-    <div className="product-car d-flex flex-column align-items-center col-lg-12 col-sm-12 col-12 bg-dark">
+    <div className=" product-car d-flex flex-column align-items-center card text-center col-lg-12 col-sm-12 col-12 bg-dark">
       <div className="bg-dark">
         <img
           className="imgCardP"
@@ -84,11 +86,17 @@ function ProductCard({
       </div>
       <div className="product-text">
         <div className="card-body">
-          <h2 className="card-title d-flex justify-content-center m-2">
+          <h3 className="card-title d-flex justify-content-center">
             {name}
-          </h2>
-          <p className="card-text text-start">{description}</p>
-          <div className="card-text d-flex">
+          </h3>
+          <button className="btn btn-primary m-1 btn-description" onClick={() => setMostrarComponente(!mostrarComponente)}>
+            {mostrarComponente ? `Ocultar` : `Ver descripción`}
+          </button>
+          <div className={mostrarComponente ? "show-element" : null}>
+            {mostrarComponente && <p className="card-text">{description}</p>}
+          </div>
+
+          <div className="card-text d-flex ">
             <p className="text-muted text-center w-50">{capacity}</p>
             <strong className="text-muted align-self-center pb-3">|</strong>
             <p className="text-muted text-center w-50">{category}</p>
