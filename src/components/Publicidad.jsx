@@ -17,7 +17,7 @@ function Publicidad() {
         <div className="publicidad">
           <button
             type="button"
-            class="btn-close btn-close-white fixed-top"
+            className="btn-close btn-close-white fixed-top"
             aria-label="Cerrar"
             onClick={handleCerrarPublicidad}
           ></button>
