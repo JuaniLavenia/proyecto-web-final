@@ -15,6 +15,19 @@
   min-width: 380px;
 }
 
+.btn-description {
+  width: 12rem;
+}
+
+.card-title {
+  font-size: 1.6rem;
+}
+
+.btnCardP {
+  width: 180px;
+  height: 2.4rem;
+}
+
 /*______________Media Queries______________*/
 @media (max-width: 569px) {
   .product-text {
@@ -25,26 +38,17 @@
     width: 7rem;
     font-size: 0.5rem;
   }
-  .btnCardP {
-    font-size: 0.7rem;
-  }
 }
 
 @media (min-width: 570px) {
   .product-text {
     font-size: 0.9rem;
   }
-  .btnCardP {
-    font-size: 0.7rem;
-  }
 }
 
 @media (min-width: 768px) {
   .product-text {
     font-size: 0.9rem;
-  }
-  .btnCardP {
-    width: 180px;
   }
 }
 
@@ -56,13 +60,17 @@
   .imgCardP {
     width: 13rem;
   }
+
   .btnCardP {
-    width: 132px !important;
+    width: 170px !important;
+    height: 2.3rem;
   }
+
   .btncartt {
-    font-size: 0.6rem !important;
+    font-size: 0.9rem !important;
   }
 }
+
 @media (min-width: 1180px) {
   .product-text {
     font-size: 1.1rem;
@@ -73,11 +81,18 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .btn-description {
+    width: 10rem;
+  }
+}
+
 @media (min-width: 1260px) {
   .btnCardP {
     width: auto !important;
   }
+
   .btncartt {
-    font-size: 0.8rem !important;
+    font-size: 1rem !important;
   }
 }

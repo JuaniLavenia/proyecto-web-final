@@ -6,6 +6,7 @@ import Drop from "../assets/img/drop-carr.png";
 import Dream from "../assets/img/dream-carr.png";
 import Megui from "../assets/img/meguiars-carr.png";
 import Menzerna from "../assets/img/menzerna-carr.png";
+import Publicidad from "../components/Publicidad";
 
 function HomePage() {
   return (
@@ -110,6 +111,7 @@ function HomePage() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+      <Publicidad />
     </div>
   );
 }

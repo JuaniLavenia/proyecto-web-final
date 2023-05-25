@@ -40,12 +40,25 @@ function Carrito() {
   };
 
   const handleShowModal = (e) => {
-    e.preventDefault();
-    setShowModal(true);
+    const token = localStorage.getItem("token");
+    if (token) {
+      e.preventDefault();
+      setShowModal(true);
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Debe iniciar sesión para realizar la compra",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    localStorage.removeItem("validation");
+    localStorage.removeItem("validation2");
   };
 
   const handleRemoveFromCart = (producto) => {
@@ -69,6 +82,13 @@ function Carrito() {
             0
           );
           setCartCount(count);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Se borró el producto con éxito",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       }
     });
@@ -77,35 +97,24 @@ function Carrito() {
   const handlePayment = () => {
     const valKey = localStorage.getItem("validation");
     const valKeyTwo = localStorage.getItem("validation2");
-    const token = localStorage.getItem("token");
 
     if (valKey === "true" && valKeyTwo === "true") {
-      if (token) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title:
-            "¡Compra realizada con éxito, se enviará su factura al correo electrónico!",
-          showConfirmButton: false,
-          timer: 2500,
-        });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title:
+          "¡Compra realizada con éxito, se enviará su factura al correo electrónico!",
+        showConfirmButton: false,
+        timer: 2500,
+      });
 
-        handleCloseModal();
-        setCartCount(0);
-        setCartItems([]);
-        localStorage.removeItem("cartItems");
-        localStorage.removeItem("validation");
-        localStorage.removeItem("validation2");
-        navigate("/");
-      } else {
-        Swal.fire({
-          position: "center",
-          icon: "info",
-          title: "Debe iniciar sesión para realizar la compra",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
+      handleCloseModal();
+      setCartCount(0);
+      setCartItems([]);
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("validation");
+      localStorage.removeItem("validation2");
+      navigate("/");
     } else {
       Swal.fire({
         position: "center",
@@ -114,6 +123,21 @@ function Carrito() {
         showConfirmButton: false,
         timer: 2500,
       });
+    }
+  };
+
+  const handleQuantityChange = (e, index) => {
+    const newCartItems = [...cartItems];
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value >= 0) {
+      newCartItems[index].quantity = value;
+      setCartItems(newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+      const count = newCartItems.reduce(
+        (count, item) => count + item.quantity,
+        0
+      );
+      setCartCount(count);
     }
   };
 
@@ -153,10 +177,23 @@ function Carrito() {
                           Ver más productos
                         </Link>
                       </button>
+
                       <Button variant="warning" onClick={handleShowModal}>
                         Comprar Ahora ({item.quantity})
                       </Button>
                     </div>
+                  </div>
+                  <div className="card-quantity">
+                    <label htmlFor={`quantity_${index}`}>Cantidad:</label>
+                    <input
+                      type="number"
+                      id={`quantity_${index}`}
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(e, index)}
+                      min={1}
+                      max={item.stock}
+                      className="customInput"
+                    />
                   </div>
                   <div className="card-price">$ {item.price}</div>
                 </div>

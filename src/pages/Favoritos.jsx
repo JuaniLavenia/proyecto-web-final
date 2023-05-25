@@ -44,6 +44,13 @@ function Favoritos() {
             0
           );
           setFavoritesCount(count);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Se borró el producto con éxito",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       }
     });
@@ -55,20 +62,25 @@ function Favoritos() {
     let existingProduct = cart.find((p) => p._id === product._id);
 
     if (existingProduct) {
-      existingProduct.quantity += 1;
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Ya tienes este producto en el carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
       cart.push({ ...product, quantity: 1 });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Se agregó el producto al carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
 
     localStorage.setItem("cartItems", JSON.stringify(cart));
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Se agregó el producto al carrito",
-      showConfirmButton: false,
-      timer: 1500,
-    });
 
     const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
     setCartCount(cartCount);

@@ -10,6 +10,7 @@ function Register() {
     password: "",
     password_confirmation: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -21,6 +22,7 @@ function Register() {
       values.password_confirmation &&
       values.password === values.password_confirmation
     ) {
+      setIsLoading(true);
       axios
         .post(
           "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/register",
@@ -30,9 +32,9 @@ function Register() {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Nuevo usuario registrado",
+            title: "Nuevo usuario registrado, ya puede iniciar sesion",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2500,
           });
           setValues({ email: "", password: "", password_confirmation: "" });
           navigate("/");
@@ -43,7 +45,10 @@ function Register() {
             title: "Oops...",
             text: "Los datos proporcionados no son correctos",
           })
-        );
+        )
+        .finally(() => {
+          setIsLoading(false);
+        });
     } else {
       Swal.fire({
         icon: "error",
@@ -138,8 +143,12 @@ function Register() {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-primary">
-                    Registrarse
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Cargando..." : "Registrarse"}
                   </button>
                 </div>
               </form>

@@ -19,6 +19,7 @@ import Category from "./pages/Category";
 import ResetPassword from "./components/ResetPassword";
 import { CartContextProvider } from "./context/ContextProvider";
 import { AuthContextProvider } from "./context/AuthContext";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -44,11 +45,11 @@ function App() {
             <Route path="/adm/productos" element={<Producto />} />
             <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
             <Route path="/adm/productos/create" element={<ProductoCreate />} />
+            <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
           <Register />
           <Login />
-          <OlvideMiContrasena />
-          <Footer />
+          <OlvideMiContrasena /> <Footer />
         </CartContextProvider>
       </AuthContextProvider>
     </>

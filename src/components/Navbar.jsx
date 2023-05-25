@@ -85,6 +85,11 @@ function Navbar() {
                   Productos
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/aboutus">
+                  Acerca de nosotros
+                </Link>
+              </li>
               <li className="nav-item" id="login-register">
                 {token ? (
                   <Link

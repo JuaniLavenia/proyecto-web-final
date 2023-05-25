@@ -12,12 +12,14 @@ function ResetPassword() {
 
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const token = searchParams.get("token");
+    setIsLoading(true);
 
     axios
       .post(
@@ -32,8 +34,6 @@ function ResetPassword() {
           showConfirmButton: false,
           timer: 1500,
         });
-
-        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -41,6 +41,10 @@ function ResetPassword() {
           title: "Oops...",
           text: err.response.data.error || "Server error",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
+        navigate("/");
       });
   };
 
@@ -91,7 +95,7 @@ function ResetPassword() {
       </div>
 
       <button type="submit" className="btn btn-primary">
-        Restablecer contraseña
+        {isLoading ? "Cargando..." : "Restablecer contraseña"}
       </button>
     </form>
   );

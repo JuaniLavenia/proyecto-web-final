@@ -8,10 +8,12 @@ function OlvideMiContrasena() {
   const [values, setValues] = useState({
     email: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     axios
       .post(
@@ -19,7 +21,6 @@ function OlvideMiContrasena() {
         values
       )
       .then((res) => {
-        console.log(res);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -37,6 +38,9 @@ function OlvideMiContrasena() {
           title: "Oops...",
           text: err.response.data.error,
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -98,8 +102,9 @@ function OlvideMiContrasena() {
                   <button
                     type="submit"
                     className="btn btn-primary botonRecuperar"
+                    disabled={isLoading}
                   >
-                    Recuperar contraseña
+                    {isLoading ? "Enviando..." : "Recuperar contraseña"}
                   </button>
                 </div>
               </form>

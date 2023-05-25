@@ -8,6 +8,7 @@ import { CartContext } from "../context/ContextProvider";
 function ProductList() {
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -26,6 +27,7 @@ function ProductList() {
   const { category } = useParams();
 
   const getProductos = () => {
+    setIsLoading(true);
     axios
       .get(
         `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
@@ -39,6 +41,9 @@ function ProductList() {
           title: "Conexión perdida",
           text: "No se pudo establecer conexión con el servidor.",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -51,18 +56,22 @@ function ProductList() {
       <h1 className="text-center">Productos {category}</h1>
       <div className="container-fluid">
         <div className="d-flex row justify-content-center">
-          {productos.map((producto) => (
-            <div
-              className="card col-lg-2 col-md-3 col-sm-5 col-12 bg-dark m-1"
-              key={producto._id}
-            >
-              <ProductCard
-                {...producto}
-                setCartCount={setCartCount}
-                setFavoritesCount={setFavoritesCount}
-              />
-            </div>
-          ))}
+          {isLoading ? (
+            <p className="text-center loading">Cargando productos...</p>
+          ) : (
+            productos.map((producto) => (
+              <div
+                className="card col-lg-2 col-md-3 col-sm-5 col-12 bg-dark m-1"
+                key={producto._id}
+              >
+                <ProductCard
+                  {...producto}
+                  setCartCount={setCartCount}
+                  setFavoritesCount={setFavoritesCount}
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

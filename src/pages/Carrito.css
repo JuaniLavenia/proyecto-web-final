@@ -8,6 +8,13 @@
   min-height: 100vh;
 }
 
+.customInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
 .dni {
   -webkit-outer-spin-button: none;
   -webkit-inner-spin-button: none;
@@ -128,6 +135,30 @@
   bottom: 0;
   width: 100vw;
   z-index: 0;
+}
+
+.card-quantity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .card-quantity {
+    align-items: flex-end;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.card-quantity label {
+  margin-bottom: 5px;
+}
+
+.card-quantity input {
+  text-align: center;
+  width: 70px;
 }
 
 @media screen and (max-width: 991px) {
