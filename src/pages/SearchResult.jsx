@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./SearchResult.css";
+import { CartContext } from "../context/ContextProvider";
+import Swal from "sweetalert2";
 
-function SearchResult({ setCartCount, setFavoritesCount }) {
+function SearchResult() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const { filter } = useParams();
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -25,37 +28,34 @@ function SearchResult({ setCartCount, setFavoritesCount }) {
 
   useEffect(() => {
     const fetchSearchResults = async () => {
-      const response = await axios.get(
-        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${filter}`
-      );
-      setSearchResults(response.data);
+      setIsLoading(true);
+
+      try {
+        const response = await axios.get(
+          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${filter}`
+        );
+        setSearchResults(response.data);
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
+      }
+
+      setIsLoading(false);
     };
 
     fetchSearchResults();
-  }, [filter]);
-
-  const [productos, setProductos] = useState([]);
-
-  useEffect(() => {
-    const buscarProductos = async () => {
-      try {
-        const response = await fetch(
-          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/search/${filter}`
-        );
-        const data = await response.json();
-        setProductos(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    buscarProductos();
   }, [filter]);
 
   return (
     <>
       <div className="p-5 bg-dark text-light">
         <div className="row">
-          {productos.length > 0 ? (
+          {isLoading ? (
+            <p className="text-center loading">Cargando resultados...</p>
+          ) : searchResults.length > 0 ? (
             <div className="row">
               <h1 className="text-center">
                 Resultados de busqueda para "{filter}"

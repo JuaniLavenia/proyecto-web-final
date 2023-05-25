@@ -20,27 +20,14 @@
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
   background: var(--color-bg);
   font-size: 1rem;
   min-width: 380px;
-  align-items: center;
 }
 
 .searchbar {
-  width: auto;
-  margin-right: 10px;
-  margin-left: 30px;
   border-radius: 40px;
   text-align: center;
-}
-
-#login-register {
-  max-width: 50%;
-  border: 1px solid #fff004;
-  border-radius: 20px;
-  margin-left: 10px;
 }
 
 .lupa {
@@ -142,10 +129,6 @@
   .navbar-toggler {
     display: block;
   }
-  #login-register {
-    display: flex;
-    justify-content: center;
-  }
 
   .search {
     display: flex;
@@ -155,6 +138,7 @@
   .carrito {
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
   }
   .imgNav {
     display: flex;
@@ -170,5 +154,14 @@
     position: relative;
     left: 25px;
     top: -25px;
+  }
+  .lupa {
+    position: relative;
+    right: 48px;
+    top: 2px;
+  }
+  .searchbar {
+    height: 51px;
+    margin-left: 2.6rem;
   }
 }

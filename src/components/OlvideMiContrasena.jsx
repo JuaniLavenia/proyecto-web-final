@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import "./OlvideMiContrasena.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function OlvideMiContrasena() {
   const [values, setValues] = useState({
     email: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     axios
       .post(
@@ -18,13 +21,26 @@ function OlvideMiContrasena() {
         values
       )
       .then((res) => {
-        alert(
-          "Se envió un correo a tu cuenta de email, en caso de no encontrarlo en la bandeja principal, revisa la carpeta de spam."
-        );
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title:
+            "Se envió un correo a tu cuenta de email, en caso de no encontrarlo en la bandeja principal, revisa la carpeta de spam.",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        setValues({ email: "" });
         navigate("/");
       })
       .catch((err) => {
-        alert(err.response.data.error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.error,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -86,8 +102,9 @@ function OlvideMiContrasena() {
                   <button
                     type="submit"
                     className="btn btn-primary botonRecuperar"
+                    disabled={isLoading}
                   >
-                    Recuperar contraseña
+                    {isLoading ? "Enviando..." : "Recuperar contraseña"}
                   </button>
                 </div>
               </form>

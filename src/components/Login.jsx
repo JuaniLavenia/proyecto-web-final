@@ -1,47 +1,70 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import Register from "./Register";
 import OlvideMiContrasena from "./OlvideMiContrasena";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
+  const { login } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
-      .post(
-        "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/login",
-        values
-      )
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Sesion iniciada",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    if (values.email && values.password) {
+      setIsLoading(true);
 
-        setTimeout(function () {
-          window.location.reload();
-        }, 2000);
-      })
-      .catch((err) =>
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Los datos proporcionados no son correctos",
+      axios
+        .post(
+          "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/login",
+          values
+        )
+        .then((res) => {
+          const { token, userId } = res.data;
+          localStorage.setItem("token", token);
+          login(token, userId);
+
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Sesión iniciada",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setValues({ email: "", password: "" });
+          navigate("/");
+
+          const modalElement = document.getElementById("exampleModal");
+          const modal = bootstrap.Modal.getInstance(modalElement);
+          modal.hide();
         })
-      );
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Los datos proporcionados no son correctos",
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, ingrese un correo y/o contraseña valido",
+      });
+    }
   };
 
   const handleChange = (event) => {
@@ -96,8 +119,8 @@ function Login() {
                     className="form-control"
                     id="emailLogin"
                     aria-describedby="emailHelp"
-                    maxLength={40}
                     required
+                    maxLength={40}
                     name="email"
                     value={values.email}
                     onChange={handleChange}
@@ -132,11 +155,11 @@ function Login() {
                   <button
                     id="iniciarSesion"
                     type="submit"
-                    className=" btn btn-primary btn-inicio-sesion"
+                    className="btn btn-primary btn-inicio-sesion"
                     onSubmit={handleSubmit}
-                    data-bs-dismiss="modal"
+                    disabled={isLoading}
                   >
-                    Iniciar Sesión
+                    {isLoading ? "Cargando..." : "Iniciar Sesión"}
                   </button>
                   <br />
                   <button

@@ -6,38 +6,36 @@
   text-align: center;
   width: 100%;
 }
-*/ .allContent {
+.allContent {
   min-width: 380px;
 }
 
-.container-card {
+.cardAbout {
   background-color: #444;
   border: #fff004;
 }
 
-.card-body {
+.aboutBody {
   background-color: #444;
   text-align: center;
 }
 
-.card-img-top {
-  width: 100%;
+.imgAbout {
   height: auto;
   object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid white;
+  display: flex;
+  justify-content: center;
 }
 
-.card-title {
+.namesAbout {
   color: yellow;
 }
 
-.card-text {
+.descAbout {
   color: yellow;
 }
 
-.card-img-top:hover {
-  transform: rotateY(360deg);
-  transition-delay: 0.2s;
-  transition: transform 1s linear;
+.cardsAbout {
+  display: flex;
+  justify-content: center;
 }

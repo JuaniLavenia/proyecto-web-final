@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardProductos from "../components/CardProductosSearch";
 import axios from "axios";
 import "./SearchResult.css";
 import CategoryButton from "../components/CategoryBtn";
+import { CartContext } from "../context/ContextProvider";
+import Swal from "sweetalert2";
 
-function SearchClean({ setCartCount, setFavoritesCount }) {
+function SearchClean() {
+  const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [categoria, setCategoria] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -22,15 +26,23 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
     setFavoritesCount(favCount);
   }, []);
 
-  const getProductos = () => {
-    axios
-      .get(
+  const getProductos = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get(
         "https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos"
-      )
-      .then((res) => setProducts(res.data))
-      .catch((err) => {
-        console.log(err);
+      );
+      setProducts(response.data);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Conexión perdida",
+        text: "No se pudo establecer conexión con el servidor.",
       });
+    }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -38,13 +50,26 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
   }, []);
 
   const handleCategoryClick = async (category) => {
-    const response = await fetch(
-      `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
-    );
-    const data = await response.json();
-    setProducts(data);
-    setCategoria(category);
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(
+        `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/category/${category}`
+      );
+      const data = await response.json();
+      setProducts(data);
+      setCategoria(category);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Conexión perdida",
+        text: "No se pudo establecer conexión con el servidor.",
+      });
+    }
+
+    setIsLoading(false);
   };
+
   return (
     <>
       <div className="p-5 bg-dark text-light cleanSearch">
@@ -102,15 +127,19 @@ function SearchClean({ setCartCount, setFavoritesCount }) {
 
         <div className="row">
           <h1 className="text-center">Productos</h1>
-          {products.map((product, index) => (
-            <div className="col-md-4 " key={index}>
-              <CardProductos
-                {...product}
-                setCartCount={setCartCount}
-                setFavoritesCount={setFavoritesCount}
-              />
-            </div>
-          ))}
+          {isLoading ? (
+            <p className="text-center">Cargando productos...</p>
+          ) : (
+            products.map((product, index) => (
+              <div className="col-md-4 " key={index}>
+                <CardProductos
+                  {...product}
+                  setCartCount={setCartCount}
+                  setFavoritesCount={setFavoritesCount}
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>

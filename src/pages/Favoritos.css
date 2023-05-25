@@ -13,6 +13,10 @@
   font-size: 1.2rem;
 }
 
+.imgFav {
+  width: 250px;
+}
+
 .favorites {
   min-height: 100vh;
   min-width: 380px;
@@ -66,6 +70,7 @@
   font-weight: bold;
   padding: 5px 10px;
   cursor: pointer;
+  align-self: center;
 }
 
 .cardPriceFav {
@@ -74,6 +79,7 @@
   text-align: center;
   padding-top: 5rem;
   padding-left: 1rem;
+  margin-right: 1.6rem;
 }
 
 .total-comprar {
@@ -113,5 +119,6 @@
   }
   .descrpt {
     font-size: 1.1rem;
+    text-align: center;
   }
 }

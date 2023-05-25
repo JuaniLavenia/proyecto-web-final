@@ -11,53 +11,44 @@
   font-family: var(--font-family);
 }
 
-/* .product-car {
-  width: 850px;
-  min-width: 380px;
-  align-items: center;
-  align-self: center;
-} */
-
 .productDep {
   min-width: 380px;
+}
+
+.btn-description {
+  width: 12rem;
+}
+
+.card-title {
+  font-size: 1.6rem;
+}
+
+.btnCardP {
+  width: 180px;
+  height: 2.4rem;
 }
 
 /*______________Media Queries______________*/
 @media (max-width: 569px) {
   .product-text {
     font-size: 0.9rem;
-    text-align: center;
   }
 
   .card-footer .button {
     width: 7rem;
     font-size: 0.5rem;
   }
-  .btnCardP {
-    font-size: 0.7rem;
-    width: 8rem;
-  }
 }
 
 @media (min-width: 570px) {
   .product-text {
     font-size: 0.9rem;
-    text-align: center;
-  }
-  .btnCardP {
-    font-size: 0.7rem;
-    width: 6rem;
   }
 }
 
 @media (min-width: 768px) {
   .product-text {
     font-size: 0.9rem;
-    text-align: center;
-  }
-  .btnCardP {
-    font-size: 0.7rem;
-    width: 6rem;
   }
 }
 
@@ -69,21 +60,39 @@
   .imgCardP {
     width: 13rem;
   }
+
   .btnCardP {
-    font-size: 0.7rem;
-    width: 5rem;
+    width: 170px !important;
+    height: 2.3rem;
+  }
+
+  .btncartt {
+    font-size: 0.9rem !important;
   }
 }
+
 @media (min-width: 1180px) {
   .product-text {
     font-size: 1.1rem;
   }
 
   .imgCardP {
-    width: 13rem;
+    width: 13rem !important;
   }
+}
+
+@media (max-width: 1200px) {
+  .btn-description {
+    width: 10rem;
+  }
+}
+
+@media (min-width: 1260px) {
   .btnCardP {
-    font-size: 0.7rem;
-    width: 6rem;
+    width: auto !important;
+  }
+
+  .btncartt {
+    font-size: 1rem !important;
   }
 }

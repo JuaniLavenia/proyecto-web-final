@@ -2,19 +2,30 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./producto.css";
+import Swal from "sweetalert2";
 
 function Producto() {
   const [productos, setProductos] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
 
   const getProductos = () => {
+    setIsLoading(true);
     axios
       .get(
         `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos`
       )
       .then((res) => setProductos(res.data))
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Conexión perdida",
+          text: "No se pudo establecer conexión con el servidor.",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -22,16 +33,45 @@ function Producto() {
   }, []);
 
   const destroy = (id) => {
-    if (confirm("¿Esta seguro ?")) {
-      axios
-        .delete(
-          `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
-        )
-        .then((res) => {
-          getProductos();
-        })
-        .catch((err) => console.log(err));
-    }
+    Swal.fire({
+      title: "¿Está seguro?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://proyecto-web-final-backend--juan-ignacio245.repl.co/api/productos/${id}`
+          )
+          .then((res) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Se borró el producto con éxito",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((err) =>
+            Swal.fire({
+              icon: "error",
+              title: "Conexión perdida",
+              text: "No se pudo establecer conexión con el servidor.",
+            })
+          )
+          .finally(() => {
+            getProductos();
+          });
+      }
+    });
   };
 
   const handleChangeSearch = (event) => {
@@ -39,6 +79,7 @@ function Producto() {
   };
 
   const buscar = () => {
+    setIsLoading(true);
     if (search == "") {
       getProductos();
     } else {
@@ -49,7 +90,16 @@ function Producto() {
         .then((res) => {
           setProductos(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Conexión perdida",
+            text: "No se pudo establecer conexión con el servidor.",
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
 
@@ -75,8 +125,9 @@ function Producto() {
           className="btn btn-outline-secondary"
           type="button"
           onClick={buscar}
+          disabled={isLoading}
         >
-          Buscar
+          {isLoading ? "Buscando..." : "Buscar"}
         </button>
       </div>
 
@@ -94,7 +145,9 @@ function Producto() {
             </tr>
           </thead>
           <tbody className="tbody">
-            {productos &&
+            {isLoading ? (
+              <p className="text-center">Cargando productos...</p>
+            ) : (
               productos.map((producto) => (
                 <tr key={producto._id} className="file">
                   <td scope="row">{producto.name}</td>
@@ -127,7 +180,8 @@ function Producto() {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>
