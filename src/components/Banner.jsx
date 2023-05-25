@@ -14,7 +14,10 @@ function Banner({ imagen, categoria }) {
       <div className="imgBan">
         <img src={imagen} className="card-img" />
         <div className="card-img-overlay">
-          <Link className="text" to={`/productos/category/${categoria}`}>
+          <Link
+            className="text"
+            to={`/productos/category/${categoria}`}
+          >
             {categoria}
           </Link>
         </div>
