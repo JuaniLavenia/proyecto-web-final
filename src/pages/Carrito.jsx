@@ -192,7 +192,6 @@ function Carrito() {
                       onChange={(e) => handleQuantityChange(e, index)}
                       min={1}
                       max={item.stock}
-                      className="customInput"
                     />
                   </div>
                   <div className="card-price">$ {item.price}</div>
