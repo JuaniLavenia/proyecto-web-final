@@ -19,7 +19,6 @@ import Category from "./pages/Category";
 import ResetPassword from "./components/ResetPassword";
 import { CartContextProvider } from "./context/ContextProvider";
 import { AuthContextProvider } from "./context/AuthContext";
-import Publicidad from "./components/Publicidad";
 import AboutUs from "./pages/AboutUs";
 
 function App() {
@@ -47,9 +46,6 @@ function App() {
             <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
             <Route path="/adm/productos/create" element={<ProductoCreate />} />
             <Route path="/aboutus" element={<AboutUs />} />
-          </Routes>
-          <Routes>
-            <Route path="/" element={<Publicidad />} />
           </Routes>
           <Register />
           <Login />
