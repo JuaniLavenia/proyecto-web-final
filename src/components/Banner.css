@@ -14,6 +14,9 @@
 }
 
 .conteinerBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-width: 380px;
 }
 
@@ -23,15 +26,16 @@
 }
 
 .imgBan {
-  width: 70%;
+  width: 85%;
   max-height: 30rem;
-  margin-right: 3rem;
+  margin-right: 5rem;
   margin-left: 3rem;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
   align-items: center;
   position: relative;
   overflow: hidden;
+  border: 4px solid white;
 }
 
 .imgBan:hover img {
@@ -84,7 +88,7 @@
 /*______________Media Queries______________*/
 @media (max-width: 1000px) {
   .imgBan {
-    width: 70%;
+    width: 85%;
   }
   .card-img-overlay .text {
     font-size: 3.5rem;
