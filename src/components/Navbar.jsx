@@ -82,8 +82,34 @@ function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link text-light" to="/productos">
-                  Productos
+                  Categorias
                 </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/AboutUs">
+                  Acerca de Nosotros
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <form className="d-flex search" role="search">
+                  <input
+                    className="searchbar"
+                    type="search"
+                    maxLength={20}
+                    placeholder="Buscar"
+                    value={searchTerm}
+                    onChange={handleChangeSearch}
+                  />
+
+                  <Link
+                    className="lupa"
+                    onClick={buscar}
+                    to={`/busqueda/${searchTerm}`}
+                  >
+                    <span className="material-icons-outlined">search</span>
+                  </Link>
+                </form>
               </li>
               <li className="nav-item" id="login-register">
                 {token ? (
@@ -124,14 +150,6 @@ function Navbar() {
                 onChange={handleChangeSearch}
               />
 
-              <Link
-                className="lupa"
-                onClick={buscar}
-                to={`/busqueda/${searchTerm}`}
-              >
-                <span className="material-icons-outlined">search</span>
-              </Link>
-            </form>
             <div className="d-flex carrito p-1">
               <Link to="/cart">
                 <button className="car">
