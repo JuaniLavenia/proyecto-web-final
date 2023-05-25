@@ -13,8 +13,6 @@ function CardProductos({
   price,
   stock,
 }) {
-  const [quantitySelect, setQuantitySelect] = useState(1);
-
   const { setCartCount, setFavoritesCount } = useContext(CartContext);
   const handleAddToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -96,19 +94,16 @@ function CardProductos({
           <button
             className="btn btn-primary me-2 w-50 btncart"
             onClick={() =>
-              handleAddToCart(
-                {
-                  image,
-                  name,
-                  description,
-                  capacity,
-                  category,
-                  _id,
-                  price,
-                  stock,
-                },
-                quantitySelect
-              )
+              handleAddToCart({
+                image,
+                name,
+                description,
+                capacity,
+                category,
+                _id,
+                price,
+                stock,
+              })
             }
           >
             Comprar

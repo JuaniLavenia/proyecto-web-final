@@ -14,7 +14,7 @@
 }
 
 .imgFav {
-  width: 300px;
+  width: 250px;
 }
 
 .favorites {
@@ -70,6 +70,7 @@
   font-weight: bold;
   padding: 5px 10px;
   cursor: pointer;
+  align-self: center;
 }
 
 .cardPriceFav {
@@ -78,6 +79,7 @@
   text-align: center;
   padding-top: 5rem;
   padding-left: 1rem;
+  margin-right: 1.6rem;
 }
 
 .total-comprar {
