@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/Home";
 import Footer from "./components/Footer";
@@ -20,6 +20,7 @@ import ResetPassword from "./components/ResetPassword";
 import { CartContextProvider } from "./context/ContextProvider";
 import { AuthContextProvider } from "./context/AuthContext";
 import AboutUs from "./pages/AboutUs";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
             <Route path="/adm/productos/edit/:id" element={<ProductoEdit />} />
             <Route path="/adm/productos/create" element={<ProductoCreate />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/notFound" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/notFound" replace />} />
           </Routes>
           <Register />
           <Login />

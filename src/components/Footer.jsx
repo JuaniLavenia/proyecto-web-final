@@ -35,27 +35,27 @@ function Footer() {
               <img src={logofot} alt="" />
             </div>
             <div className="text-center pb-2">
-              <Link to="/">
+              <Link to="/notFound">
                 <FontAwesomeIcon className="fa-3x m-2" icon={faWhatsapp} />
               </Link>
-              <Link to="/">
+              <Link to="/notFound">
                 <FontAwesomeIcon className="fa-3x m-2" icon={faInstagram} />
               </Link>
-              <Link to="/">
+              <Link to="/notFound">
                 <FontAwesomeIcon className="fa-3x m-2" icon={faFacebook} />
               </Link>
             </div>
           </div>
           <div className="col-lg-4 col-sm-12">
             <h5 className="text-white mt-4 mb-3">Información</h5>
-            <Link to="/">
+            <Link to="/notFound">
               <p className="text-white">Medios de Pago</p>
             </Link>
 
-            <Link to="/">
+            <Link to="/notFound">
               <p className="text-white">Trabajá con Nosotros</p>
             </Link>
-            <Link to="/">
+            <Link to="/notFound">
               <p className="text-white">Política de Privacidad</p>
             </Link>
           </div>
