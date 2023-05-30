@@ -27,3 +27,9 @@
     display: none;
   }
 }
+
+@media (min-width: 991px) {
+  .publicidad {
+    height: fit-content;
+  }
+}
