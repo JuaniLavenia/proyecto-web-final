@@ -105,7 +105,7 @@ function ProductCard({
           </div>
           <div className="card-price p-1">$ {price}</div>
         </div>
-        <div className="card-footer">
+        <div className="card-footer footCards">
           <div className="car-buttons btnCardP d-flex justify-content-center">
             <button
               className="btn btn-primary me-2 w-50 btncartt"

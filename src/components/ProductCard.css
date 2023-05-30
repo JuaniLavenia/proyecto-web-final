@@ -28,15 +28,25 @@
   height: 2.4rem;
 }
 
+.footCards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.car-buttons {
+  display: flex;
+}
+
+.btnCardP button {
+  flex: 1;
+  margin: 0 5px;
+}
+
 /*______________Media Queries______________*/
 @media (max-width: 569px) {
   .product-text {
     font-size: 0.9rem;
-  }
-
-  .card-footer .button {
-    width: 7rem;
-    font-size: 0.5rem;
   }
 }
 
@@ -89,7 +99,7 @@
 
 @media (min-width: 1260px) {
   .btnCardP {
-    width: auto !important;
+    width: 200px !important;
   }
 
   .btncartt {
